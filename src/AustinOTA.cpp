@@ -34,9 +34,6 @@ void setup()
 
   PIXELS_init();
 
-    // pinMode(SiniLink_POWER, OUTPUT);
-    //     digitalWrite(SiniLink_POWER, HIGH);
-
   wifi_start();               // start wifi   - will start AP / WiFi as needed - wifi.h
 
   initWebSocket();            // start websocket

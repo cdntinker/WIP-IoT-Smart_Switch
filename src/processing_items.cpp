@@ -63,7 +63,7 @@ PageMap OTOList[] =
 };
 int NumberofStates = sizeof(OTOList) / sizeof(OTOList[0]);
 char OTOstate[32];
-extern bool SiniLink_PWR_STATE;
+extern bool SmartSwitch_PWR_STATE;
 
 
 // /**********************************************************************/
@@ -263,7 +263,7 @@ String processor(const String &var)
   /**********************************************************************/
   if (var == "OTOButtons")
   {
-    if(SiniLink_PWR_STATE)
+    if(SmartSwitch_PWR_STATE)
       strcpy(OTOstate, "ON");
     else
       strcpy(OTOstate, "OFF");
@@ -275,7 +275,7 @@ String processor(const String &var)
 
     for (int OTOListCTR = 0; OTOListCTR < NumberofStates; OTOListCTR++)
     {
-      if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SiniLink_PWR_STATE
+      if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SmartSwitch_PWR_STATE
         ButtonClass = "ButtonHere";
       else
         ButtonClass = "ButtonClickable";

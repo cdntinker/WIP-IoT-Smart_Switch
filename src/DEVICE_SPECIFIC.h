@@ -11,23 +11,23 @@
 //  That'd be bloody cool.
 /////////////////////////////////////////////////////////////
 
-#include <Tinker_SiniLink.h>
+#include <Tinker_SmartSwitch.h>
 
 #ifndef DEVICE_Translations
 #define DEVICE_Translations
 
-extern bool SiniLink_PWR_STATE;
-extern bool SiniLink_LED01_STATE;
-extern bool SiniLink_LED02_STATE;
+extern bool SmartSwitch_PWR_STATE;
+extern bool SmartSwitch_LED01_STATE;
+extern bool SmartSwitch_LED02_STATE;
 
-#define DEVICE_SETUP SiniLink_init
+#define DEVICE_SETUP SmartSwitch_init
 #define DEVICE_LOOP NULL_function
 
 void DEVICE_SETUP();
 void DEVICE_LOOP();
 
-#define DEVICE_RELAY SiniLink_Relay
-#define DEVICE_TOGGLE SiniLink_Toggle
+#define DEVICE_RELAY SmartSwitch_Relay
+#define DEVICE_TOGGLE SmartSwitch_Toggle
 
 #endif // DEVICE_Translations
 

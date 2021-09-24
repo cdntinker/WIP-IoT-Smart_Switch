@@ -1,0 +1,586 @@
+/* This page and fuctions handle filling in %varibles% in HTML webpages*/
+
+// #ifndef processing_items_h
+// #define processing_items_h
+
+#include "LIBRARIES.h"
+#include "EXTERNS.h"
+#include "DEFINES.h"
+
+#include "HTML_css.h"
+#include "HTML_SCRIPTS.h"
+#include "HTML_SCRIPTS_2.h"
+// #include "HTML_SCRIPTS_3.h"
+
+/* Internal blocks of HTML */
+#include "HTML_PART_Header.h"
+#include "HTML_PART_DeviceInfo.h"
+#include "HTML_PART_Footer.h"
+#include "HTML_PART_Status.h"
+
+#include "DEVICE_HTML_PART_Homepage.h"
+
+#ifndef PART_HomePage_Body_h
+#include "HTML_PART_HomeDefault.h"
+#endif
+
+/* Sections for the config page */
+#include "HTML_PART_WiFi_Config.h"
+#include "HTML_PART_AP_Config.h"
+#include "HTML_PART_MQTT_Config.h"
+#include "HTML_PART_WEB_UI_Config.h"
+#include "HTML_PART_LEDs_Config.h"
+// #include "HTML_PART_SmartHUB_Config.h"
+
+// /**********************************************************************/
+// /* Part of the button display from TinkerLibs-HTTP                    */
+// /**********************************************************************/
+struct PageMap
+{
+  bool IsAButton;       // Display this Button?
+  char PageAddress[32]; // The page this button refers to...
+  char PageLabel[32];   // The label on the button
+  char ButtonClick[32]; // What happens when ya click this button
+};
+
+PageMap PageList[] =
+    {
+        {true, "/home", "Home", "location.href="},
+        {true, "/management", "Management", "location.href="},
+        {true, "/config", "Config", "location.href="},
+        {false, "", "Dark Mode", "darkFunction()"},
+        {false, "/factorypage", "RESET", "location.href="},
+        {false, "/failedOTA", "FAIL", "location.href="},
+};
+int NumberofButtons = sizeof(PageList) / sizeof(PageList[0]);
+extern char CurrentPage[32];
+
+PageMap OTOList[] =
+    {
+        {true, "", "ON", "RelayON()"},
+        {true, "", "Toggle", "RelayTOGGLE()"},
+        {true, "", "OFF", "RelayOFF()"},
+};
+int NumberofStates = sizeof(OTOList) / sizeof(OTOList[0]);
+char OTOstate[32];
+extern bool SiniLink_PWR_STATE;
+
+
+// /**********************************************************************/
+
+uint8_t deviceREBOOTED = true;
+
+#if defined(ESP8266)
+#elif defined(ESP32)
+#include <rom/rtc.h>
+
+String return_reset_reason(RESET_REASON reason)
+{
+  switch (reason)
+  {
+  case 1:
+    return ("POWERON_RESET");
+    break; /**<1, Vbat power on reset*/
+  case 3:
+    return ("SW_RESET");
+    break; /**<3, Software reset digital core*/
+  case 4:
+    return ("OWDT_RESET");
+    break; /**<4, Legacy watch dog reset digital core*/
+  case 5:
+    return ("DEEPSLEEP_RESET");
+    break; /**<5, Deep Sleep reset digital core*/
+  case 6:
+    return ("SDIO_RESET");
+    break; /**<6, Reset by SLC module, reset digital core*/
+  case 7:
+    return ("TG0WDT_SYS_RESET");
+    break; /**<7, Timer Group0 Watch dog reset digital core*/
+  case 8:
+    return ("TG1WDT_SYS_RESET");
+    break; /**<8, Timer Group1 Watch dog reset digital core*/
+  case 9:
+    return ("RTCWDT_SYS_RESET");
+    break; /**<9, RTC Watch dog Reset digital core*/
+  case 10:
+    return ("INTRUSION_RESET");
+    break; /**<10, Instrusion tested to reset CPU*/
+  case 11:
+    return ("TGWDT_CPU_RESET");
+    break; /**<11, Time Group reset CPU*/
+  case 12:
+    return ("SW_CPU_RESET");
+    break; /**<12, Software reset CPU*/
+  case 13:
+    return ("RTCWDT_CPU_RESET");
+    break; /**<13, RTC Watch dog Reset CPU*/
+  case 14:
+    return ("EXT_CPU_RESET");
+    break; /**<14, for APP CPU, reseted by PRO CPU*/
+  case 15:
+    return ("RTCWDT_BROWN_OUT_RESET");
+    break; /**<15, Reset when the vdd voltage is not stable*/
+  case 16:
+    return ("RTCWDT_RTC_RESET");
+    break; /**<16, RTC Watch dog reset digital core and rtc module*/
+  default:
+    return ("NO_MEAN");
+  }
+}
+#endif
+
+String DeviceID()
+{
+// #if defined(DeviceName)
+//   String id = STR(DeviceName);
+// #else
+  String id = host;
+// #endif
+  return id;
+}
+
+// String info_memsketch()
+// {
+//   String memsketch = ((String)(ESP.getSketchSize())) + " / " + ((String)(ESP.getSketchSize() + ESP.getFreeSketchSpace())) + "  Used / Total";
+//   return memsketch;
+// }
+
+String info_memsketch()
+{
+  int Size = ESP.getSketchSize();
+  int Free = ESP.getFreeSketchSpace();
+  int Flash = ESP.getFlashChipSize();
+// struct FSInfo {
+//     size_t totalBytes;
+//     size_t usedBytes;
+//     size_t blockSize;
+//     size_t pageSize;
+//     size_t maxOpenFiles;
+//     size_t maxPathLength;
+// };
+FSInfo fs_info;
+LittleFS.info(fs_info);
+
+  String memsketch =
+      ((String)(Flash / 1024)) +
+      "k / " +
+      ((String)(Size / 1024)) +
+      "k / " +
+      ((String)(Free / 1024)) +
+      "k / " +
+      ((String)(fs_info.totalBytes / 1024)) +
+      "k<br>(Flash / Sketch / Free / FS)";
+  return memsketch;
+}
+
+String ip3string(IPAddress ip)
+{
+  String ret = String(ip[0]) + "." + String(ip[1]) + "." + String(ip[2]) + "." + String(ip[3]);
+  return ret;
+}
+
+String processor(const String &var)
+{ // Change placeholders on webpage
+
+  /* Drag in complete blocks of HTML */
+  if (var == "PART_Header")
+    return PART_Header_html;
+  if (var == "PART_DeviceInfo")
+    return PART_deviceinfo_html;
+  if (var == "PART_Footer")
+    return PART_Footer_html;
+  if (var == "PART_status")
+    return PART_status_html;
+  if (var == "The_CSS")
+    return CSS_STYLE;
+  if (var == "The_SCRIPTS")
+    return CSS_SCRIPTS;
+  if (var == "More_SCRIPTS")
+    return CSS_SCRIPTS2;
+  // if (var == "Yet_More_SCRIPTS")
+  //   return CSS_SCRIPTS3;
+  if (var == "PART_HomePage_Body")
+    return PART_HomePage_Body;
+
+  if (var == "config_form_WiFi")
+    return config_form_WiFi;
+  if (var == "config_form_AP")
+    return config_form_AP;
+  if (var == "config_form_MQTT")
+    return config_form_MQTT;
+  if (var == "config_form_WEB_UI")
+    return config_form_WEB_UI;
+  if (var == "config_form_LEDs")
+    return config_form_LEDs;
+
+  /* Button Styles */
+
+  /**********************************************************************/
+  /* The Header Menu Buttons                                            */
+  /**********************************************************************/
+  if (var == "ALLDAButtons")
+  {
+
+    String TheHTML = "<div class = \"menu-buttons\">";
+    char TheButtons[1024];
+    String ButtonClass;
+
+    for (int PageListCTR = 0; PageListCTR < NumberofButtons; PageListCTR++)
+    {
+      if (!strcmp(PageList[PageListCTR].PageAddress, CurrentPage))
+        ButtonClass = "ButtonHere";
+      else
+        ButtonClass = "ButtonClickable";
+
+      String ClickAction = PageList[PageListCTR].ButtonClick;
+
+      if (strlen(PageList[PageListCTR].PageAddress) != 0)
+      {
+        ClickAction += "'";
+        ClickAction += PageList[PageListCTR].PageAddress;
+        ClickAction += "'";
+      }
+      if (PageList[PageListCTR].IsAButton)
+      {
+      sprintf(TheButtons,
+              "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
+              ButtonClass.c_str(),
+              PageListCTR,
+              ClickAction.c_str(),
+              PageList[PageListCTR].PageLabel,
+              PageListCTR);
+      TheHTML += TheButtons;
+      }
+    }
+    TheHTML += "</DIV>";
+
+    return TheHTML;
+  }
+  /**********************************************************************/
+
+  /**********************************************************************/
+  /* On / Toggle / Off Buttons                                          */
+  /**********************************************************************/
+  if (var == "OTOButtons")
+  {
+    if(SiniLink_PWR_STATE)
+      strcpy(OTOstate, "ON");
+    else
+      strcpy(OTOstate, "OFF");
+
+    String TheHTML = "<div class = \"menu-buttons\">";
+
+    char TheButtons[1024];
+    String ButtonClass;
+
+    for (int OTOListCTR = 0; OTOListCTR < NumberofStates; OTOListCTR++)
+    {
+      if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SiniLink_PWR_STATE
+        ButtonClass = "ButtonHere";
+      else
+        ButtonClass = "ButtonClickable";
+
+      String ClickAction = OTOList[OTOListCTR].ButtonClick;
+
+      if (strlen(OTOList[OTOListCTR].PageAddress) != 0)
+      {
+        ClickAction += "'";
+        ClickAction += OTOList[OTOListCTR].PageAddress;
+        ClickAction += "'";
+      }
+      if (OTOList[OTOListCTR].IsAButton)
+      {
+      sprintf(TheButtons,
+              "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
+              ButtonClass.c_str(),
+              OTOListCTR,
+              ClickAction.c_str(),
+              OTOList[OTOListCTR].PageLabel,
+              OTOListCTR);
+      TheHTML += TheButtons;
+      }
+    }
+    TheHTML += "</DIV>";
+
+    return TheHTML;
+  }
+  /**********************************************************************/
+
+  if (var == "dark")
+  {
+    if (darkState == false)
+      return "body { background-color: white; color: black; }";
+    else
+      return "body { background-color: black; color: white; }";
+  }
+
+  if (var == "online")
+  {
+    if (WiFi.status() == WL_CONNECTED)
+      return "background:green";
+    else
+      return "background:orange";
+  }
+
+  if (var == "title")
+    return htmltitle;
+
+  if (var == "PageName")
+    for (int PageListCTR = 0; PageListCTR < NumberofButtons; PageListCTR++)
+      if (!strcmp(PageList[PageListCTR].PageAddress, CurrentPage))
+        return PageList[PageListCTR].PageLabel;
+
+  if (var == "color")
+    return htmlcolor;
+
+  if (var == "hover")
+    return htmlhover;
+
+  if (var == "ipplaceholder")
+    return ip3string(WiFi.localIP());
+
+  if (var == "macplaceholder")
+    return WiFi.macAddress();
+
+  if (var == "memsketch")
+    return info_memsketch();
+
+  if (var == "FirmwareVer")
+    return STR(FIRMWAREVERSION);
+
+  if (var == "IDplaceholder")
+    return DeviceID();
+
+  if (var == "processorplaceholder")
+  {
+#if defined(ESP8266)
+    return "ESP8266";
+#elif defined(ESP32)
+    return "ESP32";
+#endif
+  }
+
+  if (var == "type")
+    return STR(DeviceType);
+
+  /* CONFIG Stuff */
+  if (var == "IDfactory")
+  {
+    return hostFACTORY;
+  }
+
+  if (var == "IDssid") // filling in the config page with ssid if configured
+  {
+    String ssing = "";
+    if (strcmp(ssid, "0") == 0)
+    {
+      ssing += "ssid";
+      return ssing;
+    }
+    else
+    {
+      ssing += "ssid = ";
+      ssing += ssid;
+      return ssing;
+    }
+  }
+
+  if (var == "whatpass") // filling in the config page with ssid password
+  {
+    String whatping = "";
+    if (strcmp(password, "0") == 0)
+    {
+      whatping += "WiFi password";
+      return whatping;
+    }
+    else
+    {
+      whatping += "Password Set";
+      return whatping;
+    }
+  }
+
+  if (var == "passwhat") // filling in the config page ap password
+  {
+    String whatsping = "";
+    whatsping += "Password Set";
+    return whatsping;
+  }
+
+  if (var == "apss") // filling in the config page ap ssid
+  {
+    String apssing = "";
+    apssing += "AP SSID = ";
+    apssing += AP_SSID;
+    return apssing;
+  }
+
+  if (var == "aphid") // filling in the config page ap hidden value
+  {
+    String aphing = "";
+    aphing += "AP hidden = ";
+    aphing += AP_HIDDEN;
+    return aphing;
+  }
+
+  if (var == "broker") // filling in the config page with broker if configured
+  {
+    String brokeing = "";
+    if (strcmp(mqtt_broker, "0") == 0)
+    {
+      brokeing += "mqtt broker";
+      return brokeing;
+    }
+    else
+    {
+      brokeing += "mqtt broker = ";
+      brokeing += mqtt_broker;
+      return brokeing;
+    }
+  }
+
+  if (var == "port") // filling in the config page with port if configured
+  {
+    String porting = "";
+    porting += "port = ";
+    porting += mqtt_port;
+    return porting;
+  }
+
+  if (var == "userID") // filling in the config page with userID if configured
+  {
+    String ming = "";
+    if (strcmp(mqtt_username, "0") == 0)
+    {
+      ming += "mqtt username";
+      return ming;
+    }
+    else
+    {
+      ming += "mqtt username = ";
+      ming += mqtt_username;
+      return ming;
+    }
+  }
+
+  if (var == "notpass") // filling in the config page with mqtt password if configured
+  {
+    String mping = "";
+    if (strcmp(mqtt_password, "0") == 0)
+    {
+      mping += "mqtt password";
+      return mping;
+    }
+    else
+    {
+      mping += "Password Set";
+      return mping;
+    }
+  }
+
+  if (var == "darkmode") // filling in the config page darkmode value
+  {
+    String dming = "";
+    dming += "Dark Mode = ";
+    dming += darkState;
+    return dming;
+  }
+
+  if (var == "currentsys") // filling in the config page
+  {
+    String dm1ing = "";
+    dm1ing += "System Current = ";
+    // dm1ing += systemcurrent;
+    return dm1ing;
+  }
+
+  if (var == "current1") // filling in the config page
+  {
+    String dm2ing = "";
+    dm2ing += "Port 1 Current = ";
+    // dm2ing += portcurrent0;
+    return dm2ing;
+  }
+
+  if (var == "current2") // filling in the config page
+  {
+    String dm3ing = "";
+    dm3ing += "Port 2 Current = ";
+    // dm3ing += portcurrent1;
+    return dm3ing;
+  }
+
+  if (var == "current3") // filling in the config page
+  {
+    String dm4ing = "";
+    dm4ing += "Port 3 Current = ";
+    // dm4ing += portcurrent2;
+    return dm4ing;
+  }
+
+  if (var == "current4") // filling in the config page
+  {
+    String dm5ing = "";
+    dm5ing += "Port 4 Current = ";
+    // dm5ing += portcurrent3;
+    return dm5ing;
+  }
+
+  if (var == "brightsys") // filling in the config page
+  {
+    String dm6ing = "";
+    dm6ing += "LED Brightness = ";
+    dm6ing += brightness;
+    return dm6ing;
+  }
+
+  // if (var == "modeover2") // filling in the config page ap overrideMODE value
+  // {
+  //   String dm7ing = "";
+  //   dm7ing += "overrideMODE = ";
+  //   dm7ing += overrideMODE;
+  //   return dm7ing;
+  // }
+
+  if (var == "wifiover") // filling in the config page ap overrideWIFI value
+  {
+    String dm8ing = "";
+    dm8ing += "overrideWIFI = ";
+    // dm8ing += overrideWEB;
+    return dm8ing;
+  }
+
+  if (var == "errorplaceholder")
+  {
+    String erroring = "";
+    if (deviceREBOOTED == false)
+    {
+      erroring += "";
+    }
+    else
+    {
+      erroring += "Device Rebooted";
+      deviceREBOOTED = false;
+      erroring += " (";
+
+#if defined(ESP8266)
+      String RebootReason =
+          ESP.getResetReason().c_str();
+#elif defined(ESP32)
+      String RebootReason =
+          return_reset_reason(rtc_get_reset_reason(0));
+      erroring += RebootReason;
+      erroring += "/";
+      RebootReason =
+          return_reset_reason(rtc_get_reset_reason(1));
+#endif
+      erroring += RebootReason;
+      erroring += ")";
+    }
+    return erroring;
+  }
+
+  return String();
+}
+
+// #endif

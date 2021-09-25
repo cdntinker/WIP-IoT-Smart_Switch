@@ -87,7 +87,7 @@ const char* in_topic4 = "-";   // override   topic
 const char* in_topic5 = "-";   // RGBW       topic **only works in override mode**
 const char* in_topic6 = "-";   // flash      topic **only works in override mode**
 
-char clientheart[60];
+char MQTT_heartbeat[60];
 char clientoutput1[60];
 char clientoutput2[60];
 char clientoutput3[60];

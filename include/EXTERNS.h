@@ -88,7 +88,7 @@ extern const char* in_topic4;   // override   topic
 extern const char* in_topic5;   // RGBW       topic **only works in override mode**
 extern const char* in_topic6;   // flash      topic **only works in override mode**
 
-extern char clientheart[60];
+extern char MQTT_heartbeat[60];
 extern char clientoutput1[60];
 extern char clientoutput2[60];
 extern char clientoutput3[60];

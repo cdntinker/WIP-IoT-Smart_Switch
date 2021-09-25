@@ -5,6 +5,7 @@
 
 void MQTT_settopics();
 void MQTT_callback(char *topic, byte *payload, unsigned int length);
+void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in);
 void MQTT_reconnect();
 
 void MQTT_init();

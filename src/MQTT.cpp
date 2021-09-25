@@ -17,7 +17,7 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 extern char DEBUGtxt[48];
 
-void settopics()
+void MQTT_settopics()
 { // sets mqtt topics based on hostname
   DEBUG_Init("MQTT Topics");
 
@@ -81,7 +81,7 @@ void settopics()
   DEBUG_LineOut2("flash");
 }
 
-void callback(char *topic, byte *payload, unsigned int length)
+void MQTT_callback(char *topic, byte *payload, unsigned int length)
 {
   sprintf(DEBUGtxt, "Message arrived [%s] ", topic);
   DEBUG_LineOut(DEBUGtxt);
@@ -434,9 +434,9 @@ void callback(char *topic, byte *payload, unsigned int length)
     }
   } // end of flash color set
 
-} // end of mqtt callback
+} // end of mqtt MQTT_callback
 
-void reconnect()
+void MQTT_reconnect()
 {
 
   // Loop until we're reconnected
@@ -487,9 +487,9 @@ void MQTT_init()
   }
   else // broker declared
   {
-    settopics(); // mqtt_setup.h - set mqtt topics
+    MQTT_settopics(); // mqtt_setup.h - set mqtt topics
     client.setServer(mqtt_broker, mqtt_port);
-    client.setCallback(callback);
+    client.setCallback(MQTT_callback);
   }
 }
 
@@ -497,7 +497,7 @@ void MQTT_loop()
 {
   if (!client.connected())
   {
-    reconnect();
+    MQTT_reconnect();
   }
   client.loop();
 }

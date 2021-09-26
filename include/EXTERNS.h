@@ -29,15 +29,7 @@ extern uint8_t white_reverse;           // used for flipping the white LED level
 /* Buttons */
 // extern int buttons[5];        // pin button is connected to
 
-/* MCP Pinout */
-// extern uint8_t mcp_update[5];       // used to limit constant updates
-// extern uint8_t MCP_en[5];     // pin power fets connected on mcp
-// extern uint8_t MCP_data[5];     // pin data  fets connected on mcp
-
 /* LED's */
-// #define LED_PIN                0                    // pin neopixels are connected to -- shouldn't need to be changed
-// #define LED_COUNT              4                    // number of neopixels
-// #define LED_TYPE               NEO_GRBW             // type of led's used
 extern uint8_t neo_update[5];               // do led's need to be updated - prevents flickering from constant updates
 extern uint8_t neo_override[5];             // do led's need to be updated - prevents flickering from constant updates -- used in overrideMODE
 extern unsigned long lastdouble;            // used for double flash animation
@@ -50,55 +42,10 @@ extern uint8_t       prevflash[5];          // array of last flash state    -- h
 extern uint8_t       ledmode[5];            // what mode the leds are in    -- used in overrideMODE control
 
 /* varibles */
-// extern  uint8_t port_state[5]; //sets the state of the port 0 off, 1 power, 2 data+power
-// extern  uint8_t last_press[5]; // stores the last press if a button for the sketch to process, then reset (15 = hold)
-// extern  uint8_t port_INA[5]; // state of an INA on a port - if failed to load it disables the port
-
-/* voltage varibles */
-// extern float         busvoltage;      // average voltage from all 4 sensors
-// extern unsigned long lastvoltread;        // last voltage reading
-// extern unsigned long lastvoltmqtt;        // last time the voltage was sent via mqtt
-// extern uint8_t       voltlockout;         // voltage lockout - 0 = off / safe 1 = under volt 2 = over volt
-// extern uint8_t       voltlockout_prev;    // last volatge lockout varible - for reseting led's
-// extern uint8_t       fwd;                 // led aniamtion
-// extern uint8_t       fwd_prev;            // led aniamtion prev value
-// extern unsigned long prevringMillis;  // speed of animation
-
-/* current measurement varibles */
-// extern uint16_t       CALCmaxtotal; // how much power used by all ports
-// extern int            currentValue[5]; // initialization of current measurement
-// extern int            wattsValue[5]; // initialization of current measurement
-// extern int            EMA_C[5]; // initialization of EMA C  - filtered current measurement
-// extern int            EMA_W[5]; // initialization of EMA C  - filtered current measurement
-// extern float          EMA_a; // initialization of EMA alpha
-// extern unsigned long  lastINAread[5]; // last time the current was read
-// extern unsigned long  lastINAmqtt[5]; // last time the current was sent via mqtt
 
 /* mqtt topics */
 extern const char* out_heart;  // LWT        topic
-
-extern const char* out_topic1; // button     topic
-extern const char* out_topic2;  // port       topic
-extern const char* out_topic3;  // volt       topic
-
-extern const char* in_topic1;   // current    topic
-extern const char* in_topic2;   // state      topic
-extern const char* in_topic3;   // brightness topic
-extern const char* in_topic4;   // override   topic
-extern const char* in_topic5;   // RGBW       topic **only works in override mode**
-extern const char* in_topic6;   // flash      topic **only works in override mode**
-
 extern char MQTT_heartbeat[60];
-extern char clientoutput1[60];
-extern char clientoutput2[60];
-extern char clientoutput3[60];
-
-extern char clientinput1[60];
-extern char clientinput2[60];
-extern char clientinput3[60];
-extern char clientinput4[60];
-extern char clientinput5[60];
-extern char clientinput6[60];
 
 extern char connectphrase[140];     // publishes to 'outTopic' when connected
 extern String IPaddress;            // IP address for 'outTopic'
@@ -147,17 +94,8 @@ extern char        htmltype[32];
 extern char        htmlcolor[10];
 extern char        htmlhover[10];
 
-// extern uint16_t    systemcurrent;         // max current availble to the system (accounts for esp usage)***
-// extern uint16_t    portcurrent0;          // max current for a port - max 3A (parts limit) // will be used in json config
-// extern uint16_t    portcurrent1;          // max current for a port - max 3A (parts limit) // will be used in json config
-// extern uint16_t    portcurrent2;          // max current for a port - max 3A (parts limit) // will be used in json config
-// extern uint16_t    portcurrent3;          // max current for a port - max 3A (parts limit) // will be used in json config
-
 extern uint8_t     brightness;            // set strip brightness
 
-// extern uint8_t     overrideMODE;          // are we allowing local control or only mqtt?
-// extern uint8_t     overrideWEB;           // can the web interface control the hub?
- 
  //////////////////////////////////////
  // From factory_settings.h
  //////////////////////////////////////
@@ -187,14 +125,4 @@ extern char      htmltypeFACTORY[32];      // Device type on the bottom of webpa
 extern char      htmlcolorFACTORY[10];      // main HTML webpage color                       Superhouse.tv color
 extern char      htmlhoverFACTORY[10];      // html color for hovering over a menu button    Superhouse.tv color
 
-/* smartHUB*/
-// extern uint16_t    systemcurrentFACTORY;             // max current availble to the system - max 5A (parts limit)  -- rating of power supply
-// extern uint16_t    portcurrent0FACTORY;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-// extern uint16_t    portcurrent1FACTORY;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-// extern uint16_t    portcurrent2FACTORY;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-// extern uint16_t    portcurrent3FACTORY;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-
 extern uint8_t     brightnessFACTORY;               // set strip brightness
-
-// extern uint8_t     overrideMODEFACTORY;            // are we allowing local control or only mqtt?
-// extern uint8_t     overrideWEBFACTORY;            // can the web interface control the hub?

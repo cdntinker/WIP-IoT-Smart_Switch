@@ -30,16 +30,6 @@ char      htmltypeFACTORY[32]        = "Factory";      // Device type on the bot
 char      htmlcolorFACTORY[10]       = "#176fc1";      // main HTML webpage color                       Superhouse.tv color
 char      htmlhoverFACTORY[10]       = "#00a5b4";      // html color for hovering over a menu button    Superhouse.tv color
 
-/* smartHUB*/
-// uint16_t    systemcurrentFACTORY   = 5000;             // max current availble to the system - max 5A (parts limit)  -- rating of power supply
-// uint16_t    portcurrent0FACTORY    = 3000;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-// uint16_t    portcurrent1FACTORY    = 3000;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-// uint16_t    portcurrent2FACTORY    = 3000;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-// uint16_t    portcurrent3FACTORY    = 3000;             // max current for a port             - max 3A (parts limit)  // will be used in json config
-
 uint8_t     brightnessFACTORY      = 30;               // set strip brightness
-
-// uint8_t     overrideMODEFACTORY    = false;            // are we allowing local control or only mqtt?
-// uint8_t     overrideWEBFACTORY     = false;            // can the web interface control the hub?
 
 #endif

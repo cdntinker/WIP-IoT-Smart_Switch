@@ -20,8 +20,6 @@
     #include "LITTLEFS.h"
 #endif
 
-// #include <Adafruit_MCP23008.h>  // For Output Enables
-// #include <Adafruit_INA219.h>    // For Current Measurements
 #include <Adafruit_NeoPixel.h>  // for SK6812 RGBW LEDs
 
 #include "Tinker_DEBUG.h" // embeded degug library

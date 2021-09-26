@@ -51,27 +51,7 @@ bool saveFACTORY()
   json["htmltype"] = htmltypeFACTORY;
   json["htmlcolor"] = htmlcolorFACTORY;
   json["htmlhover"] = htmlhoverFACTORY;
-  // char cstr4[4];
-  // itoa(systemcurrentFACTORY, cstr4, 10);
-  // json["systemcurrent"] = cstr4;
-  // char cstr5[4];
-  // itoa(portcurrent0FACTORY, cstr5, 10);
-  // json["portcurrent0"] = cstr5;
-  // char cstr6[4];
-  // itoa(portcurrent1FACTORY, cstr6, 10);
-  // json["portcurrent1"] = cstr6;
-  // char cstr7[4];
-  // itoa(portcurrent2FACTORY, cstr7, 10);
-  // json["portcurrent2"] = cstr7;
-  // char cstr8[4];
-  // itoa(portcurrent3FACTORY, cstr8, 10);
-  // json["portcurrent3"] = cstr8;
-  // char cstr9[1];
-  // itoa(overrideMODEFACTORY, cstr9, 10);
-  // json["overrideMODE"] = cstr9;
-  // char cstr11[1];
-  // itoa(overrideWEBFACTORY, cstr11, 10);
-  // json["overrideWEB"] = cstr11;
+
   char cstr12[3];
   itoa(brightnessFACTORY, cstr12, 10);
   json["brightness"] = cstr12;
@@ -121,27 +101,7 @@ bool saveConfignew()
   json["htmltype"] = htmltype;
   json["htmlcolor"] = htmlcolor;
   json["htmlhover"] = htmlhover;
-  // char cstr4[4];
-  // itoa(systemcurrent, cstr4, 10);
-  // json["systemcurrent"] = cstr4;
-  // char cstr5[4];
-  // itoa(portcurrent0, cstr5, 10);
-  // json["portcurrent0"] = cstr5;
-  // char cstr6[4];
-  // itoa(portcurrent1, cstr6, 10);
-  // json["portcurrent1"] = cstr6;
-  // char cstr7[4];
-  // itoa(portcurrent2, cstr7, 10);
-  // json["portcurrent2"] = cstr7;
-  // char cstr8[4];
-  // itoa(portcurrent3, cstr8, 10);
-  // json["portcurrent3"] = cstr8;
-  // char cstr9[1];
-  // itoa(overrideMODE, cstr9, 10);
-  // json["overrideMODE"] = cstr9;
-  // char cstr11[1];
-  // itoa(overrideWEB, cstr11, 10);
-  // json["overrideWEB"] = cstr11;
+
   char cstr12[3];
   itoa(brightness, cstr12, 10);
   json["brightness"] = cstr12;
@@ -211,20 +171,7 @@ bool loadConfig()
         strcpy(htmltype, json["htmltype"]);
         strcpy(htmlcolor, json["htmlcolor"]);
         strcpy(htmlhover, json["htmlhover"]);
-        // String convert4 = json["systemcurrent"];
-        // systemcurrent = convert4.toInt();
-        // String convert5 = json["portcurrent0"];
-        // portcurrent0 = convert5.toInt();
-        // String convert6 = json["portcurrent1"];
-        // portcurrent1 = convert6.toInt();
-        // String convert7 = json["portcurrent2"];
-        // portcurrent2 = convert7.toInt();
-        // String convert8 = json["portcurrent3"];
-        // portcurrent3 = convert8.toInt();
-        // String convert9 = json["overrideMODE"];
-        // overrideMODE = convert9.toInt();
-        // String convert11 = json["overrideWEB"];
-        // overrideWEB = convert11.toInt();
+
         String convert12 = json["brightness"];
         brightness = convert12.toInt();
       }
@@ -682,95 +629,6 @@ void wifisaving(AsyncWebServerRequest *request)
     }
   }
 
-  // String systemcurrent_ = request->arg("systemcurrent"); //****************
-  // if (systemcurrent_ != NULL)                            // we have a value to do something with
-  // {
-  //   if (systemcurrent_.toInt() != systemcurrent) // new color requested
-  //   {
-  //     if (systemcurrent_.toInt() >= 0 && systemcurrent_.toInt() <= 5000)
-  //     {
-  //       systemcurrent = systemcurrent_.toInt();
-  //       new_update = true;
-  //     }
-  //     else
-  //     {
-  //       DEBUG_Trouble("System Current limited to 0-5000mA - change value");
-  //     }
-  //   }
-  // }
-
-  // String currentone_ = request->arg("currentone");
-  // if (currentone_ != NULL) // we have a value to do something with
-  // {
-  //   if (currentone_.toInt() != portcurrent0) // new color requested
-  //   {
-  //     if (currentone_.toInt() >= 0 && currentone_.toInt() <= 3000)
-  //     {
-  //       portcurrent0 = currentone_.toInt();
-  //       portcurrent[0] = currentone_.toInt();
-  //       new_update = true;
-  //     }
-  //     else
-  //     {
-  //       DEBUG_Trouble("Port Current limited to 0-3000mA - change value");
-  //     }
-  //   }
-  // }
-
-  // String currenttwo_ = request->arg("currenttwo");
-  // if (currenttwo_ != NULL) // we have a value to do something with
-  // {
-  //   if (currenttwo_.toInt() != portcurrent1) // new color requested
-  //   {
-  //     if (currenttwo_.toInt() >= 0 && currenttwo_.toInt() <= 3000)
-  //     {
-  //       portcurrent1 = currenttwo_.toInt();
-  //       portcurrent[1] = currenttwo_.toInt();
-  //       new_update = true;
-  //     }
-  //     else
-  //     {
-  //       DEBUG_Trouble("Port Current limited to 0-3000mA - change value");
-  //     }
-  //   }
-  // }
-
-  // String currentthree_ = request->arg("currentthree");
-  // if (currentthree_ != NULL) // we have a value to do something with
-  // {
-  //   if (currentthree_.toInt() != portcurrent2) // new color requested
-  //   {
-  //     if (currentthree_.toInt() >= 0 && currentthree_.toInt() <= 3000)
-  //     {
-  //       portcurrent2 = currentthree_.toInt();
-  //       portcurrent[2] = currentthree_.toInt();
-  //       new_update = true;
-  //     }
-  //     else
-  //     {
-  //       DEBUG_Trouble("Port Current limited to 0-3000mA - change value");
-  //     }
-  //   }
-  // }
-
-  // String currentfour_ = request->arg("currentfour");
-  // if (currentfour_ != NULL) // we have a value to do something with
-  // {
-  //   if (currentfour_.toInt() != portcurrent3) // new color requested
-  //   {
-  //     if (currentfour_.toInt() >= 0 && currentfour_.toInt() <= 3000)
-  //     {
-  //       portcurrent3 = currentfour_.toInt();
-  //       portcurrent[3] = currentfour_.toInt();
-  //       new_update = true;
-  //     }
-  //     else
-  //     {
-  //       DEBUG_Trouble("Port Current limited to 0-3000mA - change value");
-  //     }
-  //   }
-  // }
-
   String brightset_ = request->arg("brightset");
   if (brightset_ != NULL) // we have a value to do something with
   {
@@ -791,26 +649,6 @@ void wifisaving(AsyncWebServerRequest *request)
       }
     }
   }
-
-  String overmode_ = request->arg("overmode");
-  if (overmode_ != NULL) // we have a value to do something with
-  {
-    // if (overmode_.toInt() != overrideMODE) // new color requested
-    // {
-    //   overrideMODE = overmode_.toInt();
-    //   new_update = true;
-    // }
-  }
-
-  // String overwifi_ = request->arg("overwifi");
-  // if (overwifi_ != NULL) // we have a value to do something with
-  // {
-  //   if (overwifi_.toInt() != overrideWEB) // new color requested
-  //   {
-  //     overrideWEB = overwifi_.toInt();
-  //     new_update = true;
-  //   }
-  // }
 
   if (new_update == true)
   { // we have new information to update

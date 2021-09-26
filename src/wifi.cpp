@@ -115,8 +115,8 @@ void wifi_checkup()
     {
       if (ap_start == true)
       {
-          //  sprintf(DEBUGtxt, "Stations connected = %d\n", WiFi.softAPgetStationNum());
-          //  DEBUG_LineOut(DEBUGtxt);
+        //  sprintf(DEBUGtxt, "Stations connected = %d\n", WiFi.softAPgetStationNum());
+        //  DEBUG_LineOut(DEBUGtxt);
 
         ap_connected = WiFi.softAPgetStationNum();
       }
@@ -136,7 +136,7 @@ void wifi_start()
   }
   else
   {
-      //  DEBUG_LineOut(ssid);
+    //  DEBUG_LineOut(ssid);
     DEBUG_Init(" WiFi");
     setup_wifi(); // start regular wifi
   }

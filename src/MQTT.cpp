@@ -183,34 +183,45 @@ void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in)
     // MQTT_SendTELE(MQTT_command, MQTT_command);
     MQTT_SendNOTI("triggered", "Power!!!");
     if (strcmp(MQTT_msg_in, "on") == 0)
-      SmartSwitch_Relay(HIGH);
+      DEVICE_RELAY(0, HIGH);
     if (strcmp(MQTT_msg_in, "off") == 0)
-      SmartSwitch_Relay(LOW);
+      DEVICE_RELAY(0, LOW);
     if (strcmp(MQTT_msg_in, "toggle") == 0)
-      SmartSwitch_Toggle();
-    // SmartSwitch_Relay(!SmartSwitch_PWR_STATE);
+      DEVICE_TOGGLE(0);
+    // SmartSwitch_Relay(!SmartSwitch_RLY01_STATE);
+  }
+  else if (strcmp(MQTT_command, "/LED00") == 0)
+  {
+    // MQTT_SendTELE(MQTT_command, MQTT_command);
+    MQTT_SendNOTI("triggered", "LED00!!!");
+    if (strcmp(MQTT_msg_in, "on") == 0)
+      DEVICE_LED(1, HIGH);
+    if (strcmp(MQTT_msg_in, "off") == 0)
+      DEVICE_LED(1, LOW);
+    if (strcmp(MQTT_msg_in, "toggle") == 0)
+      DEVICE_LED(1, !SmartSwitch_LED_STATE[0]);
   }
   else if (strcmp(MQTT_command, "/LED01") == 0)
   {
     // MQTT_SendTELE(MQTT_command, MQTT_command);
     MQTT_SendNOTI("triggered", "LED01!!!");
     if (strcmp(MQTT_msg_in, "on") == 0)
-      SmartSwitch_LED(HIGH);
+      DEVICE_LED(1, HIGH);
     if (strcmp(MQTT_msg_in, "off") == 0)
-      SmartSwitch_LED(LOW);
+      DEVICE_LED(1, LOW);
     if (strcmp(MQTT_msg_in, "toggle") == 0)
-      DEVICE_LED01(!SmartSwitch_LED01_STATE);
+      DEVICE_LED(1, !SmartSwitch_LED_STATE[1]);
   }
   else if (strcmp(MQTT_command, "/LED02") == 0)
   {
     // MQTT_SendTELE(MQTT_command, MQTT_command);
     MQTT_SendNOTI("triggered", "LED02!!!");
     if (strcmp(MQTT_msg_in, "on") == 0)
-      SmartSwitch_LINKLED(HIGH);
+      DEVICE_LED(2, HIGH);
     if (strcmp(MQTT_msg_in, "off") == 0)
-      SmartSwitch_LINKLED(LOW);
+      DEVICE_LED(2, LOW);
     if (strcmp(MQTT_msg_in, "toggle") == 0)
-      DEVICE_LED02(!SmartSwitch_LED02_STATE);
+      DEVICE_LED(2, !SmartSwitch_LED_STATE[2]);
   }
   else if (strcmp(MQTT_command, "/Status") == 0)
   {
@@ -218,21 +229,21 @@ void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in)
     DEBUG_LineOut("Status Requested");
     if (strcmp(MQTT_msg_in, "Power") == 0)
     {
-      MQTT_SendSTAT("Power", SmartSwitch_PWR_STATE ? "ON" : "OFF");
+      MQTT_SendSTAT("Power", SmartSwitch_Relay_STATE[0] ? "ON" : "OFF");
     }
     else if (strcmp(MQTT_msg_in, "LED01") == 0)
     {
-      MQTT_SendSTAT("LED01", SmartSwitch_LED01 ? "ON" : "OFF");
+      MQTT_SendSTAT("LED01", SmartSwitch_LED_STATE[0] ? "ON" : "OFF");
     }
     else if (strcmp(MQTT_msg_in, "LNKLD") == 0)
     {
-      MQTT_SendSTAT("LNKLD", SmartSwitch_LED02 ? "ON" : "OFF");
+      MQTT_SendSTAT("LNKLD", SmartSwitch_LED_STATE[1] ? "ON" : "OFF");
     }
     else if (strcmp(MQTT_msg_in, "All") == 0)
     {
-      MQTT_SendSTAT("Power", SmartSwitch_PWR_STATE ? "ON" : "OFF");
-      MQTT_SendSTAT("LED01", SmartSwitch_LED01 ? "ON" : "OFF");
-      MQTT_SendSTAT("LNKLD", SmartSwitch_LED02 ? "ON" : "OFF");
+      MQTT_SendSTAT("Power", SmartSwitch_Relay_STATE[0] ? "ON" : "OFF");
+      MQTT_SendSTAT("LED01", SmartSwitch_LED_STATE[0] ? "ON" : "OFF");
+      MQTT_SendSTAT("LNKLD", SmartSwitch_LED_STATE[1] ? "ON" : "OFF");
     }
     // else if (strcmp(MQTT_msg_in, "All") == 0)
   }

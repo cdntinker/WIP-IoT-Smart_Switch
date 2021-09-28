@@ -181,7 +181,7 @@ boolean customInit()
 
     server.on("/darkmode", HTTP_GET, [](AsyncWebServerRequest *request)
               {
-Serial.println("Dork Mode");
+                  Serial.println("Dork Mode");
                   String inputMessage1;
                   if (request->hasParam(PARAM_INPUT_1))
                   {
@@ -194,32 +194,41 @@ Serial.println("Dork Mode");
                   request->send(200, "text/plain", "OK");
               });
 
-///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
     server.on("/RelayControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
+                  int RelayNumber = 0;
                   String inputMessage1;
                   if (request->hasParam(PARAM_INPUT_1))
                   {
                       inputMessage1 = request->getParam(PARAM_INPUT_1)->value();
                       if (inputMessage1 == "0")
-                      {
-                          DEVICE_RELAY(LOW);
-                          ///////////////////////   OFF
-                      }
+                          DEVICE_RELAY(RelayNumber, LOW);     //   OFF
                       if (inputMessage1 == "1")
-                      {
-                          DEVICE_RELAY(HIGH);
-                          ///////////////////////   ON
-                      }
+                          DEVICE_RELAY(RelayNumber, HIGH);    //   ON
                       if (inputMessage1 == "9")
-                      {
-                          DEVICE_TOGGLE();
-                          ///////////////////////   TOGGLE
-                      }
+                          DEVICE_TOGGLE(RelayNumber);         //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });
-///////////////////////////////////////////////////////////////////////////////////
+
+    server.on("/LEDControl", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
+                  int LEDNumber = 0;
+                  String inputMessage1;
+                  if (request->hasParam(PARAM_INPUT_1))
+                  {
+                      inputMessage1 = request->getParam(PARAM_INPUT_1)->value();
+                      if (inputMessage1 == "0")
+                          DEVICE_LED(LEDNumber, LOW);     //   OFF
+                      if (inputMessage1 == "1")
+                          DEVICE_LED(LEDNumber, HIGH);    //   ON
+                    //   if (inputMessage1 == "9")
+                    //       DEVICE_LEDTOGGLE(LEDNumber);         //   TOGGLE
+                  }
+                  request->send(200, "text/plain", "OK");
+              });
+    ///////////////////////////////////////////////////////////////////////////////////
 
     server.on(
         "/management", HTTP_POST, [&](AsyncWebServerRequest *request)

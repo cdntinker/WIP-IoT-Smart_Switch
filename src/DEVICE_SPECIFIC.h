@@ -16,9 +16,15 @@
 #ifndef DEVICE_Translations
 #define DEVICE_Translations
 
-extern bool SmartSwitch_PWR_STATE;
-extern bool SmartSwitch_LED01_STATE;
-extern bool SmartSwitch_LED02_STATE;
+
+extern int SmartSwitch_RelayPin[4];
+extern bool SmartSwitch_Relay_STATE[4];
+
+extern int SmartSwitch_LEDPin[4];
+extern bool SmartSwitch_LED_STATE[4];
+
+extern int SmartSwitch_ButtonPin[4];
+
 
 #define DEVICE_SETUP SmartSwitch_init
 #define DEVICE_LOOP NULL_function
@@ -29,8 +35,8 @@ void DEVICE_LOOP();
 #define DEVICE_RELAY SmartSwitch_Relay
 #define DEVICE_TOGGLE SmartSwitch_Toggle
 
-#define DEVICE_LED01 SmartSwitch_LED
-#define DEVICE_LED02 SmartSwitch_LINKLED
+#define DEVICE_LED SmartSwitch_LED
+// #define DEVICE_LED02 SmartSwitch_LINKLED
 
 #endif // DEVICE_Translations
 

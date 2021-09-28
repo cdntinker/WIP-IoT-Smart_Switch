@@ -37,7 +37,7 @@ function RelayTOGGLE() {
   xhr.open("GET", "/RelayControl?state=9", true);
   xhr.send();
   setTimeout(function () {window.location.reload();}, 100);
-}
+} 
 
 /*    ///////////////////////////////////////   */
 

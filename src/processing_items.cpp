@@ -63,7 +63,7 @@ PageMap OTOList[] =
 };
 int NumberofStates = sizeof(OTOList) / sizeof(OTOList[0]);
 char OTOstate[32];
-extern bool SmartSwitch_PWR_STATE;
+extern bool SmartSwitch_Relay_STATE[4];
 
 
 // /**********************************************************************/
@@ -261,21 +261,45 @@ String processor(const String &var)
   /**********************************************************************/
   /* On / Toggle / Off Buttons                                          */
   /**********************************************************************/
-  if (var == "OTOButtons")
+  // if ((var == "OTOButtons.0") || (var == "OTOButtons.1") || (var == "OTOButtons.0.1.2"))
+  if (var.startsWith("OTOButtons"))
   {
-    if(SmartSwitch_PWR_STATE)
+    String TheHTML = "<div class = \"menu-buttons\">";
+    // String TheLabel = "";
+
+char WTF[50];
+    var.toCharArray(WTF, 50);
+Serial.printf("===> %s\n", WTF);
+
+char *Token = NULL;
+  Token = strtok(WTF, ".");
+      Serial.printf("---> %s\n", Token);
+      Token = strtok(NULL, "."); 
+  while(Token != NULL)
+  {
+      Serial.printf("+++> %s\n", Token);
+
+      String TheLabel = "<H3>Relay #";
+      TheLabel += Token;
+      TheLabel += "</H3>\n";
+      TheHTML += TheLabel;
+
+      Token = strtok(NULL, ".");
+  // }
+
+    if(SmartSwitch_Relay_STATE[0])
       strcpy(OTOstate, "ON");
     else
       strcpy(OTOstate, "OFF");
 
-    String TheHTML = "<div class = \"menu-buttons\">";
+    // String TheHTML = "<div class = \"menu-buttons\">";
 
     char TheButtons[1024];
     String ButtonClass;
 
     for (int OTOListCTR = 0; OTOListCTR < NumberofStates; OTOListCTR++)
     {
-      if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SmartSwitch_PWR_STATE
+      if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SmartSwitch_Relay_STATE[0]
         ButtonClass = "ButtonHere";
       else
         ButtonClass = "ButtonClickable";
@@ -300,8 +324,9 @@ String processor(const String &var)
       TheHTML += TheButtons;
       }
     }
+    TheHTML += "<br>\n";
+  }
     TheHTML += "</DIV>";
-
     return TheHTML;
   }
   /**********************************************************************/

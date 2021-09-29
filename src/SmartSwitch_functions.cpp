@@ -92,26 +92,39 @@ void SmartSwitch_init()
     LEDCount++;
 #endif
 
-    Serial.printf("Relays: %2d ( ", RelayCount);
+String OOGABOOGA = "";
+
+sprintf(DEBUGtxt, " Relays: %2d", RelayCount);
+DEBUG_LineOut(DEBUGtxt);
+OOGABOOGA = "GPIOs: ";
     for (int ctr = 0; ctr < RelayCount; ctr++)
     {
-        Serial.printf("%2d ", SmartSwitch_RelayPin[ctr]);
+        OOGABOOGA += SmartSwitch_RelayPin[ctr];
+        OOGABOOGA += " ";
     }
-    Serial.println(")");
+    DEBUG_LineOut2(OOGABOOGA.c_str());
 
-    Serial.printf("Relays: %2d ( ", ButtonCount);
+    // Serial.println(")");
+
+sprintf(DEBUGtxt, "Buttons: %2d", ButtonCount);
+DEBUG_LineOut(DEBUGtxt);
+OOGABOOGA = "GPIOs: ";
     for (int ctr = 0; ctr < ButtonCount; ctr++)
     {
-        Serial.printf("%2d ", SmartSwitch_ButtonPin[ctr]);
+        OOGABOOGA += SmartSwitch_ButtonPin[ctr];
+        OOGABOOGA += " ";
     }
-    Serial.println(")");
+    DEBUG_LineOut2(OOGABOOGA.c_str());
 
-    Serial.printf("  LEDs: %2d ( ", LEDCount);
+sprintf(DEBUGtxt, "   LEDs: %2d", LEDCount);
+DEBUG_LineOut(DEBUGtxt);
+OOGABOOGA = "GPIOs: ";
     for (int ctr = 0; ctr < LEDCount; ctr++)
     {
-        Serial.printf("%2d ", SmartSwitch_LEDPin[ctr]);
+        OOGABOOGA += SmartSwitch_LEDPin[ctr];
+        OOGABOOGA += " ";
     }
-    Serial.println(")");
+    DEBUG_LineOut2(OOGABOOGA.c_str());
 }
 
 // Handle button press

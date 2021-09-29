@@ -16,25 +16,27 @@ function darkFunction() {
   setTimeout(function () {window.location.reload();}, 100);
 }
 
+/*    ///////////////////////////////////////   */
+
 /*    Control Button Handling       */
 
-function RelayON() {
+function RelayON(element) {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/RelayControl?state=1", true);
+  xhr.open("GET", "/RelayControl?RelayNum="+element+"&Action=1", true);
   xhr.send();
   setTimeout(function () {window.location.reload();}, 100);
 }
 
-function RelayOFF() {
+function RelayOFF(element) {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/RelayControl?state=0", true);
+  xhr.open("GET", "/RelayControl?RelayNum="+element+"&Action=0", true);
   xhr.send();
   setTimeout(function () {window.location.reload();}, 100);
 }
 
-function RelayTOGGLE() {
+function RelayTOGGLE(element) {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/RelayControl?state=9", true);
+  xhr.open("GET", "/RelayControl?RelayNum="+element+"&Action=9", true);
   xhr.send();
   setTimeout(function () {window.location.reload();}, 100);
 } 

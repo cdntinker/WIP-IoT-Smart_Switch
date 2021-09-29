@@ -24,6 +24,9 @@ AsyncWebServer server(80); // declare ASYNC server library
 AsyncWebSocket ws("/ws");  // declare web socket
 
 const char *PARAM_INPUT_1 = "state";
+const char *PARAM_INPUT_2 = "RelayNum";
+const char *PARAM_INPUT_3 = "Action";
+
 extern char DEBUGtxt[48];
 
 void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *WSclient, AwsEventType type,
@@ -199,15 +202,22 @@ boolean customInit()
               {
                   int RelayNumber = 0;
                   String inputMessage1;
-                  if (request->hasParam(PARAM_INPUT_1))
+                  String inputMessage2;
+                  if (request->hasParam(PARAM_INPUT_2))
                   {
-                      inputMessage1 = request->getParam(PARAM_INPUT_1)->value();
+                      inputMessage2 = request->getParam(PARAM_INPUT_2)->value();
+Serial.printf("PARAM_INPUT_2: %s = %s\n", PARAM_INPUT_2, inputMessage2.c_str());
+                  }
+                  if (request->hasParam(PARAM_INPUT_3))
+                  {
+                      inputMessage1 = request->getParam(PARAM_INPUT_3)->value();
+Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage1.c_str());
                       if (inputMessage1 == "0")
-                          DEVICE_RELAY(RelayNumber, LOW);     //   OFF
+                          DEVICE_RELAY(inputMessage2.toInt(), LOW);     //   OFF
                       if (inputMessage1 == "1")
-                          DEVICE_RELAY(RelayNumber, HIGH);    //   ON
+                          DEVICE_RELAY(inputMessage2.toInt(), HIGH);    //   ON
                       if (inputMessage1 == "9")
-                          DEVICE_TOGGLE(RelayNumber);         //   TOGGLE
+                          DEVICE_TOGGLE(inputMessage2.toInt());         //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });
@@ -216,9 +226,16 @@ boolean customInit()
               {
                   int LEDNumber = 0;
                   String inputMessage1;
+                  String inputMessage2;
+                  if (request->hasParam(PARAM_INPUT_2))
+                  {
+                      inputMessage2 = request->getParam(PARAM_INPUT_2)->value();
+Serial.printf("PARAM_INPUT_2: %s = %s\n", PARAM_INPUT_2, inputMessage2.c_str());
+                  }
                   if (request->hasParam(PARAM_INPUT_1))
                   {
-                      inputMessage1 = request->getParam(PARAM_INPUT_1)->value();
+                      inputMessage1 = request->getParam(PARAM_INPUT_3)->value();
+Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage1.c_str());
                       if (inputMessage1 == "0")
                           DEVICE_LED(LEDNumber, LOW);     //   OFF
                       if (inputMessage1 == "1")

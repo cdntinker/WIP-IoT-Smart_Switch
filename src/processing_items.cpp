@@ -7,6 +7,9 @@
 #include "EXTERNS.h"
 #include "DEFINES.h"
 
+#include "Tinker_DEBUG.h"
+extern char DEBUGtxt[48];
+
 #include "HTML_css.h"
 #include "HTML_SCRIPTS.h"
 #include "HTML_SCRIPTS_2.h"
@@ -57,14 +60,13 @@ extern char CurrentPage[32];
 
 PageMap OTOList[] =
     {
-        {true, "", "ON", "RelayON()"},
-        {true, "", "Toggle", "RelayTOGGLE()"},
-        {true, "", "OFF", "RelayOFF()"},
+        {true, "", "ON", "RelayON"},
+        {true, "", "Toggle", "RelayTOGGLE"},
+        {true, "", "OFF", "RelayOFF"},
 };
 int NumberofStates = sizeof(OTOList) / sizeof(OTOList[0]);
 char OTOstate[32];
 extern bool SmartSwitch_Relay_STATE[4];
-
 
 // /**********************************************************************/
 
@@ -131,11 +133,11 @@ String return_reset_reason(RESET_REASON reason)
 
 String DeviceID()
 {
-// #if defined(DeviceName)
-//   String id = STR(DeviceName);
-// #else
+  // #if defined(DeviceName)
+  //   String id = STR(DeviceName);
+  // #else
   String id = host;
-// #endif
+  // #endif
   return id;
 }
 
@@ -150,16 +152,16 @@ String info_memsketch()
   int Size = ESP.getSketchSize();
   int Free = ESP.getFreeSketchSpace();
   int Flash = ESP.getFlashChipSize();
-// struct FSInfo {
-//     size_t totalBytes;
-//     size_t usedBytes;
-//     size_t blockSize;
-//     size_t pageSize;
-//     size_t maxOpenFiles;
-//     size_t maxPathLength;
-// };
-FSInfo fs_info;
-LittleFS.info(fs_info);
+  // struct FSInfo {
+  //     size_t totalBytes;
+  //     size_t usedBytes;
+  //     size_t blockSize;
+  //     size_t pageSize;
+  //     size_t maxOpenFiles;
+  //     size_t maxPathLength;
+  // };
+  FSInfo fs_info;
+  LittleFS.info(fs_info);
 
   String memsketch =
       ((String)(Flash / 1024)) +
@@ -242,14 +244,14 @@ String processor(const String &var)
       }
       if (PageList[PageListCTR].IsAButton)
       {
-      sprintf(TheButtons,
-              "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
-              ButtonClass.c_str(),
-              PageListCTR,
-              ClickAction.c_str(),
-              PageList[PageListCTR].PageLabel,
-              PageListCTR);
-      TheHTML += TheButtons;
+        sprintf(TheButtons,
+                "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
+                ButtonClass.c_str(),
+                PageListCTR,
+                ClickAction.c_str(),
+                PageList[PageListCTR].PageLabel,
+                PageListCTR);
+        TheHTML += TheButtons;
       }
     }
     TheHTML += "</DIV>";
@@ -264,68 +266,74 @@ String processor(const String &var)
   // if ((var == "OTOButtons.0") || (var == "OTOButtons.1") || (var == "OTOButtons.0.1.2"))
   if (var.startsWith("OTOButtons"))
   {
+    DEBUG_SectionTitle(var.c_str());
+
     String TheHTML = "<div class = \"menu-buttons\">";
-    // String TheLabel = "";
 
-char WTF[50];
+    char WTF[50];
     var.toCharArray(WTF, 50);
-Serial.printf("===> %s\n", WTF);
 
-char *Token = NULL;
-  Token = strtok(WTF, ".");
-      Serial.printf("---> %s\n", Token);
-      Token = strtok(NULL, "."); 
-  while(Token != NULL)
-  {
-      Serial.printf("+++> %s\n", Token);
-
+    char *Token = NULL;
+    Token = strtok(WTF, ".");
+    Token = strtok(NULL, ".");
+    while (Token != NULL)
+    {
+      sprintf(DEBUGtxt, "Button Group > %s", Token);
+      DEBUG_LineOut(DEBUGtxt);
+      String GroupNumber = Token;
       String TheLabel = "<H3>Relay #";
       TheLabel += Token;
       TheLabel += "</H3>\n";
       TheHTML += TheLabel;
 
-      Token = strtok(NULL, ".");
-  // }
-
-    if(SmartSwitch_Relay_STATE[0])
-      strcpy(OTOstate, "ON");
-    else
-      strcpy(OTOstate, "OFF");
-
-    // String TheHTML = "<div class = \"menu-buttons\">";
-
-    char TheButtons[1024];
-    String ButtonClass;
-
-    for (int OTOListCTR = 0; OTOListCTR < NumberofStates; OTOListCTR++)
-    {
-      if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SmartSwitch_Relay_STATE[0]
-        ButtonClass = "ButtonHere";
+      if (SmartSwitch_Relay_STATE[atoi(Token)])
+        strcpy(OTOstate, "ON");
       else
-        ButtonClass = "ButtonClickable";
+        strcpy(OTOstate, "OFF");
 
-      String ClickAction = OTOList[OTOListCTR].ButtonClick;
+      char TheButtons[1024];
+      String ButtonClass;
 
-      if (strlen(OTOList[OTOListCTR].PageAddress) != 0)
+      for (int OTOListCTR = 0; OTOListCTR < NumberofStates; OTOListCTR++)
       {
-        ClickAction += "'";
-        ClickAction += OTOList[OTOListCTR].PageAddress;
-        ClickAction += "'";
+        if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SmartSwitch_Relay_STATE[0]
+          ButtonClass = "ButtonHere";
+        else
+          ButtonClass = "ButtonClickable";
+
+        String ClickAction = OTOList[OTOListCTR].ButtonClick;
+
+        if (strlen(OTOList[OTOListCTR].PageAddress) != 0)
+        {
+          ClickAction += "'";
+          ClickAction += OTOList[OTOListCTR].PageAddress;
+          ClickAction += "'";
+        }
+        else
+        {
+          ClickAction += "(";
+          ClickAction += GroupNumber;
+          ClickAction += ")";
+        }
+        if (OTOList[OTOListCTR].IsAButton)
+        {
+
+          sprintf(DEBUGtxt, "Button > %s", ClickAction.c_str());
+          DEBUG_LineOut2(DEBUGtxt);
+
+          sprintf(TheButtons,
+                  "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
+                  ButtonClass.c_str(),
+                  OTOListCTR,
+                  ClickAction.c_str(),
+                  OTOList[OTOListCTR].PageLabel,
+                  OTOListCTR);
+          TheHTML += TheButtons;
+        }
       }
-      if (OTOList[OTOListCTR].IsAButton)
-      {
-      sprintf(TheButtons,
-              "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
-              ButtonClass.c_str(),
-              OTOListCTR,
-              ClickAction.c_str(),
-              OTOList[OTOListCTR].PageLabel,
-              OTOListCTR);
-      TheHTML += TheButtons;
-      }
+      TheHTML += "<br>\n";
+      Token = strtok(NULL, ".");
     }
-    TheHTML += "<br>\n";
-  }
     TheHTML += "</DIV>";
     return TheHTML;
   }

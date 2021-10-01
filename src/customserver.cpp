@@ -26,6 +26,7 @@ AsyncWebSocket ws("/ws");  // declare web socket
 const char *PARAM_INPUT_1 = "state";
 const char *PARAM_INPUT_2 = "RelayNum";
 const char *PARAM_INPUT_3 = "Action";
+const char *PARAM_INPUT_4 = "LEDNum";
 
 extern char DEBUGtxt[48];
 
@@ -200,23 +201,25 @@ boolean customInit()
     ///////////////////////////////////////////////////////////////////////////////////
     server.on("/RelayControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
-                  int RelayNumber = 0;
+                //   int RelayNumber = 0;
                   String inputMessage1;
                   String inputMessage2;
+                  String inputMessage3;
+DEBUG_Separator();
                   if (request->hasParam(PARAM_INPUT_2))
                   {
                       inputMessage2 = request->getParam(PARAM_INPUT_2)->value();
-Serial.printf("PARAM_INPUT_2: %s = %s\n", PARAM_INPUT_2, inputMessage2.c_str());
+Serial.printf("PARAM_INPUT_2: %s = %ld\n", PARAM_INPUT_2, inputMessage2.toInt());
                   }
                   if (request->hasParam(PARAM_INPUT_3))
                   {
-                      inputMessage1 = request->getParam(PARAM_INPUT_3)->value();
-Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage1.c_str());
-                      if (inputMessage1 == "0")
+                      inputMessage3 = request->getParam(PARAM_INPUT_3)->value();
+Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage3.c_str());
+                      if (inputMessage3 == "0")
                           DEVICE_RELAY(inputMessage2.toInt(), LOW);     //   OFF
-                      if (inputMessage1 == "1")
+                      if (inputMessage3 == "1")
                           DEVICE_RELAY(inputMessage2.toInt(), HIGH);    //   ON
-                      if (inputMessage1 == "9")
+                      if (inputMessage3 == "9")
                           DEVICE_TOGGLE(inputMessage2.toInt());         //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
@@ -224,24 +227,26 @@ Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage1.c_str());
 
     server.on("/LEDControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
-                  int LEDNumber = 0;
+                //   int LEDNumber = 0;
                   String inputMessage1;
                   String inputMessage2;
-                  if (request->hasParam(PARAM_INPUT_2))
+                  String inputMessage3;
+DEBUG_Separator();
+                  if (request->hasParam(PARAM_INPUT_4))
                   {
-                      inputMessage2 = request->getParam(PARAM_INPUT_2)->value();
-Serial.printf("PARAM_INPUT_2: %s = %s\n", PARAM_INPUT_2, inputMessage2.c_str());
+                      inputMessage2 = request->getParam(PARAM_INPUT_4)->value();
+Serial.printf("PARAM_INPUT_2: %s = %s\n", PARAM_INPUT_4, inputMessage2.c_str());
                   }
-                  if (request->hasParam(PARAM_INPUT_1))
+                  if (request->hasParam(PARAM_INPUT_3))
                   {
-                      inputMessage1 = request->getParam(PARAM_INPUT_3)->value();
-Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage1.c_str());
-                      if (inputMessage1 == "0")
-                          DEVICE_LED(LEDNumber, LOW);     //   OFF
-                      if (inputMessage1 == "1")
-                          DEVICE_LED(LEDNumber, HIGH);    //   ON
-                    //   if (inputMessage1 == "9")
-                    //       DEVICE_LEDTOGGLE(LEDNumber);         //   TOGGLE
+                      inputMessage3 = request->getParam(PARAM_INPUT_3)->value();
+Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage3.c_str());
+                      if (inputMessage3 == "0")
+                          DEVICE_LED(inputMessage2.toInt(), LOW);     //   OFF
+                      if (inputMessage3 == "1")
+                          DEVICE_LED(inputMessage2.toInt(), HIGH);    //   ON
+                      if (inputMessage3 == "9")
+                          DEVICE_LED_TOGGLE(inputMessage2.toInt());         //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });

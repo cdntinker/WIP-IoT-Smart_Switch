@@ -6,7 +6,13 @@
 const char PART_HomePage_Body[] PROGMEM = R"rawliteral(
 <div class = "border">
 
-%OTOButtons.0.1.2%
+%OTOButtons.Relays%
+
+</div>
+
+<div class = "border">
+
+%OTOButtons.LEDs%
 
 </div>
 )rawliteral";

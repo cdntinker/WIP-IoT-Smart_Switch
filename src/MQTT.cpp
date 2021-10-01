@@ -172,58 +172,101 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
 
 } // end of mqtt MQTT_callback
 
-void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in)
-// {
+extern int SmartSwitch_RelayPin[4];
+extern bool SmartSwitch_Relay_STATE[4];
+extern int RelayCount;
 
-// }
-// void MQTT_HandleMessages(const char *MQTT_command, const char MQTT_msg_in[MQTT_BUFFER_SIZE])
+extern int SmartSwitch_LEDPin[4];
+extern bool SmartSwitch_LED_STATE[4];
+extern int LEDCount;
+
+/////////////////////////////////////////////////////
+void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in)
 {
-  if (strcmp(MQTT_command, "/Power") == 0)
+  String TheTopic = MQTT_command;
+  char NotiMSG[32];
+  int CTRbegin, CTRfinish;
+
+/////////////////////////////////////////////////////
+  if (TheTopic.startsWith("/Power"))
   {
-    // MQTT_SendTELE(MQTT_command, MQTT_command);
-    MQTT_SendNOTI("triggered", "Power!!!");
-    if (strcmp(MQTT_msg_in, "on") == 0)
-      DEVICE_RELAY(0, HIGH);
-    if (strcmp(MQTT_msg_in, "off") == 0)
-      DEVICE_RELAY(0, LOW);
-    if (strcmp(MQTT_msg_in, "toggle") == 0)
-      DEVICE_TOGGLE(0);
-    // SmartSwitch_Relay(!SmartSwitch_RLY01_STATE);
+    TheTopic.remove(0, 6);
+    if (TheTopic == "")
+    {
+      CTRbegin = 0;
+      CTRfinish = RelayCount;
+      MQTT_SendNOTI("triggered", "All Da Power!");
+    }
+    else
+    {
+      CTRbegin = TheTopic.toInt();
+      CTRfinish = TheTopic.toInt() + 1;
+      sprintf(NotiMSG, "Power%s", TheTopic.c_str());
+      MQTT_SendNOTI("triggered", NotiMSG);
+    }
+
+    for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
+    {
+      if (TheTopic.toInt() < RelayCount)
+      {
+        if (strcmp(MQTT_msg_in, "on") == 0)
+          DEVICE_RELAY(CTR, HIGH);
+        if (strcmp(MQTT_msg_in, "off") == 0)
+          DEVICE_RELAY(CTR, LOW);
+        if (strcmp(MQTT_msg_in, "toggle") == 0)
+          DEVICE_TOGGLE(CTR);
+      }
+      else
+        MQTT_SendNOTI("triggered", "Unknown Power!");
+    }
   }
-  else if (strcmp(MQTT_command, "/LED00") == 0)
+  /////////////////////////////////////////////////////
+  if (TheTopic.startsWith("/LED"))
   {
-    // MQTT_SendTELE(MQTT_command, MQTT_command);
-    MQTT_SendNOTI("triggered", "LED00!!!");
-    if (strcmp(MQTT_msg_in, "on") == 0)
-      DEVICE_LED(1, HIGH);
-    if (strcmp(MQTT_msg_in, "off") == 0)
-      DEVICE_LED(1, LOW);
-    if (strcmp(MQTT_msg_in, "toggle") == 0)
-      DEVICE_LED(1, !SmartSwitch_LED_STATE[0]);
+    TheTopic.remove(0, 6);
+    if (TheTopic == "")
+    {
+      CTRbegin = 0;
+      CTRfinish = LEDCount;
+      MQTT_SendNOTI("triggered", "All Da LEDs!");
+    }
+    else
+    {
+      CTRbegin = TheTopic.toInt();
+      CTRfinish = TheTopic.toInt() + 1;
+      sprintf(NotiMSG, "LED%s", TheTopic.c_str());
+      MQTT_SendNOTI("triggered", NotiMSG);
+    }
+
+    for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
+    {
+      if (TheTopic.toInt() < LEDCount)
+      {
+        if (strcmp(MQTT_msg_in, "on") == 0)
+          DEVICE_LED(CTR, HIGH);
+        if (strcmp(MQTT_msg_in, "off") == 0)
+          DEVICE_LED(CTR, LOW);
+        if (strcmp(MQTT_msg_in, "toggle") == 0)
+          DEVICE_LED_TOGGLE(CTR);
+      }
+      else
+        MQTT_SendNOTI("triggered", "Unknown LED!");
+    }
   }
-  else if (strcmp(MQTT_command, "/LED01") == 0)
-  {
-    // MQTT_SendTELE(MQTT_command, MQTT_command);
-    MQTT_SendNOTI("triggered", "LED01!!!");
-    if (strcmp(MQTT_msg_in, "on") == 0)
-      DEVICE_LED(1, HIGH);
-    if (strcmp(MQTT_msg_in, "off") == 0)
-      DEVICE_LED(1, LOW);
-    if (strcmp(MQTT_msg_in, "toggle") == 0)
-      DEVICE_LED(1, !SmartSwitch_LED_STATE[1]);
-  }
-  else if (strcmp(MQTT_command, "/LED02") == 0)
-  {
-    // MQTT_SendTELE(MQTT_command, MQTT_command);
-    MQTT_SendNOTI("triggered", "LED02!!!");
-    if (strcmp(MQTT_msg_in, "on") == 0)
-      DEVICE_LED(2, HIGH);
-    if (strcmp(MQTT_msg_in, "off") == 0)
-      DEVICE_LED(2, LOW);
-    if (strcmp(MQTT_msg_in, "toggle") == 0)
-      DEVICE_LED(2, !SmartSwitch_LED_STATE[2]);
-  }
-  else if (strcmp(MQTT_command, "/Status") == 0)
+  /////////////////////////////////////////////////////
+  // else if (strcmp(MQTT_command, "/LED00") == 0)
+  // {
+  //   // MQTT_SendTELE(MQTT_command, MQTT_command);
+  //   MQTT_SendNOTI("triggered", "LED00!!!");
+  //   if (strcmp(MQTT_msg_in, "on") == 0)
+  //     DEVICE_LED(1, HIGH);
+  //   if (strcmp(MQTT_msg_in, "off") == 0)
+  //     DEVICE_LED(1, LOW);
+  //   if (strcmp(MQTT_msg_in, "toggle") == 0)
+  //     DEVICE_LED(1, !SmartSwitch_LED_STATE[0]);
+  // }
+ 
+  else if (strcmp(MQTT_command, "/Status") == 0)  ///// Needs complete rewrite
   {
     MQTT_SendNOTI("triggered", "Status!!!");
     DEBUG_LineOut("Status Requested");
@@ -253,6 +296,7 @@ void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in)
     DEBUG_Trouble("Dunno Whatcha want...");
     MQTT_SendNOTI("Error", "Dunno Whatcha want...");
   }
+
 }
 
 void MQTT_reconnect()

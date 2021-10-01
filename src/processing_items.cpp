@@ -58,15 +58,23 @@ PageMap PageList[] =
 int NumberofButtons = sizeof(PageList) / sizeof(PageList[0]);
 extern char CurrentPage[32];
 
-PageMap OTOList[] =
+PageMap OTOListRLY[] =
     {
         {true, "", "ON", "RelayON"},
         {true, "", "Toggle", "RelayTOGGLE"},
         {true, "", "OFF", "RelayOFF"},
 };
-int NumberofStates = sizeof(OTOList) / sizeof(OTOList[0]);
-char OTOstate[32];
-extern bool SmartSwitch_Relay_STATE[4];
+int NumberofStatesRLY = sizeof(OTOListRLY) / sizeof(OTOListRLY[0]);
+char OTOstateRLY[32];
+
+PageMap OTOListLED[] =
+    {
+        {true, "", "ON", "LEDON"},
+        {true, "", "Toggle", "LEDTOGGLE"},
+        {true, "", "OFF", "LEDOFF"},
+};
+int NumberofStatesLED = sizeof(OTOListLED) / sizeof(OTOListLED[0]);
+char OTOstateLED[32];
 
 // /**********************************************************************/
 
@@ -263,50 +271,74 @@ String processor(const String &var)
   /**********************************************************************/
   /* On / Toggle / Off Buttons                                          */
   /**********************************************************************/
-  // if ((var == "OTOButtons.0") || (var == "OTOButtons.1") || (var == "OTOButtons.0.1.2"))
+
+  extern int SmartSwitch_RelayPin[4];
+  extern bool SmartSwitch_Relay_STATE[4];
+  extern int RelayCount;
+
+  extern int SmartSwitch_LEDPin[4];
+  extern bool SmartSwitch_LED_STATE[4];
+  extern int LEDCount;
+
   if (var.startsWith("OTOButtons"))
   {
     DEBUG_SectionTitle(var.c_str());
 
-    String TheHTML = "<div class = \"menu-buttons\">";
-
     char WTF[50];
     var.toCharArray(WTF, 50);
-
     char *Token = NULL;
     Token = strtok(WTF, ".");
+    // Serial.println(Token);
     Token = strtok(NULL, ".");
-    while (Token != NULL)
+    // Serial.println(Token); // This is the TYPE of device
+
+// int GPIO_Pin[4];
+// bool GPIO_State[4];
+// int GPIO_Count;
+
+    String TheHTML = "<div class = \"menu-buttons\">";
+
+if(strcmp(Token, "Relays") == 0)
+{
+
+  // Serial.printf("RelayCount: %d\n", RelayCount);
+
+    for (int DeviceCTR = 0; DeviceCTR < RelayCount; DeviceCTR++)
     {
-      sprintf(DEBUGtxt, "Button Group > %s", Token);
+
+  // Serial.printf("DeviceCTR: %d\n", DeviceCTR);
+
+      sprintf(DEBUGtxt, "Button Group > %2d", DeviceCTR);
       DEBUG_LineOut(DEBUGtxt);
-      String GroupNumber = Token;
+      String GroupNumber = String(DeviceCTR);
       String TheLabel = "<H3>Relay #";
-      TheLabel += Token;
-      TheLabel += "</H3>\n";
+      TheLabel += DeviceCTR;
+      TheLabel += " (GPIO ";
+      TheLabel += SmartSwitch_RelayPin[DeviceCTR];
+      TheLabel += ")</H3>\n";
       TheHTML += TheLabel;
 
-      if (SmartSwitch_Relay_STATE[atoi(Token)])
-        strcpy(OTOstate, "ON");
+      if (SmartSwitch_Relay_STATE[DeviceCTR])
+        strcpy(OTOstateRLY, "ON");
       else
-        strcpy(OTOstate, "OFF");
+        strcpy(OTOstateRLY, "OFF");
 
       char TheButtons[1024];
       String ButtonClass;
 
-      for (int OTOListCTR = 0; OTOListCTR < NumberofStates; OTOListCTR++)
+      for (int OTOListCTR = 0; OTOListCTR < NumberofStatesRLY; OTOListCTR++)
       {
-        if (!strcmp(OTOList[OTOListCTR].PageLabel, OTOstate)) // SmartSwitch_Relay_STATE[0]
+        if (!strcmp(OTOListRLY[OTOListCTR].PageLabel, OTOstateRLY)) // SmartSwitch_Relay_STATE[0]
           ButtonClass = "ButtonHere";
         else
           ButtonClass = "ButtonClickable";
 
-        String ClickAction = OTOList[OTOListCTR].ButtonClick;
+        String ClickAction = OTOListRLY[OTOListCTR].ButtonClick;
 
-        if (strlen(OTOList[OTOListCTR].PageAddress) != 0)
+        if (strlen(OTOListRLY[OTOListCTR].PageAddress) != 0)
         {
           ClickAction += "'";
-          ClickAction += OTOList[OTOListCTR].PageAddress;
+          ClickAction += OTOListRLY[OTOListCTR].PageAddress;
           ClickAction += "'";
         }
         else
@@ -315,25 +347,93 @@ String processor(const String &var)
           ClickAction += GroupNumber;
           ClickAction += ")";
         }
-        if (OTOList[OTOListCTR].IsAButton)
+        if (OTOListRLY[OTOListCTR].IsAButton)
         {
 
-          sprintf(DEBUGtxt, "Button > %s", ClickAction.c_str());
-          DEBUG_LineOut2(DEBUGtxt);
+          // sprintf(DEBUGtxt, "Button > %s", ClickAction.c_str());
+          // DEBUG_LineOut2(DEBUGtxt);
 
           sprintf(TheButtons,
                   "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
                   ButtonClass.c_str(),
                   OTOListCTR,
                   ClickAction.c_str(),
-                  OTOList[OTOListCTR].PageLabel,
+                  OTOListRLY[OTOListCTR].PageLabel,
                   OTOListCTR);
           TheHTML += TheButtons;
         }
       }
       TheHTML += "<br>\n";
-      Token = strtok(NULL, ".");
     }
+}
+else if(strcmp(Token, "LEDs") == 0)
+{
+
+  // Serial.printf("LEDCount: %d\n", LEDCount);
+
+    for (int DeviceCTR = 0; DeviceCTR < LEDCount; DeviceCTR++)
+    {
+
+  // Serial.printf("DeviceCTR: %d\n", DeviceCTR);
+
+      sprintf(DEBUGtxt, "Button Group > %2d", DeviceCTR);
+      DEBUG_LineOut(DEBUGtxt);
+      String GroupNumber = String(DeviceCTR);
+      String TheLabel = "<H3>LED #";
+      TheLabel += DeviceCTR;
+      TheLabel += " (GPIO ";
+      TheLabel += SmartSwitch_LEDPin[DeviceCTR];
+      TheLabel += ")</H3>\n";
+      TheHTML += TheLabel;
+
+      if (SmartSwitch_LED_STATE[DeviceCTR])
+        strcpy(OTOstateLED, "ON");
+      else
+        strcpy(OTOstateLED, "OFF");
+
+      char TheButtons[1024];
+      String ButtonClass;
+
+      for (int OTOListCTR = 0; OTOListCTR < NumberofStatesLED; OTOListCTR++)
+      {
+        if (!strcmp(OTOListLED[OTOListCTR].PageLabel, OTOstateLED)) // SmartSwitch_LED_STATE[0]
+          ButtonClass = "ButtonHere";
+        else
+          ButtonClass = "ButtonClickable";
+
+        String ClickAction = OTOListLED[OTOListCTR].ButtonClick;
+
+        if (strlen(OTOListLED[OTOListCTR].PageAddress) != 0)
+        {
+          ClickAction += "'";
+          ClickAction += OTOListLED[OTOListCTR].PageAddress;
+          ClickAction += "'";
+        }
+        else
+        {
+          ClickAction += "(";
+          ClickAction += GroupNumber;
+          ClickAction += ")";
+        }
+        if (OTOListLED[OTOListCTR].IsAButton)
+        {
+
+          // sprintf(DEBUGtxt, "Button > %s", ClickAction.c_str());
+          // DEBUG_LineOut2(DEBUGtxt);
+
+          sprintf(TheButtons,
+                  "<div class = \"buttons %s\"> <button%d onclick=\"%s\">%s</button%d> </div>\n",
+                  ButtonClass.c_str(),
+                  OTOListCTR,
+                  ClickAction.c_str(),
+                  OTOListLED[OTOListCTR].PageLabel,
+                  OTOListCTR);
+          TheHTML += TheButtons;
+        }
+      }
+      TheHTML += "<br>\n";
+    }
+  }
     TheHTML += "</DIV>";
     return TheHTML;
   }

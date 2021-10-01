@@ -43,6 +43,31 @@ function RelayTOGGLE(element) {
 
 /*    ///////////////////////////////////////   */
 
+/*    Control Button Handling       */
+
+function LEDON(element) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/LEDControl?LEDNum="+element+"&Action=1", true);
+  xhr.send();
+  setTimeout(function () {window.location.reload();}, 100);
+}
+
+function LEDOFF(element) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/LEDControl?LEDNum="+element+"&Action=0", true);
+  xhr.send();
+  setTimeout(function () {window.location.reload();}, 100);
+}
+
+function LEDTOGGLE(element) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/LEDControl?LEDNum="+element+"&Action=9", true);
+  xhr.send();
+  setTimeout(function () {window.location.reload();}, 100);
+} 
+
+/*    ///////////////////////////////////////   */
+
    function checkConnectionStatus()
    {
     let xhttp = new XMLHttpRequest();

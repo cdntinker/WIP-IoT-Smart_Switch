@@ -36,7 +36,7 @@ void DEVICE_LOOP();
 #define DEVICE_TOGGLE SmartSwitch_Toggle
 
 #define DEVICE_LED SmartSwitch_LED
-// #define DEVICE_LED02 SmartSwitch_LINKLED
+#define DEVICE_LED_TOGGLE SmartSwitch_LED_Toggle
 
 #endif // DEVICE_Translations
 

@@ -29,44 +29,44 @@ void SmartSwitch_init()
 /*****  Relays  *****/
 #ifdef SmartSwitch_RELAY00
     SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY00;
-    pinMode(SmartSwitch_RelayPin[LEDCount], OUTPUT);
+    pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
     RelayCount++;
 #endif
 #ifdef SmartSwitch_RELAY01
     SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY01;
-    pinMode(SmartSwitch_RelayPin[LEDCount], OUTPUT);
+    pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
     RelayCount++;
 #endif
 #ifdef SmartSwitch_RELAY02
     SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY02;
-    pinMode(SmartSwitch_RelayPin[LEDCount], OUTPUT);
+    pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
     RelayCount++;
 #endif
 #ifdef SmartSwitch_RELAY03
     SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY03;
-    pinMode(SmartSwitch_RelayPin[LEDCount], OUTPUT);
+    pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
     RelayCount++;
 #endif
 
 /*****  Buttons  *****/
 #ifdef SmartSwitch_BUTTN00
     SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN00;
-    pinMode(SmartSwitch_ButtonPin[LEDCount], INPUT);
+    pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
     ButtonCount++;
 #endif
 #ifdef SmartSwitch_BUTTN01
     SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN01;
-    pinMode(SmartSwitch_ButtonPin[LEDCount], INPUT);
+    pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
     ButtonCount++;
 #endif
 #ifdef SmartSwitch_BUTTN02
     SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN02;
-    pinMode(SmartSwitch_ButtonPin[LEDCount], INPUT);
+    pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
     ButtonCount++;
 #endif
 #ifdef SmartSwitch_BUTTN03
     SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN03;
-    pinMode(SmartSwitch_ButtonPin[LEDCount], INPUT);
+    pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
     ButtonCount++;
 #endif
 
@@ -99,6 +99,8 @@ DEBUG_LineOut(DEBUGtxt);
 OOGABOOGA = "GPIOs: ";
     for (int ctr = 0; ctr < RelayCount; ctr++)
     {
+        OOGABOOGA += ctr;
+        OOGABOOGA += "=";
         OOGABOOGA += SmartSwitch_RelayPin[ctr];
         OOGABOOGA += " ";
     }
@@ -111,6 +113,8 @@ DEBUG_LineOut(DEBUGtxt);
 OOGABOOGA = "GPIOs: ";
     for (int ctr = 0; ctr < ButtonCount; ctr++)
     {
+        OOGABOOGA += ctr;
+        OOGABOOGA += "=";
         OOGABOOGA += SmartSwitch_ButtonPin[ctr];
         OOGABOOGA += " ";
     }
@@ -121,6 +125,8 @@ DEBUG_LineOut(DEBUGtxt);
 OOGABOOGA = "GPIOs: ";
     for (int ctr = 0; ctr < LEDCount; ctr++)
     {
+        OOGABOOGA += ctr;
+        OOGABOOGA += "=";
         OOGABOOGA += SmartSwitch_LEDPin[ctr];
         OOGABOOGA += " ";
     }
@@ -138,6 +144,9 @@ String SmartSwitch_TurnOff;
 // Turn relay on/off
 void SmartSwitch_Relay(int RelayNum, bool OnOff)
 {
+    char MQTT_Topic[16];
+    sprintf(MQTT_Topic, "Power%02d", RelayNum);
+
     DEBUG_SectionTitle("SmartSwitch Action");
     if (OnOff)
     {
@@ -145,8 +154,8 @@ void SmartSwitch_Relay(int RelayNum, bool OnOff)
         SmartSwitch_Relay_STATE[RelayNum] = HIGH;
         SmartSwitch_TurnOn = "ButtonHere";
         SmartSwitch_TurnOff = "ButtonClickable";
-        MQTT_SendSTAT("Power", "ON");
-        sprintf(DEBUGtxt, "Relay %02d ON", RelayNum);
+        MQTT_SendSTAT(MQTT_Topic, "ON");
+        sprintf(DEBUGtxt, "Relay %02d (%d) ON", RelayNum, SmartSwitch_RelayPin[RelayNum]);
         DEBUG_LineOut(DEBUGtxt);
     }
     else
@@ -155,8 +164,8 @@ void SmartSwitch_Relay(int RelayNum, bool OnOff)
         SmartSwitch_Relay_STATE[RelayNum] = LOW;
         SmartSwitch_TurnOn = "ButtonClickable";
         SmartSwitch_TurnOff = "ButtonHere";
-        MQTT_SendSTAT("Power", "OFF");
-        sprintf(DEBUGtxt, "Relay %02d OFF", RelayNum);
+        MQTT_SendSTAT(MQTT_Topic, "OFF");
+        sprintf(DEBUGtxt, "Relay %02d (%d) OFF", RelayNum, SmartSwitch_RelayPin[RelayNum]);
         DEBUG_LineOut(DEBUGtxt);
     }
 }
@@ -173,20 +182,32 @@ void SmartSwitch_Toggle(int RelayNum)
 // Turn LED on/off
 void SmartSwitch_LED(int LEDNum, bool OnOff)
 {
+    char MQTT_Topic[16];
+    sprintf(MQTT_Topic, "LED%02d", LEDNum);
+
     if (OnOff)
     {
         DEBUG_LineOut("LED ON");
-        digitalWrite(SmartSwitch_LED01, HIGH);
+        digitalWrite(SmartSwitch_LEDPin[LEDNum], HIGH);
         SmartSwitch_LED_STATE[LEDNum] = HIGH;
-        MQTT_SendSTAT("LED01", "ON");
+        MQTT_SendSTAT(MQTT_Topic, "ON");
     }
     else
     {
         DEBUG_LineOut("LED OFF");
-        digitalWrite(SmartSwitch_LED01, LOW);
+        digitalWrite(SmartSwitch_LEDPin[LEDNum], LOW);
         SmartSwitch_LED_STATE[LEDNum] = LOW;
-        MQTT_SendSTAT("LED01", "OFF");
+        MQTT_SendSTAT(MQTT_Topic, "OFF");
     }
+}
+
+// Turn relay on/off
+void SmartSwitch_LED_Toggle(int LEDNum)
+{
+    DEBUG_SectionTitle("SmartSwitch Action");
+    sprintf(DEBUGtxt, "LED %02d TOGGLE", LEDNum);
+    DEBUG_LineOut(DEBUGtxt);
+    SmartSwitch_LED(LEDNum, !SmartSwitch_LED_STATE[LEDNum]);
 }
 
 #if defined(SmartSwitch) && !defined(TestCode)

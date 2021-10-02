@@ -326,9 +326,9 @@ void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in)
     }
   }
   /////////////////////////////////////////////////////
-  if (TheTopic.startsWith("/LED"))
+  else if (TheTopic.startsWith("/LED"))
   {
-    TheTopic.remove(0, 6);
+    TheTopic.remove(0, 4);
     if (TheTopic == "")
     {
       CTRbegin = 0;
@@ -385,7 +385,7 @@ void MQTT_HandleMessages(const char *MQTT_command, const char *MQTT_msg_in)
     // else if (strcmp(MQTT_msg_in, "All") == 0)
   }
 
-  else
+  else    // Ya cornfoozed me!
   {
     DEBUG_Trouble("Dunno Whatcha want...");
     MQTT_SendNOTI("Error", "Dunno Whatcha want...");

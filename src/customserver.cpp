@@ -28,7 +28,7 @@ const char *PARAM_INPUT_2 = "RelayNum";
 const char *PARAM_INPUT_3 = "Action";
 const char *PARAM_INPUT_4 = "LEDNum";
 
-extern char DEBUGtxt[48];
+extern char DEBUGtxt[92];
 
 void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *WSclient, AwsEventType type,
              void *arg, uint8_t *data, size_t len)
@@ -201,52 +201,52 @@ boolean customInit()
     ///////////////////////////////////////////////////////////////////////////////////
     server.on("/RelayControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
-                //   int RelayNumber = 0;
+                  //   int RelayNumber = 0;
                   String inputMessage1;
                   String inputMessage2;
                   String inputMessage3;
-DEBUG_Separator();
+                  DEBUG_SectionTitle("Web Input");
                   if (request->hasParam(PARAM_INPUT_2))
                   {
                       inputMessage2 = request->getParam(PARAM_INPUT_2)->value();
-Serial.printf("PARAM_INPUT_2: %s = %ld\n", PARAM_INPUT_2, inputMessage2.toInt());
                   }
                   if (request->hasParam(PARAM_INPUT_3))
                   {
                       inputMessage3 = request->getParam(PARAM_INPUT_3)->value();
-Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage3.c_str());
+                      sprintf(DEBUGtxt, "Relay - #%ld, Action: %ld", inputMessage2.toInt(), inputMessage3.toInt());
+                      DEBUG_LineOut(DEBUGtxt);
                       if (inputMessage3 == "0")
-                          DEVICE_RELAY(inputMessage2.toInt(), LOW);     //   OFF
+                          DEVICE_RELAY(inputMessage2.toInt(), LOW); //   OFF
                       if (inputMessage3 == "1")
-                          DEVICE_RELAY(inputMessage2.toInt(), HIGH);    //   ON
+                          DEVICE_RELAY(inputMessage2.toInt(), HIGH); //   ON
                       if (inputMessage3 == "9")
-                          DEVICE_TOGGLE(inputMessage2.toInt());         //   TOGGLE
+                          DEVICE_TOGGLE(inputMessage2.toInt()); //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });
 
     server.on("/LEDControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
-                //   int LEDNumber = 0;
+                  //   int LEDNumber = 0;
                   String inputMessage1;
                   String inputMessage2;
                   String inputMessage3;
-DEBUG_Separator();
+                  DEBUG_SectionTitle("Web Input");
                   if (request->hasParam(PARAM_INPUT_4))
                   {
                       inputMessage2 = request->getParam(PARAM_INPUT_4)->value();
-Serial.printf("PARAM_INPUT_2: %s = %s\n", PARAM_INPUT_4, inputMessage2.c_str());
                   }
                   if (request->hasParam(PARAM_INPUT_3))
                   {
                       inputMessage3 = request->getParam(PARAM_INPUT_3)->value();
-Serial.printf("PARAM_INPUT_3: %s = %s\n", PARAM_INPUT_3, inputMessage3.c_str());
+                      sprintf(DEBUGtxt, "LED - #%ld, Action: %ld", inputMessage2.toInt(), inputMessage3.toInt());
+                      DEBUG_LineOut(DEBUGtxt);
                       if (inputMessage3 == "0")
-                          DEVICE_LED(inputMessage2.toInt(), LOW);     //   OFF
+                          DEVICE_LED(inputMessage2.toInt(), LOW); //   OFF
                       if (inputMessage3 == "1")
-                          DEVICE_LED(inputMessage2.toInt(), HIGH);    //   ON
+                          DEVICE_LED(inputMessage2.toInt(), HIGH); //   ON
                       if (inputMessage3 == "9")
-                          DEVICE_LED_TOGGLE(inputMessage2.toInt());         //   TOGGLE
+                          DEVICE_LED_TOGGLE(inputMessage2.toInt()); //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });

@@ -8,7 +8,7 @@
 #include "DEFINES.h"
 
 #include "Tinker_DEBUG.h"
-extern char DEBUGtxt[48];
+extern char DEBUGtxt[92];
 
 #include "HTML_css.h"
 #include "HTML_SCRIPTS.h"

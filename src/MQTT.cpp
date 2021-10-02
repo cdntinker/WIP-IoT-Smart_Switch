@@ -149,8 +149,9 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
       DEBUG_Trouble("Missing topic...");
       MQTT_SendNOTI("Error", "Missing topic...");
     }
-
-    /*********************************************************************
+    else
+    {
+      /*********************************************************************
      * This is where you need to send the incoming message off
      * to be handled elsewhere.
      * Probably in your main project code would be best...
@@ -159,8 +160,12 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
      * Tho...  Separate Handlers in individual libraries would be cool.
      * void DEVICE_MQTT_IN(const char *MQTT_command, const char *MQTT_msg_in)
      *********************************************************************/
-    else
-    {
+      ////////////////////////////////////////////////////////////////////////////
+      // Incoming message handling is done in the device/library specific       //
+      // function referred to by DEVICE_MQTT_IN                                 //
+      // At some point, I intend to make it possible to have multiple           //
+      // sub-functions...                                                       //
+      ////////////////////////////////////////////////////////////////////////////
       DEVICE_MQTT_IN(MQTT_command, MQTT_msg_in);
     }
   }
@@ -285,5 +290,3 @@ void MQTT_SendTELE(const char *MQTT_command, const char *MQTT_msg_in)
   strcpy(TheMessage, MQTT_msg_in);
   MQTT_send(TheTopic, TheMessage);
 }
-
-/////////////////////////////////////////////////////

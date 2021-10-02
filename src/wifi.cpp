@@ -5,7 +5,7 @@
 #include "wifi.h"
 #include "EXTERNS.h"
 
-extern char DEBUGtxt[48];
+extern char DEBUGtxt[92];
 
 #include "neopixel.h"
 

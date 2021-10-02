@@ -9,7 +9,7 @@ void MQTT_SendNOTI(const char *Topic, const char *Message);
 void MQTT_SendTELE(const char *Topic, const char *Message);
 
 #include "Tinker_DEBUG.h"
-extern char DEBUGtxt[48];
+extern char DEBUGtxt[92];
 
 int SmartSwitch_RelayPin[4];
 bool SmartSwitch_Relay_STATE[4];

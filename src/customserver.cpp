@@ -24,9 +24,9 @@ AsyncWebServer server(80); // declare ASYNC server library
 AsyncWebSocket ws("/ws");  // declare web socket
 
 const char *PARAM_INPUT_1 = "state";
-const char *PARAM_INPUT_2 = "RelayNum";
-const char *PARAM_INPUT_3 = "Action";
-const char *PARAM_INPUT_4 = "LEDNum";
+// const char *PARAM_INPUT_2 = "RelayNum";
+// const char *PARAM_INPUT_3 = "Action";
+// const char *PARAM_INPUT_4 = "LEDNum";
 
 extern char DEBUGtxt[92];
 
@@ -201,52 +201,48 @@ boolean customInit()
     ///////////////////////////////////////////////////////////////////////////////////
     server.on("/RelayControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
-                  //   int RelayNumber = 0;
-                  String inputMessage1;
-                  String inputMessage2;
-                  String inputMessage3;
+                  String RLY_Num;
+                  String RLY_Act;
                   DEBUG_SectionTitle("Web Input");
-                  if (request->hasParam(PARAM_INPUT_2))
+                  if (request->hasParam("RelayNum"))
                   {
-                      inputMessage2 = request->getParam(PARAM_INPUT_2)->value();
+                      RLY_Num = request->getParam("RelayNum")->value();
                   }
-                  if (request->hasParam(PARAM_INPUT_3))
+                  if (request->hasParam("Action"))
                   {
-                      inputMessage3 = request->getParam(PARAM_INPUT_3)->value();
-                      sprintf(DEBUGtxt, "Relay - #%ld, Action: %ld", inputMessage2.toInt(), inputMessage3.toInt());
+                      RLY_Act = request->getParam("Action")->value();
+                      sprintf(DEBUGtxt, "Relay - #%ld, Action: %ld", RLY_Num.toInt(), RLY_Act.toInt());
                       DEBUG_LineOut(DEBUGtxt);
-                      if (inputMessage3 == "0")
-                          DEVICE_RELAY(inputMessage2.toInt(), LOW); //   OFF
-                      if (inputMessage3 == "1")
-                          DEVICE_RELAY(inputMessage2.toInt(), HIGH); //   ON
-                      if (inputMessage3 == "9")
-                          DEVICE_TOGGLE(inputMessage2.toInt()); //   TOGGLE
+                      if (RLY_Act == "0")
+                          DEVICE_RELAY(RLY_Num.toInt(), LOW); //   OFF
+                      if (RLY_Act == "1")
+                          DEVICE_RELAY(RLY_Num.toInt(), HIGH); //   ON
+                      if (RLY_Act == "9")
+                          DEVICE_TOGGLE(RLY_Num.toInt()); //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });
 
     server.on("/LEDControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
-                  //   int LEDNumber = 0;
-                  String inputMessage1;
-                  String inputMessage2;
-                  String inputMessage3;
+                  String LED_Num;
+                  String LED_Act;
                   DEBUG_SectionTitle("Web Input");
-                  if (request->hasParam(PARAM_INPUT_4))
+                  if (request->hasParam("LEDNum"))
                   {
-                      inputMessage2 = request->getParam(PARAM_INPUT_4)->value();
+                      LED_Num = request->getParam("LEDNum")->value();
                   }
-                  if (request->hasParam(PARAM_INPUT_3))
+                  if (request->hasParam("Action"))
                   {
-                      inputMessage3 = request->getParam(PARAM_INPUT_3)->value();
-                      sprintf(DEBUGtxt, "LED - #%ld, Action: %ld", inputMessage2.toInt(), inputMessage3.toInt());
+                      LED_Act = request->getParam("Action")->value();
+                      sprintf(DEBUGtxt, "LED - #%ld, Action: %ld", LED_Num.toInt(), LED_Act.toInt());
                       DEBUG_LineOut(DEBUGtxt);
-                      if (inputMessage3 == "0")
-                          DEVICE_LED(inputMessage2.toInt(), LOW); //   OFF
-                      if (inputMessage3 == "1")
-                          DEVICE_LED(inputMessage2.toInt(), HIGH); //   ON
-                      if (inputMessage3 == "9")
-                          DEVICE_LED_TOGGLE(inputMessage2.toInt()); //   TOGGLE
+                      if (LED_Act == "0")
+                          DEVICE_LED(LED_Num.toInt(), LOW); //   OFF
+                      if (LED_Act == "1")
+                          DEVICE_LED(LED_Num.toInt(), HIGH); //   ON
+                      if (LED_Act == "9")
+                          DEVICE_LED_TOGGLE(LED_Num.toInt()); //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });

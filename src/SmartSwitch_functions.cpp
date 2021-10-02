@@ -210,72 +210,113 @@ void SmartSwitch_LED_Toggle(int LEDNum)
     SmartSwitch_LED(LEDNum, !SmartSwitch_LED_STATE[LEDNum]);
 }
 
-#if defined(SmartSwitch) && !defined(TestCode)
-void MQTT_HandleMessages(const char *Topic, const char Message[MQTT_BUFFER_SIZE])
-{
-    if (strcmp(Topic, "/Power") == 0)
-    {
-        // MQTT_SendTELE(Topic, Topic);
-        MQTT_SendNOTI("triggered", "Power!!!");
-        if (strcmp(Message, "on") == 0)
-            SmartSwitch_Relay(HIGH);
-        if (strcmp(Message, "off") == 0)
-            SmartSwitch_Relay(LOW);
-        if (strcmp(Message, "toggle") == 0)
-            SmartSwitch_Toggle();
-        // SmartSwitch_Relay(!SmartSwitch_RLY01_STATE);
-    }
-    else if (strcmp(Topic, "/LED01") == 0)
-    {
-        // MQTT_SendTELE(Topic, Topic);
-        MQTT_SendNOTI("triggered", "LED01!!!");
-        if (strcmp(Message, "on") == 0)
-            SmartSwitch_LED(HIGH);
-        if (strcmp(Message, "off") == 0)
-            SmartSwitch_LED(LOW);
-        if (strcmp(Message, "toggle") == 0)
-            SmartSwitch_LED(!SmartSwitch_LED01_STATE);
-    }
-    else if (strcmp(Topic, "/LED02") == 0)
-    {
-        // MQTT_SendTELE(Topic, Topic);
-        MQTT_SendNOTI("triggered", "LED02!!!");
-        if (strcmp(Message, "on") == 0)
-            SmartSwitch_LINKLED(HIGH);
-        if (strcmp(Message, "off") == 0)
-            SmartSwitch_LINKLED(LOW);
-        if (strcmp(Message, "toggle") == 0)
-            SmartSwitch_LINKLED(!SmartSwitch_LED02_STATE);
-    }
-    else if (strcmp(Topic, "/Status") == 0)
-    {
-        MQTT_SendNOTI("triggered", "Status!!!");
-        DEBUG_LineOut("Status Requested");
-        if (strcmp(Message, "Power") == 0)
-        {
-            MQTT_SendSTAT("Power", SmartSwitch_RLY01_STATE ? "ON" : "OFF");
-        }
-        else if (strcmp(Message, "LED01") == 0)
-        {
-            MQTT_SendSTAT("LED01", SmartSwitch_LED01 ? "ON" : "OFF");
-        }
-        else if (strcmp(Message, "LNKLD") == 0)
-        {
-            MQTT_SendSTAT("LNKLD", SmartSwitch_LED02 ? "ON" : "OFF");
-        }
-        else if (strcmp(Message, "All") == 0)
-        {
-            MQTT_SendSTAT("Power", SmartSwitch_RLY01_STATE ? "ON" : "OFF");
-            MQTT_SendSTAT("LED01", SmartSwitch_LED01 ? "ON" : "OFF");
-            MQTT_SendSTAT("LNKLD", SmartSwitch_LED02 ? "ON" : "OFF");
-        }
-        // else if (strcmp(Message, "All") == 0)
-    }
+// Handle incoming MQTT messages for the SmartSwitch functionality
+#define DEVICE_RELAY SmartSwitch_Relay
+#define DEVICE_TOGGLE SmartSwitch_Toggle
+#define DEVICE_LED SmartSwitch_LED
+#define DEVICE_LED_TOGGLE SmartSwitch_LED_Toggle
 
+void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
+{
+  String TheTopic = MQTT_command;
+  char NotiMSG[32];
+  int CTRbegin, CTRfinish;
+
+  if (TheTopic.startsWith("/Power"))
+  {
+    TheTopic.remove(0, 6);
+    if (TheTopic == "")
+    {
+      CTRbegin = 0;
+      CTRfinish = RelayCount;
+      MQTT_SendNOTI("triggered", "All Da Power!");
+    }
     else
     {
-        DEBUG_Trouble("Dunno Whatcha want...");
-        MQTT_SendNOTI("Error", "Dunno Whatcha want...");
+      CTRbegin = TheTopic.toInt();
+      CTRfinish = TheTopic.toInt() + 1;
+      sprintf(NotiMSG, "Power%s", TheTopic.c_str());
+      MQTT_SendNOTI("triggered", NotiMSG);
     }
+
+    for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
+    {
+      if (TheTopic.toInt() < RelayCount)
+      {
+        if (strcmp(MQTT_msg_in, "on") == 0)
+          DEVICE_RELAY(CTR, HIGH);
+        if (strcmp(MQTT_msg_in, "off") == 0)
+          DEVICE_RELAY(CTR, LOW);
+        if (strcmp(MQTT_msg_in, "toggle") == 0)
+          DEVICE_TOGGLE(CTR);
+      }
+      else
+        MQTT_SendNOTI("triggered", "Unknown Power!");
+    }
+  }
+
+  else if (TheTopic.startsWith("/LED"))
+  {
+    TheTopic.remove(0, 4);
+    if (TheTopic == "")
+    {
+      CTRbegin = 0;
+      CTRfinish = LEDCount;
+      MQTT_SendNOTI("triggered", "All Da LEDs!");
+    }
+    else
+    {
+      CTRbegin = TheTopic.toInt();
+      CTRfinish = TheTopic.toInt() + 1;
+      sprintf(NotiMSG, "LED%s", TheTopic.c_str());
+      MQTT_SendNOTI("triggered", NotiMSG);
+    }
+
+    for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
+    {
+      if (TheTopic.toInt() < LEDCount)
+      {
+        if (strcmp(MQTT_msg_in, "on") == 0)
+          DEVICE_LED(CTR, HIGH);
+        if (strcmp(MQTT_msg_in, "off") == 0)
+          DEVICE_LED(CTR, LOW);
+        if (strcmp(MQTT_msg_in, "toggle") == 0)
+          DEVICE_LED_TOGGLE(CTR);
+      }
+      else
+        MQTT_SendNOTI("triggered", "Unknown LED!");
+    }
+  }
+
+  else if (strcmp(MQTT_command, "/Status") == 0)  ///// Needs complete rewrite
+  {
+    MQTT_SendNOTI("triggered", "Status!!!");
+    DEBUG_LineOut("Status Requested");
+    if (strcmp(MQTT_msg_in, "Power") == 0)
+    {
+      MQTT_SendSTAT("Power", SmartSwitch_Relay_STATE[0] ? "ON" : "OFF");
+    }
+    else if (strcmp(MQTT_msg_in, "LED01") == 0)
+    {
+      MQTT_SendSTAT("LED01", SmartSwitch_LED_STATE[0] ? "ON" : "OFF");
+    }
+    else if (strcmp(MQTT_msg_in, "LNKLD") == 0)
+    {
+      MQTT_SendSTAT("LNKLD", SmartSwitch_LED_STATE[1] ? "ON" : "OFF");
+    }
+    else if (strcmp(MQTT_msg_in, "All") == 0)
+    {
+      MQTT_SendSTAT("Power", SmartSwitch_Relay_STATE[0] ? "ON" : "OFF");
+      MQTT_SendSTAT("LED01", SmartSwitch_LED_STATE[0] ? "ON" : "OFF");
+      MQTT_SendSTAT("LNKLD", SmartSwitch_LED_STATE[1] ? "ON" : "OFF");
+    }
+    // else if (strcmp(MQTT_msg_in, "All") == 0)
+  }
+
+  else    // Ya cornfoozed me!
+  {
+    DEBUG_Trouble("Dunno Whatcha want...");
+    MQTT_SendNOTI("Error", "Dunno Whatcha want...");
+  }
+
 }
-#endif

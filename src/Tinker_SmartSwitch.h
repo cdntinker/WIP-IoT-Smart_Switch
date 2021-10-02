@@ -9,4 +9,4 @@ void SmartSwitch_Toggle(int RelayNum);
 void SmartSwitch_LED(int LEDNum, bool OnOff);
 void SmartSwitch_LED_Toggle(int LEDNum);
 
-void MQTT_HandleMessages(const char *Topic, const char *Message);
+void SmartSwitch_MQTT_in(const char *Topic, const char *Message);

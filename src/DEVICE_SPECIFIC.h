@@ -38,6 +38,8 @@ void DEVICE_LOOP();
 #define DEVICE_LED SmartSwitch_LED
 #define DEVICE_LED_TOGGLE SmartSwitch_LED_Toggle
 
+#define DEVICE_MQTT_IN SmartSwitch_MQTT_in
+
 #endif // DEVICE_Translations
 
 /////////////////////////////////////////////////////////////

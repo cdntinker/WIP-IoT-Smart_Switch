@@ -11,7 +11,8 @@
 //  That'd be bloody cool.
 /////////////////////////////////////////////////////////////
 
-#include <Tinker_SmartSwitch.h>
+// #include <Tinker_SmartSwitch.h>
+#include "Tinker_SmartSwitch.h"     //  Building with embeded version in Arduino prefers quotes
 
 #ifndef DEVICE_Translations
 #define DEVICE_Translations

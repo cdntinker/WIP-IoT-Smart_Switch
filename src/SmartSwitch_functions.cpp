@@ -39,7 +39,7 @@ BfButton Button2(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN02, false, LOW);
 BfButton Button3(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN03, false, LOW);
 #endif
 
-void ButtonPressHandler(BfButton *Button0, BfButton::press_pattern_t pattern);
+void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern);
 
 void SmartSwitch_init()
 {
@@ -179,21 +179,27 @@ void SmartSwitch_loop()
 }
 
 // // Handle button press
-void ButtonPressHandler(BfButton *Button0, BfButton::press_pattern_t pattern)
+void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 {
-    Serial.print(Button0->getID());
+    String ButtonMessage = "Button ";
+    ButtonMessage += ButtonPin->getID();
+
     switch (pattern)
     {
     case BfButton::SINGLE_PRESS:
-        Serial.println(" pressed.");
+        ButtonMessage += " pressed.";
+        // Action: Toggle
         break;
     case BfButton::DOUBLE_PRESS:
-        Serial.println(" double pressed.");
+        ButtonMessage += " double pressed.";
         break;
     case BfButton::LONG_PRESS:
-        Serial.println(" long pressed.");
+        ButtonMessage += " long pressed.";
         break;
     }
+
+    DEBUG_SectionTitle("SmartSwitch Action");
+    DEBUG_LineOut(ButtonMessage.c_str());
 }
 
 

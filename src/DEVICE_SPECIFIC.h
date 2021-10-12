@@ -13,6 +13,8 @@
 
 // #include <Tinker_SmartSwitch.h>
 #include "Tinker_SmartSwitch.h"     //  Building with embeded version in Arduino prefers quotes
+#include "device_Relays.h"
+#include "device_LEDs.h"
 
 #ifndef DEVICE_Translations
 #define DEVICE_Translations
@@ -28,16 +30,16 @@ extern int SmartSwitch_ButtonPin[4];
 
 
 #define DEVICE_SETUP SmartSwitch_init
-#define DEVICE_LOOP SmartSwitch_loop
+#define DEVICE_LOOP Button_loop
 
 void DEVICE_SETUP();
 void DEVICE_LOOP();
 
-#define DEVICE_RELAY SmartSwitch_Relay
-#define DEVICE_TOGGLE SmartSwitch_Toggle
+#define DEVICE_RELAY Relay_switch
+#define DEVICE_TOGGLE Relay_toggle
 
-#define DEVICE_LED SmartSwitch_LED
-#define DEVICE_LED_TOGGLE SmartSwitch_LED_Toggle
+#define DEVICE_LED LED_switch
+#define DEVICE_LED_TOGGLE LED_toggle
 
 #define DEVICE_MQTT_IN SmartSwitch_MQTT_in
 

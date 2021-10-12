@@ -19,14 +19,34 @@ int SmartSwitch_LEDPin[4];
 bool SmartSwitch_LED_STATE[4];
 int LEDCount = 0;
 
+#include <BfButton.h>
+
 int SmartSwitch_ButtonPin[4];
+
 int ButtonCount = 0;
+
+// const unsigned int btnPin = SmartSwitch_BUTTN00;
+#ifdef SmartSwitch_BUTTN00
+BfButton Button0(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN00, false, LOW);
+#endif
+#ifdef SmartSwitch_BUTTN01
+BfButton Button1(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN01, false, LOW);
+#endif
+#ifdef SmartSwitch_BUTTN02
+BfButton Button2(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN02, false, LOW);
+#endif
+#ifdef SmartSwitch_BUTTN03
+BfButton Button3(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN03, false, LOW);
+#endif
+
+void ButtonPressHandler(BfButton *Button0, BfButton::press_pattern_t pattern);
 
 void SmartSwitch_init()
 {
     DEBUG_Init("SmartSwitch");
 
 /*****  Relays  *****/
+{
 #ifdef SmartSwitch_RELAY00
     SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY00;
     pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
@@ -47,8 +67,10 @@ void SmartSwitch_init()
     pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
     RelayCount++;
 #endif
+}
 
 /*****  Buttons  *****/
+{
 #ifdef SmartSwitch_BUTTN00
     SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN00;
     pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
@@ -69,8 +91,10 @@ void SmartSwitch_init()
     pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
     ButtonCount++;
 #endif
+}
 
 /*****  LEDs  *****/
+{
 #ifdef SmartSwitch_LED00
     SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED00;
     pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
@@ -91,6 +115,7 @@ void SmartSwitch_init()
     pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
     LEDCount++;
 #endif
+}
 
     String OOGABOOGA = "";
 
@@ -131,12 +156,46 @@ void SmartSwitch_init()
         OOGABOOGA += " ";
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
+
+    //////////////////////
+    Button0.onPress(ButtonPressHandler)
+        .onDoublePress(ButtonPressHandler)    // default timeout
+        .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
+    //////////////////////
+#ifdef SmartSwitch_BUTTN01
+    Button1.onPress(ButtonPressHandler)
+        .onDoublePress(ButtonPressHandler)    // default timeout
+        .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
+#endif
+    //////////////////////
 }
 
-// Handle button press
-void SmartSwitch_Button(int ButtonNum)
+void SmartSwitch_loop()
 {
+    Button0.read();
+#ifdef SmartSwitch_BUTTN01
+    Button1.read();
+#endif
 }
+
+// // Handle button press
+void ButtonPressHandler(BfButton *Button0, BfButton::press_pattern_t pattern)
+{
+    Serial.print(Button0->getID());
+    switch (pattern)
+    {
+    case BfButton::SINGLE_PRESS:
+        Serial.println(" pressed.");
+        break;
+    case BfButton::DOUBLE_PRESS:
+        Serial.println(" double pressed.");
+        break;
+    case BfButton::LONG_PRESS:
+        Serial.println(" long pressed.");
+        break;
+    }
+}
+
 
 String SmartSwitch_TurnOn;
 String SmartSwitch_TurnOff;

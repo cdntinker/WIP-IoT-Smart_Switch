@@ -7,6 +7,29 @@ int SmartSwitch_LEDPin[4];
 bool SmartSwitch_LED_STATE[4];
 int LEDCount = 0;
 
+void LED_setup()
+    {
+#ifdef SmartSwitch_LED00
+        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED00;
+        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
+        LEDCount++;
+#endif
+#ifdef SmartSwitch_LED01
+        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED01;
+        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
+        LEDCount++;
+#endif
+#ifdef SmartSwitch_LED02
+        SmartSwitch_LEDPin[2LEDCount] = SmartSwitch_LED02;
+        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
+        LEDCount++;
+#endif
+#ifdef SmartSwitch_LED03
+        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED03;
+        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
+        LEDCount++;
+#endif
+    }
 // Turn LED on/off
 void LED_switch(int LEDNum, bool OnOff)
 {

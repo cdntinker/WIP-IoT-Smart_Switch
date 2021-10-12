@@ -11,90 +11,16 @@ void MQTT_SendTELE(const char *Topic, const char *Message);
 #include "Tinker_DEBUG.h"
 extern char DEBUGtxt[92];
 
-#include "device_Buttons.h"
-
-#include "device_Relays.h"
-
-#include "device_LEDs.h"
+#include "DEVICE_SPECIFIC.h"
 
 void SmartSwitch_init()
 {
     DEBUG_Init("SmartSwitch");
 
-    /*****  Relays  *****/
-    {
-#ifdef SmartSwitch_RELAY00
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY00;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-#ifdef SmartSwitch_RELAY01
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY01;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-#ifdef SmartSwitch_RELAY02
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY02;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-#ifdef SmartSwitch_RELAY03
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY03;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-    }
-
-    /*****  Buttons  *****/
-    {
-#ifdef SmartSwitch_BUTTN00
-        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN00;
-        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
-        ButtonCount++;
-#endif
-#ifdef SmartSwitch_BUTTN01
-        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN01;
-        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
-        ButtonCount++;
-#endif
-#ifdef SmartSwitch_BUTTN02
-        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN02;
-        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
-        ButtonCount++;
-#endif
-#ifdef SmartSwitch_BUTTN03
-        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN03;
-        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
-        ButtonCount++;
-#endif
-    }
-
-    /*****  LEDs  *****/
-    {
-#ifdef SmartSwitch_LED00
-        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED00;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-#ifdef SmartSwitch_LED01
-        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED01;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-#ifdef SmartSwitch_LED02
-        SmartSwitch_LEDPin[2LEDCount] = SmartSwitch_LED02;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-#ifdef SmartSwitch_LED03
-        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED03;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-    }
-
     String OOGABOOGA = "";
 
+    /*****  Relays  *****/
+    Relay_setup();
     sprintf(DEBUGtxt, " Relays: %2d", RelayCount);
     DEBUG_LineOut(DEBUGtxt);
     OOGABOOGA = "GPIOs: ";
@@ -107,8 +33,8 @@ void SmartSwitch_init()
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
 
-    // Serial.println(")");
-
+    /*****  Buttons  *****/
+    Button_setup();
     sprintf(DEBUGtxt, "Buttons: %2d", ButtonCount);
     DEBUG_LineOut(DEBUGtxt);
     OOGABOOGA = "GPIOs: ";
@@ -121,6 +47,8 @@ void SmartSwitch_init()
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
 
+    /*****  LEDs  *****/
+    LED_setup();
     sprintf(DEBUGtxt, "   LEDs: %2d", LEDCount);
     DEBUG_LineOut(DEBUGtxt);
     OOGABOOGA = "GPIOs: ";
@@ -137,10 +65,6 @@ void SmartSwitch_init()
 }
 
 // Handle incoming MQTT messages for the SmartSwitch functionality
-#define DEVICE_RELAY Relay_switch
-#define DEVICE_TOGGLE Relay_toggle
-#define DEVICE_LED LED_switch
-#define DEVICE_LED_TOGGLE LED_toggle
 
 void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
 {

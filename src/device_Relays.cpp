@@ -10,6 +10,30 @@ int RelayCount = 0;
 String SmartSwitch_TurnOn;
 String SmartSwitch_TurnOff;
 
+void Relay_setup()
+    {
+#ifdef SmartSwitch_RELAY00
+        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY00;
+        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
+        RelayCount++;
+#endif
+#ifdef SmartSwitch_RELAY01
+        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY01;
+        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
+        RelayCount++;
+#endif
+#ifdef SmartSwitch_RELAY02
+        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY02;
+        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
+        RelayCount++;
+#endif
+#ifdef SmartSwitch_RELAY03
+        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY03;
+        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
+        RelayCount++;
+#endif
+    }
+
 // Turn relay on/off
 void Relay_switch(int RelayNum, bool OnOff)
 {

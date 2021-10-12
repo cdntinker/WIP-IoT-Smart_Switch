@@ -20,6 +20,30 @@ BfButton Button2(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN02, false, LOW);
 BfButton Button3(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN03, false, LOW);
 #endif
 
+void Button_setup()
+    {
+#ifdef SmartSwitch_BUTTN00
+        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN00;
+        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
+        ButtonCount++;
+#endif
+#ifdef SmartSwitch_BUTTN01
+        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN01;
+        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
+        ButtonCount++;
+#endif
+#ifdef SmartSwitch_BUTTN02
+        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN02;
+        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
+        ButtonCount++;
+#endif
+#ifdef SmartSwitch_BUTTN03
+        SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN03;
+        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
+        ButtonCount++;
+#endif
+    }
+
 // // Handle button press
 void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 {
@@ -59,6 +83,7 @@ void Button_init()
 #endif
     //////////////////////
 }
+
 void Button_loop()
 {
     Button0.read();

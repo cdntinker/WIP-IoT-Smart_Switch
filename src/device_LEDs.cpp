@@ -3,33 +3,23 @@ extern char DEBUGtxt[92];
 
 void MQTT_SendSTAT(const char *Topic, const char *Message);
 
-int SmartSwitch_LEDPin[4];
-bool SmartSwitch_LED_STATE[4];
-int LEDCount = 0;
+//////////////////////////////////////////////////
+#define GPIO_LEDs(...) unsigned int GPIO_LED_PINS[] = {__VA_ARGS__}
+#ifdef SmartSwitch_LEDs
+GPIO_LEDs(SmartSwitch_LEDs);
+unsigned int GPIO_LED_COUNT = sizeof(GPIO_LED_PINS) / sizeof(GPIO_LED_PINS[0]);
+#else
+unsigned int GPIO_LED_PINS[] = {0};
+unsigned int GPIO_LED_COUNT = 0;
+#endif
+bool GPIO_LED_STATE[10]; // 10 is arbitrary...
+//////////////////////////////////////////////////
 
 void LED_setup()
-    {
-#ifdef SmartSwitch_LED00
-        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED00;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-#ifdef SmartSwitch_LED01
-        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED01;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-#ifdef SmartSwitch_LED02
-        SmartSwitch_LEDPin[2LEDCount] = SmartSwitch_LED02;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-#ifdef SmartSwitch_LED03
-        SmartSwitch_LEDPin[LEDCount] = SmartSwitch_LED03;
-        pinMode(SmartSwitch_LEDPin[LEDCount], OUTPUT);
-        LEDCount++;
-#endif
-    }
+{
+    for (unsigned int CTR = 0; CTR < GPIO_LED_COUNT; CTR++)
+        pinMode(GPIO_LED_PINS[CTR], OUTPUT);
+}
 // Turn LED on/off
 void LED_switch(int LEDNum, bool OnOff)
 {
@@ -39,19 +29,19 @@ void LED_switch(int LEDNum, bool OnOff)
     if (OnOff)
     {
         // DEBUG_LineOut("LED ON");
-        digitalWrite(SmartSwitch_LEDPin[LEDNum], HIGH);
-        SmartSwitch_LED_STATE[LEDNum] = HIGH;
+        digitalWrite(GPIO_LED_PINS[LEDNum], HIGH);
+        GPIO_LED_STATE[LEDNum] = HIGH;
         MQTT_SendSTAT(MQTT_Topic, "ON");
-        sprintf(DEBUGtxt, "LED %02d (%d) ON", LEDNum, SmartSwitch_LEDPin[LEDNum]);
+        sprintf(DEBUGtxt, "LED %02d (%d) ON", LEDNum, GPIO_LED_PINS[LEDNum]);
         DEBUG_LineOut(DEBUGtxt);
     }
     else
     {
         // DEBUG_LineOut("LED OFF");
-        digitalWrite(SmartSwitch_LEDPin[LEDNum], LOW);
-        SmartSwitch_LED_STATE[LEDNum] = LOW;
+        digitalWrite(GPIO_LED_PINS[LEDNum], LOW);
+        GPIO_LED_STATE[LEDNum] = LOW;
         MQTT_SendSTAT(MQTT_Topic, "OFF");
-        sprintf(DEBUGtxt, "LED %02d (%d) OFF", LEDNum, SmartSwitch_LEDPin[LEDNum]);
+        sprintf(DEBUGtxt, "LED %02d (%d) OFF", LEDNum, GPIO_LED_PINS[LEDNum]);
         DEBUG_LineOut(DEBUGtxt);
     }
 }
@@ -62,5 +52,5 @@ void LED_toggle(int LEDNum)
     DEBUG_SectionTitle("SmartSwitch Action");
     sprintf(DEBUGtxt, "LED %02d TOGGLE", LEDNum);
     DEBUG_LineOut(DEBUGtxt);
-    LED_switch(LEDNum, !SmartSwitch_LED_STATE[LEDNum]);
+    LED_switch(LEDNum, !GPIO_LED_STATE[LEDNum]);
 }

@@ -272,13 +272,13 @@ String processor(const String &var)
   /* On / Toggle / Off Buttons                                          */
   /**********************************************************************/
 
-  extern int SmartSwitch_RelayPin[4];
-  extern bool SmartSwitch_Relay_STATE[4];
-  extern int RelayCount;
+  extern int GPIO_Relay_PINS[4];
+  extern bool GPIO_Relay_STATE[4];
+  extern int GPIO_Relay_COUNT;
 
-  extern int SmartSwitch_LEDPin[4];
-  extern bool SmartSwitch_LED_STATE[4];
-  extern int LEDCount;
+  extern int GPIO_LED_PINS[4];
+  extern bool GPIO_LED_STATE[4];
+  extern int GPIO_LED_COUNT;
 
   if (var.startsWith("OTOButtons"))
   {
@@ -301,9 +301,9 @@ String processor(const String &var)
 if(strcmp(Token, "Relays") == 0)
 {
 
-  // Serial.printf("RelayCount: %d\n", RelayCount);
+  // Serial.printf("GPIO_Relay_COUNT: %d\n", GPIO_Relay_COUNT);
 
-    for (int DeviceCTR = 0; DeviceCTR < RelayCount; DeviceCTR++)
+    for (int DeviceCTR = 0; DeviceCTR < GPIO_Relay_COUNT; DeviceCTR++)
     {
 
   // Serial.printf("DeviceCTR: %d\n", DeviceCTR);
@@ -314,11 +314,11 @@ if(strcmp(Token, "Relays") == 0)
       String TheLabel = "<H3>Relay #";
       TheLabel += DeviceCTR;
       TheLabel += " (GPIO ";
-      TheLabel += SmartSwitch_RelayPin[DeviceCTR];
+      TheLabel += GPIO_Relay_PINS[DeviceCTR];
       TheLabel += ")</H3>\n";
       TheHTML += TheLabel;
 
-      if (SmartSwitch_Relay_STATE[DeviceCTR])
+      if (GPIO_Relay_STATE[DeviceCTR])
         strcpy(OTOstateRLY, "ON");
       else
         strcpy(OTOstateRLY, "OFF");
@@ -328,7 +328,7 @@ if(strcmp(Token, "Relays") == 0)
 
       for (int OTOListCTR = 0; OTOListCTR < NumberofStatesRLY; OTOListCTR++)
       {
-        if (!strcmp(OTOListRLY[OTOListCTR].PageLabel, OTOstateRLY)) // SmartSwitch_Relay_STATE[0]
+        if (!strcmp(OTOListRLY[OTOListCTR].PageLabel, OTOstateRLY)) // GPIO_Relay_STATE[0]
           ButtonClass = "ButtonHere";
         else
           ButtonClass = "ButtonClickable";
@@ -369,9 +369,9 @@ if(strcmp(Token, "Relays") == 0)
 else if(strcmp(Token, "LEDs") == 0)
 {
 
-  // Serial.printf("LEDCount: %d\n", LEDCount);
+  // Serial.printf("GPIO_LED_COUNT: %d\n", GPIO_LED_COUNT);
 
-    for (int DeviceCTR = 0; DeviceCTR < LEDCount; DeviceCTR++)
+    for (int DeviceCTR = 0; DeviceCTR < GPIO_LED_COUNT; DeviceCTR++)
     {
 
   // Serial.printf("DeviceCTR: %d\n", DeviceCTR);
@@ -382,11 +382,11 @@ else if(strcmp(Token, "LEDs") == 0)
       String TheLabel = "<H3>LED #";
       TheLabel += DeviceCTR;
       TheLabel += " (GPIO ";
-      TheLabel += SmartSwitch_LEDPin[DeviceCTR];
+      TheLabel += GPIO_LED_PINS[DeviceCTR];
       TheLabel += ")</H3>\n";
       TheHTML += TheLabel;
 
-      if (SmartSwitch_LED_STATE[DeviceCTR])
+      if (GPIO_LED_STATE[DeviceCTR])
         strcpy(OTOstateLED, "ON");
       else
         strcpy(OTOstateLED, "OFF");

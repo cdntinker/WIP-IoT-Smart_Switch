@@ -3,36 +3,26 @@ extern char DEBUGtxt[92];
 
 void MQTT_SendSTAT(const char *Topic, const char *Message);
 
-int SmartSwitch_RelayPin[4];
-bool SmartSwitch_Relay_STATE[4];
-int RelayCount = 0;
-
 String SmartSwitch_TurnOn;
 String SmartSwitch_TurnOff;
 
+// //////////////////////////////////////////////////
+#define GPIO_Relays(...) unsigned int GPIO_Relay_PINS[] = {__VA_ARGS__}
+#ifdef SmartSwitch_Relays
+GPIO_Relays(SmartSwitch_Relays);
+unsigned int GPIO_Relay_COUNT = sizeof(GPIO_Relay_PINS) / sizeof(GPIO_Relay_PINS[0]);
+#else
+unsigned int GPIO_Relay_PINS[] = {0};
+unsigned int GPIO_Relay_COUNT = 0;
+#endif
+bool GPIO_Relay_STATE[10]; // 10 is arbitrary...
+// //////////////////////////////////////////////////
+
 void Relay_setup()
-    {
-#ifdef SmartSwitch_RELAY00
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY00;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-#ifdef SmartSwitch_RELAY01
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY01;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-#ifdef SmartSwitch_RELAY02
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY02;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-#ifdef SmartSwitch_RELAY03
-        SmartSwitch_RelayPin[RelayCount] = SmartSwitch_RELAY03;
-        pinMode(SmartSwitch_RelayPin[RelayCount], OUTPUT);
-        RelayCount++;
-#endif
-    }
+{
+    for (unsigned int CTR = 0; CTR < GPIO_Relay_COUNT; CTR++)
+        pinMode(GPIO_Relay_PINS[CTR], OUTPUT);
+}
 
 // Turn relay on/off
 void Relay_switch(int RelayNum, bool OnOff)
@@ -42,22 +32,22 @@ void Relay_switch(int RelayNum, bool OnOff)
     DEBUG_SectionTitle("SmartSwitch Action");
     if (OnOff)
     {
-        digitalWrite(SmartSwitch_RelayPin[RelayNum], HIGH);
-        SmartSwitch_Relay_STATE[RelayNum] = HIGH;
+        digitalWrite(GPIO_Relay_PINS[RelayNum], HIGH);
+        GPIO_Relay_STATE[RelayNum] = HIGH;
         SmartSwitch_TurnOn = "ButtonHere";
         SmartSwitch_TurnOff = "ButtonClickable";
         MQTT_SendSTAT(MQTT_Topic, "ON");
-        sprintf(DEBUGtxt, "Relay %02d (%d) ON", RelayNum, SmartSwitch_RelayPin[RelayNum]);
+        sprintf(DEBUGtxt, "Relay %02d (%d) ON", RelayNum, GPIO_Relay_PINS[RelayNum]);
         DEBUG_LineOut(DEBUGtxt);
     }
     else
     {
-        digitalWrite(SmartSwitch_RelayPin[RelayNum], LOW);
-        SmartSwitch_Relay_STATE[RelayNum] = LOW;
+        digitalWrite(GPIO_Relay_PINS[RelayNum], LOW);
+        GPIO_Relay_STATE[RelayNum] = LOW;
         SmartSwitch_TurnOn = "ButtonClickable";
         SmartSwitch_TurnOff = "ButtonHere";
         MQTT_SendSTAT(MQTT_Topic, "OFF");
-        sprintf(DEBUGtxt, "Relay %02d (%d) OFF", RelayNum, SmartSwitch_RelayPin[RelayNum]);
+        sprintf(DEBUGtxt, "Relay %02d (%d) OFF", RelayNum, GPIO_Relay_PINS[RelayNum]);
         DEBUG_LineOut(DEBUGtxt);
     }
 }
@@ -68,5 +58,5 @@ void Relay_toggle(int RelayNum)
     DEBUG_SectionTitle("SmartSwitch Action");
     sprintf(DEBUGtxt, "Relay %02d TOGGLE", RelayNum);
     DEBUG_LineOut(DEBUGtxt);
-    Relay_switch(RelayNum, !SmartSwitch_Relay_STATE[RelayNum]);
+    Relay_switch(RelayNum, !GPIO_Relay_STATE[RelayNum]);
 }

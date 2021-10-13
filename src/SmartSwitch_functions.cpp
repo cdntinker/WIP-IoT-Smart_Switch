@@ -21,14 +21,14 @@ void SmartSwitch_init()
 
     /*****  Relays  *****/
     Relay_setup();
-    sprintf(DEBUGtxt, " Relays: %2d", RelayCount);
+    sprintf(DEBUGtxt, " Relays: %2d", GPIO_Relay_COUNT);
     DEBUG_LineOut(DEBUGtxt);
     OOGABOOGA = "GPIOs: ";
-    for (int ctr = 0; ctr < RelayCount; ctr++)
+    for (unsigned int ctr = 0; ctr < GPIO_Relay_COUNT; ctr++)
     {
         OOGABOOGA += ctr;
         OOGABOOGA += "=";
-        OOGABOOGA += SmartSwitch_RelayPin[ctr];
+        OOGABOOGA += GPIO_Relay_PINS[ctr];
         OOGABOOGA += " ";
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
@@ -49,14 +49,14 @@ void SmartSwitch_init()
 
     /*****  LEDs  *****/
     LED_setup();
-    sprintf(DEBUGtxt, "   LEDs: %2d", LEDCount);
+    sprintf(DEBUGtxt, "   LEDs: %2d", GPIO_LED_COUNT);
     DEBUG_LineOut(DEBUGtxt);
     OOGABOOGA = "GPIOs: ";
-    for (int ctr = 0; ctr < LEDCount; ctr++)
+    for (unsigned int ctr = 0; ctr < GPIO_LED_COUNT; ctr++)
     {
         OOGABOOGA += ctr;
         OOGABOOGA += "=";
-        OOGABOOGA += SmartSwitch_LEDPin[ctr];
+        OOGABOOGA += GPIO_LED_PINS[ctr];
         OOGABOOGA += " ";
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
@@ -78,7 +78,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
         if (TheTopic == "")
         {
             CTRbegin = 0;
-            CTRfinish = RelayCount;
+            CTRfinish = GPIO_Relay_COUNT;
             MQTT_SendNOTI("triggered", "All Da Power!");
         }
         else
@@ -91,7 +91,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
 
         for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
         {
-            if (TheTopic.toInt() < RelayCount)
+            if ((unsigned int) TheTopic.toInt() < GPIO_Relay_COUNT)
             {
                 if (strcmp(MQTT_msg_in, "on") == 0)
                     DEVICE_RELAY(CTR, HIGH);
@@ -111,7 +111,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
         if (TheTopic == "")
         {
             CTRbegin = 0;
-            CTRfinish = LEDCount;
+            CTRfinish = GPIO_LED_COUNT;
             MQTT_SendNOTI("triggered", "All Da LEDs!");
         }
         else
@@ -124,7 +124,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
 
         for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
         {
-            if (TheTopic.toInt() < LEDCount)
+            if ((unsigned int) TheTopic.toInt() < GPIO_LED_COUNT)
             {
                 if (strcmp(MQTT_msg_in, "on") == 0)
                     DEVICE_LED(CTR, HIGH);
@@ -144,21 +144,21 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
         DEBUG_LineOut("Status Requested");
         if (strcmp(MQTT_msg_in, "Power") == 0)
         {
-            MQTT_SendSTAT("Power", SmartSwitch_Relay_STATE[0] ? "ON" : "OFF");
+            MQTT_SendSTAT("Power", GPIO_Relay_STATE[0] ? "ON" : "OFF");
         }
         else if (strcmp(MQTT_msg_in, "LED01") == 0)
         {
-            MQTT_SendSTAT("LED01", SmartSwitch_LED_STATE[0] ? "ON" : "OFF");
+            MQTT_SendSTAT("LED01", GPIO_LED_STATE[0] ? "ON" : "OFF");
         }
         else if (strcmp(MQTT_msg_in, "LNKLD") == 0)
         {
-            MQTT_SendSTAT("LNKLD", SmartSwitch_LED_STATE[1] ? "ON" : "OFF");
+            MQTT_SendSTAT("LNKLD", GPIO_LED_STATE[1] ? "ON" : "OFF");
         }
         else if (strcmp(MQTT_msg_in, "All") == 0)
         {
-            MQTT_SendSTAT("Power", SmartSwitch_Relay_STATE[0] ? "ON" : "OFF");
-            MQTT_SendSTAT("LED01", SmartSwitch_LED_STATE[0] ? "ON" : "OFF");
-            MQTT_SendSTAT("LNKLD", SmartSwitch_LED_STATE[1] ? "ON" : "OFF");
+            MQTT_SendSTAT("Power", GPIO_Relay_STATE[0] ? "ON" : "OFF");
+            MQTT_SendSTAT("LED01", GPIO_LED_STATE[0] ? "ON" : "OFF");
+            MQTT_SendSTAT("LNKLD", GPIO_LED_STATE[1] ? "ON" : "OFF");
         }
         // else if (strcmp(MQTT_msg_in, "All") == 0)
     }

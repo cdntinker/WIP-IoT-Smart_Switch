@@ -20,8 +20,22 @@ BfButton Button2(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN02, false, LOW);
 BfButton Button3(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN03, false, LOW);
 #endif
 
+//////////////////////////////////////////////////
+// #define GPIO_Buttons(...) unsigned int GPIO_Button_PINS[] = {__VA_ARGS__}
+// #ifdef SmartSwitch_Buttons
+// GPIO_Buttons(SmartSwitch_Buttons);
+// unsigned int GPIO_Button_COUNT = sizeof(GPIO_Button_PINS) / sizeof(GPIO_Button_PINS[0]);
+// #else
+// unsigned int GPIO_Button_PINS[] = {0};
+// unsigned int GPIO_Button_COUNT = 0;
+// #endif
+// bool GPIO_Button_STATE[10]; // 10 is arbitrary...
+//////////////////////////////////////////////////
+
 void Button_setup()
     {
+    // for (unsigned int CTR = 0; CTR < GPIO_Button_COUNT; CTR++)
+    //     pinMode(GPIO_Button_PINS[CTR], INPUT);
 #ifdef SmartSwitch_BUTTN00
         SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN00;
         pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);

@@ -21,11 +21,11 @@
 #define DEVICE_Translations
 
 
-extern int SmartSwitch_RelayPin[4];
-extern bool SmartSwitch_Relay_STATE[4];
+extern unsigned int GPIO_Relay_PINS[4];
+extern bool GPIO_Relay_STATE[10];
 
-extern int SmartSwitch_LEDPin[4];
-extern bool SmartSwitch_LED_STATE[4];
+extern unsigned int GPIO_LED_PINS[4];
+extern bool GPIO_LED_STATE[10];
 
 extern int SmartSwitch_ButtonPin[4];
 

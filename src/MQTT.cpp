@@ -178,13 +178,13 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
 
 } // end of mqtt MQTT_callback
 
-extern int SmartSwitch_RelayPin[4];
-extern bool SmartSwitch_Relay_STATE[4];
-extern int RelayCount;
+extern unsigned int GPIO_Relay_PINS[];
+extern bool GPIO_Relay_STATE[];
+extern unsigned int GPIO_Relay_COUNT;
 
-extern int SmartSwitch_LEDPin[4];
-extern bool SmartSwitch_LED_STATE[4];
-extern int LEDCount;
+extern unsigned int GPIO_LED_PINS[];
+extern bool GPIO_LED_STATE[];
+extern unsigned int GPIO_LED_COUNT;
 
 void MQTT_reconnect()
 {

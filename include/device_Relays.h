@@ -1,6 +1,6 @@
-extern int SmartSwitch_RelayPin[4];
-extern bool SmartSwitch_Relay_STATE[4];
-extern int RelayCount;
+extern unsigned int GPIO_Relay_PINS[4];
+extern bool GPIO_Relay_STATE[10];
+extern unsigned int GPIO_Relay_COUNT;
 
 void Relay_setup();
 

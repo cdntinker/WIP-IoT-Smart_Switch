@@ -11,6 +11,9 @@ void MQTT_SendTELE(const char *Topic, const char *Message);
 #include "Tinker_DEBUG.h"
 extern char DEBUGtxt[92];
 
+// #include "device_Buttons.h"
+// #include "device_LEDs.h"
+// #include "device_Relays.h"
 #include "DEVICE_SPECIFIC.h"
 
 void SmartSwitch_init()
@@ -98,7 +101,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
                 if (strcmp(MQTT_msg_in, "off") == 0)
                     DEVICE_RELAY(CTR, LOW);
                 if (strcmp(MQTT_msg_in, "toggle") == 0)
-                    DEVICE_TOGGLE(CTR);
+                    DEVICE_RELAY_TOGGLE(CTR);
             }
             else
                 MQTT_SendNOTI("triggered", "Unknown Power!");

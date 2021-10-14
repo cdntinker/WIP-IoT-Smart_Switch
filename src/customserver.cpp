@@ -218,7 +218,7 @@ boolean customInit()
                       if (RLY_Act == "1")
                           DEVICE_RELAY(RLY_Num.toInt(), HIGH); //   ON
                       if (RLY_Act == "9")
-                          DEVICE_TOGGLE(RLY_Num.toInt()); //   TOGGLE
+                          DEVICE_RELAY_TOGGLE(RLY_Num.toInt()); //   TOGGLE
                   }
                   request->send(200, "text/plain", "OK");
               });

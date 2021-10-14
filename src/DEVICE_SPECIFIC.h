@@ -37,10 +37,16 @@ void DEVICE_SETUP();
 void DEVICE_LOOP();
 
 #define DEVICE_RELAY Relay_switch
-#define DEVICE_TOGGLE Relay_toggle
+#define DEVICE_RELAY_TOGGLE Relay_toggle
+
+void DEVICE_RELAY(int RelayNum, bool OnOff);
+void DEVICE_RELAY_TOGGLE(int RelayNum);
 
 #define DEVICE_LED LED_switch
 #define DEVICE_LED_TOGGLE LED_toggle
+
+void DEVICE_LED(int LEDNum, bool OnOff);
+void DEVICE_RELAY_TOGGLE(int LEDNum);
 
 #define DEVICE_MQTT_IN SmartSwitch_MQTT_in
 

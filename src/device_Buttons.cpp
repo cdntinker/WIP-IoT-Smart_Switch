@@ -6,7 +6,18 @@ int ButtonCount = 0;
 #include "Tinker_DEBUG.h"
 extern char DEBUGtxt[92];
 
-// const unsigned int btnPin = SmartSwitch_BUTTN00;
+//////////////////////////////////////////////////
+// #define GPIO_Buttons(...) unsigned int GPIO_Button_PINS[] = {__VA_ARGS__}
+// #ifdef SmartSwitch_Buttons
+// GPIO_Buttons(SmartSwitch_Buttons);
+// unsigned int GPIO_Button_COUNT = sizeof(GPIO_Button_PINS) / sizeof(GPIO_Button_PINS[0]);
+// #else
+// unsigned int GPIO_Button_PINS[] = {0};
+// unsigned int GPIO_Button_COUNT = 0;
+// #endif
+// bool GPIO_Button_STATE[10]; // 10 is arbitrary...
+//////////////////////////////////////////////////
+
 #ifdef SmartSwitch_BUTTN00
 BfButton Button0(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN00, false, LOW);
 #endif
@@ -19,18 +30,6 @@ BfButton Button2(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN02, false, LOW);
 #ifdef SmartSwitch_BUTTN03
 BfButton Button3(BfButton::STANDALONE_DIGITAL, SmartSwitch_BUTTN03, false, LOW);
 #endif
-
-//////////////////////////////////////////////////
-// #define GPIO_Buttons(...) unsigned int GPIO_Button_PINS[] = {__VA_ARGS__}
-// #ifdef SmartSwitch_Buttons
-// GPIO_Buttons(SmartSwitch_Buttons);
-// unsigned int GPIO_Button_COUNT = sizeof(GPIO_Button_PINS) / sizeof(GPIO_Button_PINS[0]);
-// #else
-// unsigned int GPIO_Button_PINS[] = {0};
-// unsigned int GPIO_Button_COUNT = 0;
-// #endif
-// bool GPIO_Button_STATE[10]; // 10 is arbitrary...
-//////////////////////////////////////////////////
 
 void Button_setup()
     {

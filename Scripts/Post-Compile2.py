@@ -1,10 +1,3 @@
-#   For some strange reason, if the FinalBIN file does not exist yet,
-#   You have to do a "Clean" before "Build" or it doesn't get copied...
-#
-#   If the file exists, it gets updated...
-#
-#   This is rather odd...
-
 ##############################################################
 def walkItems(haystack, needle):
 	nxt = False
@@ -62,15 +55,16 @@ my_flags = env.ParseFlags(env['BUILD_FLAGS'])
 my_cppdefines = my_flags.get("CPPDEFINES")
 
 MyName = walkItems(my_cppdefines, 'DeviceName')
-# MyType = walkItems(my_cppdefines, 'DeviceType')
+MyType = walkItems(my_cppdefines, 'DeviceType')
 MyFlash = walkItems(my_cppdefines, 'FlashSize')
 MyVersion = walkItems(my_cppdefines, 'FIRMWAREVERSION')
 MyBuild = env['PIOENV']
 
 UNIXtime = env['UNIX_TIME']
 
-BinaryDir = os.path.join(os.getcwd(), "binaries", MyVersion);
-BinaryName = MyName + "_" + MyBuild + "_" + MyVersion + ".bin"
+BinaryDir = os.path.join(os.getcwd(), "Binaries", MyVersion);
+# BinaryName = MyName + "_" + MyBuild + "_" + MyVersion + ".bin"
+BinaryName = MyName + " - " + MyBuild + " (" + MyType + ") v" + MyVersion +".bin"
 
 if not os.path.exists(BinaryDir):
 	os.makedirs(BinaryDir)

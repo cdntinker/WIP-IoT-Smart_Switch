@@ -481,6 +481,9 @@ else if(strcmp(Token, "LEDs") == 0)
   if (var == "FirmwareVer")
     return STR(FIRMWAREVERSION);
 
+  if (var == "DevName")
+    return STR(DeviceName);
+
   if (var == "IDplaceholder")
     return DeviceID();
 

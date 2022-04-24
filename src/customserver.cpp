@@ -248,8 +248,7 @@ boolean customInit()
               });
     ///////////////////////////////////////////////////////////////////////////////////
 
-    server.on(
-        "/management", HTTP_POST, [&](AsyncWebServerRequest *request)
+    server.on("/management", HTTP_POST, [&](AsyncWebServerRequest *request)
         {
             // the request handler is triggered after the upload has finished...
             // create the response, add header, and send response

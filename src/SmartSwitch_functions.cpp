@@ -50,6 +50,8 @@ void SmartSwitch_init()
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
 
+    /*****  Switches  *****/
+
     /*****  LEDs  *****/
     LED_setup();
     sprintf(DEBUGtxt, "   LEDs: %2d", GPIO_LED_COUNT);

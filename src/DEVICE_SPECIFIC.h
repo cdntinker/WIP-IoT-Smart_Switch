@@ -14,6 +14,7 @@
 // #include <Tinker_SmartSwitch.h>
 #include "Tinker_SmartSwitch.h"     //  Building with embeded version in Arduino prefers quotes
 #include "device_Buttons.h"
+///////#include "device_Switches.h"
 #include "device_Relays.h"
 #include "device_LEDs.h"
 
@@ -28,6 +29,7 @@ extern unsigned int GPIO_LED_PINS[4];
 extern bool GPIO_LED_STATE[10];
 
 extern int SmartSwitch_ButtonPin[4];
+extern int SmartSwitch_SwitchPin[4];
 
 
 #define DEVICE_SETUP SmartSwitch_init

@@ -1,4 +1,4 @@
-/* This page and fuctions handle filling in %varibles% in HTML webpages*/
+/* This page and fuctions handle filling in %variables% in HTML webpages*/
 
 // #ifndef processing_items_h
 // #define processing_items_h

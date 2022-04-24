@@ -92,9 +92,11 @@ void Button_init()
 {
 
     //////////////////////
+#ifdef SmartSwitch_BUTTN00
     Button0.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
+#endif
     //////////////////////
 #ifdef SmartSwitch_BUTTN01
     Button1.onPress(ButtonPressHandler)
@@ -106,7 +108,9 @@ void Button_init()
 
 void Button_loop()
 {
+#ifdef SmartSwitch_BUTTN00
     Button0.read();
+#endif
 #ifdef SmartSwitch_BUTTN01
     Button1.read();
 #endif

@@ -37,7 +37,7 @@ void Button_setup()
     //     pinMode(GPIO_Button_PINS[CTR], INPUT);
 #ifdef SmartSwitch_BUTTN00
         SmartSwitch_ButtonPin[ButtonCount] = SmartSwitch_BUTTN00;
-        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT);
+        pinMode(SmartSwitch_ButtonPin[ButtonCount], INPUT_PULLUP);
         ButtonCount++;
 #endif
 #ifdef SmartSwitch_BUTTN01
@@ -56,29 +56,36 @@ void Button_setup()
         ButtonCount++;
 #endif
     }
+void MQTT_SendTELE(const char *Topic, const char *Message);
 
 // // Handle button press
 void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 {
-    String ButtonMessage = "Button on GPIO";
+    String ButtonMessage = "GPIObutton";
     ButtonMessage += ButtonPin->getID();
+String Topic = ButtonMessage;
 
     switch (pattern)
     {
     case BfButton::SINGLE_PRESS:
-        ButtonMessage += " single press";
+        ButtonMessage = "single press";
         // Action: Toggle
         break;
     case BfButton::DOUBLE_PRESS:
-        ButtonMessage += " double press";
+        ButtonMessage = "double press";
         break;
     case BfButton::LONG_PRESS:
-        ButtonMessage += " long press";
+        ButtonMessage = "long press";
         break;
     }
 
+String DEBUGmessage = Topic + " " + ButtonMessage;
+
     DEBUG_SectionTitle("SmartSwitch Action");
-    DEBUG_LineOut(ButtonMessage.c_str());
+    DEBUG_LineOut(DEBUGmessage.c_str());
+
+// void MQTT_SendSTAT(const char *Topic, const char *Message);
+ MQTT_SendTELE(Topic.c_str(), ButtonMessage.c_str());
 }
 
 void Button_init()

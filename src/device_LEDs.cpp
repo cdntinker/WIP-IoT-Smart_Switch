@@ -46,7 +46,7 @@ void LED_switch(int LEDNum, bool OnOff)
     }
 }
 
-// Turn relay on/off
+// Turn LED on/off
 void LED_toggle(int LEDNum)
 {
     DEBUG_SectionTitle("SmartSwitch Action");

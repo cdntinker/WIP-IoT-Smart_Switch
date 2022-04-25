@@ -1,9 +1,9 @@
 
 void SmartSwitch_init();
 
-void Button_loop();
+// void Button_loop();
 
-// void SmartSwitch_Button(int ButtonNum);
+void SmartSwitch_Button(int ButtonNum);
 
 void SmartSwitch_Relay(int RelayNum, bool OnOff);
 void SmartSwitch_Toggle(int RelayNum);

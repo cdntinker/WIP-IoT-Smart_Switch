@@ -18,7 +18,7 @@ function darkFunction() {
 
 /*    ///////////////////////////////////////   */
 
-/*    Control Button Handling       */
+/*    Relay Control Button Handling       */
 
 function RelayON(element) {
   var xhr = new XMLHttpRequest();
@@ -43,7 +43,7 @@ function RelayTOGGLE(element) {
 
 /*    ///////////////////////////////////////   */
 
-/*    Control Button Handling       */
+/*    LED Control Button Handling       */
 
 function LEDON(element) {
   var xhr = new XMLHttpRequest();

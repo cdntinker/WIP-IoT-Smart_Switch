@@ -311,7 +311,7 @@ boolean customInit()
     server.onNotFound([](AsyncWebServerRequest *request)
                       { request->send(404); });
     server.begin();
-    DEBUG_Success("ASYNC Server Started - customInit");
+    DEBUG_Success("customInit: ASYNC Server Started");
     // DEBUG_Separator();
     return true;
 }

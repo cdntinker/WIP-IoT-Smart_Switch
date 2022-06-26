@@ -20,8 +20,8 @@ Install the needed libraries:
 * https://github.com/cdntinker/TinkerLibs-DEBUG
     * (Instructions in the README.md of that repo...)
     
-Create a folder named `AustinOTA` inside your Arduino folder, copy the content of `src` & `include` to that folder & rename `AustinOTA.cpp` to `AustinOTA.ino`
+Create a folder named `IdIoT` inside your Arduino folder, copy the content of `src` & `include` to that folder & rename `IdIoT.cpp` to `IdIoT.ino`
 
-Tell Tarduino to open `AustinOTA.ino`...
+Tell Tarduino to open `IdIoT.ino`...
 
 Eeewww...  Ick!  :vomiting_face:

@@ -30,7 +30,7 @@ char        htmlhover[10];
 uint8_t     brightness;            // set strip brightness
 
 const char *DeviceNotes PROGMEM = R"rawliteral(
-# Welcome to AustinOTA.                                                                             #
+# Welcome to IdIoT.                                                                             #
 # Yet another bit of code by austinscreations that I'm mutilating into submission...                #)rawliteral";
 
 #endif

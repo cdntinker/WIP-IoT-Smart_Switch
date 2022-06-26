@@ -36,20 +36,6 @@ void SmartSwitch_init()
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
 
-    /*****  Buttons  *****/
-    Button_setup();
-    sprintf(DEBUGtxt, "Buttons: %2d", ButtonCount);
-    DEBUG_LineOut(DEBUGtxt);
-    OOGABOOGA = "GPIOs: ";
-    for (int ctr = 0; ctr < ButtonCount; ctr++)
-    {
-        OOGABOOGA += ctr;
-        OOGABOOGA += "=";
-        OOGABOOGA += SmartSwitch_ButtonPin[ctr];
-        OOGABOOGA += " ";
-    }
-    DEBUG_LineOut2(OOGABOOGA.c_str());
-
     /*****  LEDs  *****/
     LED_setup();
     sprintf(DEBUGtxt, "   LEDs: %2d", GPIO_LED_COUNT);
@@ -64,7 +50,23 @@ void SmartSwitch_init()
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
 
-    Button_init();
+    /*****  Buttons  *****/
+    Button_setup();
+    sprintf(DEBUGtxt, "Buttons: %2d", GPIO_Button_COUNT);
+    DEBUG_LineOut(DEBUGtxt);
+    OOGABOOGA = "GPIOs: ";
+    for (unsigned int ctr = 0; ctr < GPIO_Button_COUNT; ctr++)
+    {
+        OOGABOOGA += ctr;
+        OOGABOOGA += "=";
+        OOGABOOGA += GPIO_Button_PINS[ctr];
+        OOGABOOGA += " ";
+    }
+    DEBUG_LineOut2(OOGABOOGA.c_str());
+
+    /*****  Switches  *****/
+
+    // Button_init();
 }
 
 // Handle incoming MQTT messages for the SmartSwitch functionality

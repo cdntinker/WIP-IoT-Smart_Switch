@@ -248,8 +248,7 @@ boolean customInit()
               });
     ///////////////////////////////////////////////////////////////////////////////////
 
-    server.on(
-        "/management", HTTP_POST, [&](AsyncWebServerRequest *request)
+    server.on("/management", HTTP_POST, [&](AsyncWebServerRequest *request)
         {
             // the request handler is triggered after the upload has finished...
             // create the response, add header, and send response
@@ -312,7 +311,7 @@ boolean customInit()
     server.onNotFound([](AsyncWebServerRequest *request)
                       { request->send(404); });
     server.begin();
-    DEBUG_Success("ASYNC Server Started - customInit");
+    DEBUG_Success("customInit: ASYNC Server Started");
     // DEBUG_Separator();
     return true;
 }

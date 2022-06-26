@@ -247,7 +247,7 @@ void MQTT_JSON_send(char g_mqtt_json_topic[50], size_t msg_length, bool TF, char
 }
 
 ////////////////////////////////////////////////////////////////////////////
-//  These translate the TinkerLibs MQTT function calls to AustinOTA calls //
+//  These translate the TinkerLibs MQTT function calls to IdIoT calls //
 ////////////////////////////////////////////////////////////////////////////
 
 void MQTT_SendSTAT(const char *MQTT_command, const char *MQTT_msg_in)

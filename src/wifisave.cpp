@@ -132,12 +132,12 @@ bool loadConfig()
   if (LittleFS.exists("/config.json"))
   {
     //file exists, reading and loading
-    DEBUG_Success("reading config file - loadConfig");
+    DEBUG_Success("loadConfig: reading config file");
     File configFile = LittleFS.open("/config.json", "r");
 
     if (configFile)
     {
-      DEBUG_Success("opened config file - loadConfig");
+      DEBUG_Success("loadConfig: opened config file");
       size_t size = configFile.size();
       // Allocate a buffer to store contents of the file.
       std::unique_ptr<char[]> buf(new char[size]);
@@ -177,15 +177,15 @@ bool loadConfig()
       }
       else
       {
-        DEBUG_Trouble("failed to load json config - loadConfig");
+        DEBUG_Trouble("loadConfig: failed to load json config");
         return false;
       }
       configFile.close();
-      DEBUG_Success("file closed - loadConfig");
+      DEBUG_Success("loadConfig: file closed");
       return true;
     }
   }
-  DEBUG_Trouble("config file doesn't exist - loadConfig");
+  DEBUG_Trouble("loadConfig: config file doesn't exist");
   return false;
 }
 
@@ -352,12 +352,12 @@ bool loadConfig()
   if (LITTLEFS.exists("/config.json"))
   {
     //file exists, reading and loading
-    DEBUG_Success("reading config file - loadConfig");
+    DEBUG_Success("loadConfig: reading config file");
     File configFile = LITTLEFS.open("/config.json", "r");
 
     if (configFile)
     {
-      DEBUG_Success("opened config file - loadConfig");
+      DEBUG_Success("loadConfig: opened config file");
       size_t size = configFile.size();
       // Allocate a buffer to store contents of the file.
       std::unique_ptr<char[]> buf(new char[size]);
@@ -410,15 +410,15 @@ bool loadConfig()
       }
       else
       {
-        DEBUG_Trouble("failed to load json config - loadConfig");
+        DEBUG_Trouble("loadConfig: failed to load json config");
         return false;
       }
       configFile.close();
-      DEBUG_Success("file closed - loadConfig");
+      DEBUG_Success("loadConfig: file closed");
       return true;
     }
   }
-  DEBUG_Trouble("config file doesn't exist - loadConfig");
+  DEBUG_Trouble("loadConfig: config file doesn't exist");
   return false;
 }
 #endif
@@ -428,13 +428,13 @@ void parameterSETUP()
 #if defined(ESP8266)
   if (!LittleFS.begin())
   {
-    DEBUG_Trouble("Failed to mount file system - parameterSETUP");
+    DEBUG_Trouble("parameterSETUP: Failed to mount file system");
     return;
   }
 #elif defined(ESP32)
   if (!LITTLEFS.begin())
   {
-    DEBUG_Trouble("Failed to mount file system - parameterSETUP");
+    DEBUG_Trouble("parameterSETUP: Failed to mount file system");
     return;
   }
 #endif
@@ -442,23 +442,23 @@ void parameterSETUP()
   {
     if (!loadConfig())
     {
-      DEBUG_Trouble("Failed to load Saved Config - parameterSETUP");
+      DEBUG_Trouble("parameterSETUP: Failed to load Saved Config");
       DEBUG_Init("Saving Factory Information");
       saveFACTORY();
       delay(500);
-      DEBUG_Success("Trying to read Factory Config - parameterSETUP");
+      DEBUG_Success("parameterSETUP: Trying to read Factory Config");
       if (!loadConfig())
       {
-        DEBUG_Trouble("Couldn't read Factory Config - parameterSETUP");
+        DEBUG_Trouble("parameterSETUP: Couldn't read Factory Config");
       }
       else
       {
-        DEBUG_Success("Trying to read Factory Config - parameterSETUP");
+        DEBUG_Success("parameterSETUP: Trying to read Factory Config");
       }
     }
     else
     {
-      DEBUG_Success("Saved Config loaded - parameterSETUP");
+      DEBUG_Success("parameterSETUP: Saved Config loaded");
       // DEBUG_Title(host, htmltype); // debug title screen
       // DEBUG_Title();
 

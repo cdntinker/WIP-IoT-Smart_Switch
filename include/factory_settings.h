@@ -6,7 +6,7 @@
 #define factory_settings_h
 
 /* Device name / hostname - Hostname may not work on all DCHP setups - HOSTNAME IS USED WITH MQTT TOPICS*/
-char       hostFACTORY[32]           = "AustinOTA-Factory";
+char       hostFACTORY[32]           = "IdIoT-Factory";
 
 /* WIFI */
 char       ssidFACTORY[32]           = "0";            // unconfigured ssid

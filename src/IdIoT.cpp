@@ -6,7 +6,7 @@
 #include "LIBRARIES.h"
 
 #include "DEFINES.h"
-#include "varibles.h"         // non-edited varibles
+#include "variables.h"         // non-edited varibles
 
 #include "config.h"           // config information
 #include "factory_settings.h" // factory reset config

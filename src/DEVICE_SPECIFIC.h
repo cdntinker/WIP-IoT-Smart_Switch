@@ -14,6 +14,7 @@
 // #include <Tinker_SmartSwitch.h>
 #include "Tinker_SmartSwitch.h"     //  Building with embeded version in Arduino prefers quotes
 #include "device_Buttons.h"
+///////#include "device_Switches.h"
 #include "device_Relays.h"
 #include "device_LEDs.h"
 
@@ -28,6 +29,10 @@ extern unsigned int GPIO_LED_PINS[4];
 extern bool GPIO_LED_STATE[10];
 
 extern int SmartSwitch_ButtonPin[4];
+extern unsigned int GPIO_Button_PINS[4];
+extern bool GPIO_Button_STATE[10];
+
+extern int SmartSwitch_SwitchPin[4];
 
 
 #define DEVICE_SETUP SmartSwitch_init
@@ -41,6 +46,12 @@ void DEVICE_LOOP();
 
 void DEVICE_RELAY(int RelayNum, bool OnOff);
 void DEVICE_RELAY_TOGGLE(int RelayNum);
+
+#define DEVICE_BUTTON Button_switch
+#define DEVICE_BUTTON_TOGGLE Button_toggle
+
+void DEVICE_BUTTON(int ButtonNum, bool OnOff);
+void DEVICE_BUTTON_TOGGLE(int ButtonNum);
 
 #define DEVICE_LED LED_switch
 #define DEVICE_LED_TOGGLE LED_toggle

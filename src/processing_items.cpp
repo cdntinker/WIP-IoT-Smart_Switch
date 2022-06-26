@@ -469,11 +469,23 @@ else if(strcmp(Token, "LEDs") == 0)
   if (var == "hover")
     return htmlhover;
 
+  if (var == "ssidplaceholder")
+  {
+        char rssi1[5];
+        itoa(WiFi.RSSI(), rssi1, 10);
+        char buf[12];
+        sprintf(buf, "%s (%s dBm)", ssid, rssi1);
+    return buf;
+  }
+
   if (var == "ipplaceholder")
     return ip3string(WiFi.localIP());
 
   if (var == "macplaceholder")
     return WiFi.macAddress();
+
+  if (var == "brokerplaceholder")
+    return mqtt_broker;
 
   if (var == "memsketch")
     return info_memsketch();

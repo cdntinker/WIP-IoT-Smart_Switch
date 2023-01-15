@@ -14,6 +14,7 @@ const char PART_deviceinfo_html[] PROGMEM = R"rawliteral(
         <div class = "name-text">MQTT Broker: </div>
         <div class = "name-text">Flash Usage: </div>
         <br>
+        <div class = "name-text">Battery: </div>
         <div class = "name-text">Firmware Version: </div>
       </div>
     </div>
@@ -25,6 +26,7 @@ const char PART_deviceinfo_html[] PROGMEM = R"rawliteral(
         <div class = "host-text">%macplaceholder%</div>
         <div class = "host-text">%brokerplaceholder%</div>
         <div class = "host-text">%memsketch%</div>
+        <div class = "host-text">%BATTERYv%V</div>
         <div class = "host-text">%DevName% (%FirmwareVer%)</div>
       </div>
     </div>

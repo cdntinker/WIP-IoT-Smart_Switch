@@ -189,8 +189,31 @@ String ip3string(IPAddress ip)
   return ret;
 }
 
+// ADC_MODE(ADC_VCC);   // If using SYSvoltage
+
 String processor(const String &var)
 { // Change placeholders on webpage
+
+  // if (var == "SYSvoltage")
+  // {
+  //   String dm9ing = "";
+  //   dm9ing += ESP.getVcc();
+  //   return dm9ing;
+  // }
+
+  if (var == "BATTERY")
+  {
+    String dm9ing = "";
+    dm9ing += analogRead(A0);
+    return dm9ing;
+  }
+
+  if (var == "BATTERYv")
+  {
+    String dm9ing = "";
+    dm9ing += (analogRead(A0) / 194.0);
+    return dm9ing;
+  }
 
   /* Drag in complete blocks of HTML */
   if (var == "PART_Header")
@@ -462,7 +485,7 @@ String processor(const String &var)
     // int GPIO_Count;
 
     String TheHTML = "<div class = \"menu-buttons\">";
-    
+
     if (strcmp(Token, "Buttons") == 0)
     {
       for (int DeviceCTR = 0; DeviceCTR < GPIO_Button_COUNT; DeviceCTR++)
@@ -566,10 +589,10 @@ String processor(const String &var)
 
   if (var == "ssidplaceholder")
   {
-        char rssi1[5];
-        itoa(WiFi.RSSI(), rssi1, 10);
-        char buf[12];
-        sprintf(buf, "%s (%s dBm)", ssid, rssi1);
+    char rssi1[5];
+    itoa(WiFi.RSSI(), rssi1, 10);
+    char buf[12];
+    sprintf(buf, "%s (%s dBm)", ssid, rssi1);
     return buf;
   }
 

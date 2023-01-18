@@ -201,13 +201,8 @@ String processor(const String &var)
   //   return dm9ing;
   // }
 
-  if (var == "BATTERY")
-  {
-    String dm9ing = "";
-    dm9ing += analogRead(A0);
-    return dm9ing;
-  }
-
+// This is based on connecting a typical lithium single cell 
+// to A0 of a D1-mini through a 220k resistor
   if (var == "BATTERYv")
   {
     String dm9ing = "";

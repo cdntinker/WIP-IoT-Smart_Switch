@@ -8,6 +8,7 @@ const char PART_Header_html[] PROGMEM = R"rawliteral(
     <h2>%title% - <em>%PageName%</em></h2>
     %ALLDAButtons%
     %PART_status%
+    %PART_battery%
 </div>
 )rawliteral";
 

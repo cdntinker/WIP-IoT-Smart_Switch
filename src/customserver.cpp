@@ -137,6 +137,23 @@ boolean customInit()
                   //    Serial.println(request->WSclient()->remoteIP());                  /////////////
               });
 
+    server.on("/battery", HTTP_GET, [](AsyncWebServerRequest *request)
+        {
+            static char Voltage[12];
+            float Volts = analogRead(A0) / 194.0;
+                dtostrf(Volts, 12, 0, Voltage);
+            // request->send_P(200, "text/plain", Voltage);
+            if (Volts > 4.0)
+                  {
+                      request->send_P(200, "text/plain", "green");
+                  }
+                  else
+                  {
+                      request->send_P(200, "text/plain", "orange");
+                  }
+
+        });
+
     server.on("/management", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   strcpy(CurrentPage, "/management"); // For button display from TinkerLibs-HTTP

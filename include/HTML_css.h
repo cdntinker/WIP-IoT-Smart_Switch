@@ -86,6 +86,14 @@ const char CSS_STYLE[] PROGMEM = R"rawliteral(
      margin-bottom: 1rem;
     }
 
+    .name-battery {
+     border-radius: .4rem;
+     font-weight: bold;
+     padding: .25rem .6rem;
+     display: inline-block;
+     margin-bottom: 1rem;
+    }
+
     .name-text {
     font-size: 1.2rem;
     font-weight: bold;

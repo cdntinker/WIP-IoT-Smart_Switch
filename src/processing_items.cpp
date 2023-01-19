@@ -20,6 +20,7 @@ extern char DEBUGtxt[92];
 #include "HTML_PART_DeviceInfo.h"
 #include "HTML_PART_Footer.h"
 #include "HTML_PART_Status.h"
+#include "HTML_PART_Battery.h"
 
 #include "DEVICE_HTML_PART_Homepage.h"
 
@@ -219,6 +220,8 @@ String processor(const String &var)
     return PART_Footer_html;
   if (var == "PART_status")
     return PART_status_html;
+  if (var == "PART_battery")
+    return PART_battery_html;
   if (var == "The_CSS")
     return CSS_STYLE;
   if (var == "The_SCRIPTS")

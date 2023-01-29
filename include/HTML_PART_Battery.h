@@ -4,8 +4,9 @@
 #define HTML_PART_Battery_h
 
 const char PART_battery_html[] PROGMEM = R"rawliteral(
-<div class = "name-battery" id="battery" style="%online%">
-      <span class = "name-text">BAT: %BATTERYv%</span>
+<div class="name-battery" id="battery" style="background:%battColor%">
+      <span class="name-text" id="batteryText">BAT</span>
+      <span class="name-text" id="batteryVolts">%BATTERYv%</span>
 </div>
 )rawliteral";
 

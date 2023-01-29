@@ -133,17 +133,31 @@ boolean customInit()
 
     server.on("/battery", HTTP_GET, [](AsyncWebServerRequest *request)
               {
+                // read battery voltage
+                float Volts = analogRead(A0) / BATTDIV;
+                //temporarily holds data from vals
+                char charVal[10];                
+                //4 is mininum width, 3 is precision; float value is copied onto buff
+                dtostrf(Volts, 4, 2, charVal);
+                
+                request->send_P(200, "text/plain", charVal); 
+            });
+    server.on("/batteryColor", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
                   float Volts = analogRead(A0) / BATTDIV;
 
-                  if (Volts >= 4.0)
+                  if (Volts >= 3.9)
                   {
                       request->send_P(200, "text/plain", "green");
+                  }
+                  else if (Volts <= 3.2)
+                  {
+                    request->send_P(200, "text/plain", "red");
                   }
                   else
                   {
                       request->send_P(200, "text/plain", "orange");
-                  }
-              });
+                  } });
 
     server.on("/management", HTTP_GET, [](AsyncWebServerRequest *request)
               {

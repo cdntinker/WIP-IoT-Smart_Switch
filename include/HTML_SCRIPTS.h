@@ -95,6 +95,59 @@ function LEDTOGGLE(element) {
 /*    Initial status check    */
 setTimeout(checkConnectionStatus, 5000);
 
+function checkBatteryColor()
+   {
+    let xhttp = new XMLHttpRequest();
+    xhttp.timeout = 2000;
+    xhttp.onreadystatechange = function()
+    {
+        if (this.readyState == 4)
+        {
+            if (this.status === 200)
+            {
+                document.getElementById("battery").style.background = this.responseText;
+            }
+            else
+            {
+                document.getElementById("battery").style.background = "grey";
+            }
+             setTimeout(checkBatteryColor, 5000);
+            /* Repeat our status check only once there's a result */
+        }
+    }
+    xhttp.open("GET", "/batteryColor", true);
+    xhttp.send();
+}
+
+function checkBatteryVolts()
+   {
+    let xhttp = new XMLHttpRequest();
+    xhttp.timeout = 2000;
+    xhttp.onreadystatechange = function()
+    {
+        if (this.readyState == 4)
+        {
+            if (this.status === 200)
+            {
+                document.getElementById("batteryVolts").innerHTML = this.responseText;
+                checkBatteryColor();
+            }
+            else
+            {
+                document.getElementById("batteryVolts").innerHTML = "- - -";
+                document.getElementById("battery").style.background = "grey";
+            }
+             setTimeout(checkBatteryVolts, 5000);
+            /* Repeat our status check only once there's a result */
+        }
+    }
+    xhttp.open("GET", "/battery", true);
+    xhttp.send();
+}
+
+/*    Initial status check    */
+setTimeout(checkBatteryVolts, 5000);
+
 var domReady = function(callback) {
        document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
       };

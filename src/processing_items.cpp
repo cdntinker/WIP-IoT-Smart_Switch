@@ -216,6 +216,27 @@ String processor(const String &var)
     // battvolt += (analogRead(A0) / 1.0);     // RAW
     return battvolt;
   }
+  if (var == "battColor")
+  {
+    // battvolt += (analogRead(A0) / 194.0);    // D1-mini
+    // battvolt += (analogRead(A0) / 178.7);     // ESP-Everything
+    // battvolt += (analogRead(A0) / 1.0);     // RAW
+
+    float Volts = analogRead(A0) / BATTDIV; // ESP-Everything
+
+    if (Volts >= 4.0)
+    {
+      return "green";
+    }
+    else if (Volts <= 3.2)
+    {
+      return "red";
+    }
+    else
+    {
+      return "orange";
+    }
+  }
 
   /* Drag in complete blocks of HTML */
   if (var == "PART_Header")

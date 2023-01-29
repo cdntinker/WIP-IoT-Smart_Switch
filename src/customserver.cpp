@@ -2,6 +2,7 @@
 
 // #include "LIBRARIES.h"
 #include "EXTERNS.h"
+#include "DEFINES.h"
 #include "Tinker_DEBUG.h"
 
 #include "DEVICE_SPECIFIC.h"
@@ -89,8 +90,7 @@ boolean customInit()
                       // DEBUG_LineOut(DEBUGtxt);
                       //      WIFIbuttonSTATE[inputMessage1.toInt()] = LOW;
                   }
-                  request->send(200, "text/plain", "OK");
-              });
+                  request->send(200, "text/plain", "OK"); });
 
     server.on("/released", HTTP_GET, [](AsyncWebServerRequest *request)
               {
@@ -101,8 +101,7 @@ boolean customInit()
                       // DEBUG_LineOut(DEBUGtxt);
                       //      WIFIbuttonSTATE[inputMessage2.toInt()] = HIGH;
                   }
-                  request->send(200, "text/plain", "OK");
-              });
+                  request->send(200, "text/plain", "OK"); });
 
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->redirect("/home"); });
@@ -111,15 +110,13 @@ boolean customInit()
     server.on("/home", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   strcpy(CurrentPage, "/home"); // For button display from TinkerLibs-HTTP
-                  request->send_P(200, "text/html", home_html, processor);
-              });
+                  request->send_P(200, "text/html", home_html, processor); });
     DEBUG_LineOut("Page: /home");
 
     server.on("/config", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   strcpy(CurrentPage, "/config"); // For button display from TinkerLibs-HTTP
-                  request->send_P(200, "text/html", config_form, processor);
-              });
+                  request->send_P(200, "text/html", config_form, processor); });
     DEBUG_LineOut("Page: /config");
 
     server.on("/state", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -132,18 +129,13 @@ boolean customInit()
                   else
                   {
                       request->send_P(200, "text/plain", "green");
-                  }
-                  //    Serial.print("Received request from client with IP: ");         /////////////
-                  //    Serial.println(request->WSclient()->remoteIP());                  /////////////
-              });
+                  } });
 
     server.on("/battery", HTTP_GET, [](AsyncWebServerRequest *request)
-        {
-            static char Voltage[12];
-            float Volts = analogRead(A0) / 194.0;
-                dtostrf(Volts, 12, 0, Voltage);
-            // request->send_P(200, "text/plain", Voltage);
-            if (Volts > 4.0)
+              {
+                  float Volts = analogRead(A0) / BATTDIV;
+
+                  if (Volts >= 4.0)
                   {
                       request->send_P(200, "text/plain", "green");
                   }
@@ -151,47 +143,40 @@ boolean customInit()
                   {
                       request->send_P(200, "text/plain", "orange");
                   }
-
-        });
+              });
 
     server.on("/management", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   strcpy(CurrentPage, "/management"); // For button display from TinkerLibs-HTTP
-                  request->send_P(200, "text/html", management_html, processor);
-              });
+                  request->send_P(200, "text/html", management_html, processor); });
     DEBUG_LineOut("Page: /management");
 
     server.on("/complete", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   request->send_P(200, "text/html", finished_html, processor);
-                  restartRequired = true;
-              });
+                  restartRequired = true; });
 
     server.on("/failedOTA", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   strcpy(CurrentPage, "/failedOTA"); // For button display from TinkerLibs-HTTP
-                  request->send_P(200, "text/html", failed_html, processor);
-              });
+                  request->send_P(200, "text/html", failed_html, processor); });
 
     server.on("/reboot", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   request->send_P(200, "text/html", reboot_html, processor);
-                  restartRequired = true;
-              });
+                  restartRequired = true; });
 
     server.on("/factory", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   //     request->send_P(200, "text/html", reboot_html, processor );
                   request->redirect("/factorypage");
                   lastDelete = millis();
-                  factoryRequired = true;
-              });
+                  factoryRequired = true; });
 
     server.on("/factorypage", HTTP_GET, [](AsyncWebServerRequest *request)
               {
                   strcpy(CurrentPage, "/factorypage"); // For button display from TinkerLibs-HTTP
-                  request->send_P(200, "text/html", factory_page, processor);
-              });
+                  request->send_P(200, "text/html", factory_page, processor); });
 
     server.on("/wifisave", HTTP_GET, [](AsyncWebServerRequest *request)
               {
@@ -212,8 +197,7 @@ boolean customInit()
                           darkState = !darkState;
                       }
                   }
-                  request->send(200, "text/plain", "OK");
-              });
+                  request->send(200, "text/plain", "OK"); });
 
     ///////////////////////////////////////////////////////////////////////////////////
     server.on("/RelayControl", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -237,8 +221,7 @@ boolean customInit()
                       if (RLY_Act == "9")
                           DEVICE_RELAY_TOGGLE(RLY_Num.toInt()); //   TOGGLE
                   }
-                  request->send(200, "text/plain", "OK");
-              });
+                  request->send(200, "text/plain", "OK"); });
 
     server.on("/LEDControl", HTTP_GET, [](AsyncWebServerRequest *request)
               {
@@ -261,11 +244,11 @@ boolean customInit()
                       if (LED_Act == "9")
                           DEVICE_LED_TOGGLE(LED_Num.toInt()); //   TOGGLE
                   }
-                  request->send(200, "text/plain", "OK");
-              });
+                  request->send(200, "text/plain", "OK"); });
     ///////////////////////////////////////////////////////////////////////////////////
 
-    server.on("/management", HTTP_POST, [&](AsyncWebServerRequest *request)
+    server.on(
+        "/management", HTTP_POST, [&](AsyncWebServerRequest *request)
         {
             // the request handler is triggered after the upload has finished...
             // create the response, add header, and send response
@@ -276,11 +259,10 @@ boolean customInit()
             response->addHeader("Connection", "close");
             response->addHeader("Access-Control-Allow-Origin", "*");
             request->send(response);
-            restartRequired = true;
-        },
+            restartRequired = true; },
         [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final)
         {
-            //Upload handler chunks in data
+            // Upload handler chunks in data
 
             if (!index)
             {
@@ -314,7 +296,7 @@ boolean customInit()
             if (final)
             { // if the final flag is set then this is the last frame of data
                 if (!Update.end(true))
-                { //true to set the size to the current progress
+                { // true to set the size to the current progress
                     Update.printError(Serial);
                     return request->send(400, "text/plain", "Could not end OTA");
                 }

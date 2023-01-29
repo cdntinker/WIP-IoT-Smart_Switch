@@ -58,4 +58,8 @@
     #define FIRMWAREVERSION     '0.666.0 (arduino)'  // This is a MUCH more appropriate place for this...
 #endif
 
+#ifndef BATTDIV
+    #define BATTDIV 1.0
+#endif
+
 #endif // DEFINES_H

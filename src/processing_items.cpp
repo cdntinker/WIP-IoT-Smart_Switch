@@ -197,18 +197,24 @@ String processor(const String &var)
 
   // if (var == "SYSvoltage")
   // {
-  //   String dm9ing = "";
-  //   dm9ing += ESP.getVcc();
-  //   return dm9ing;
+  //   String battvolt = "";
+  //   battvolt += ESP.getVcc();
+  //   return battvolt;
   // }
 
 // This is based on connecting a typical lithium single cell 
 // to A0 of a D1-mini through a 220k resistor
+// OR
+// a ~1:5 divider (100K:470K) across the battery to ADC on an ESP-07-Everything!
   if (var == "BATTERYv")
   {
-    String dm9ing = "";
-    dm9ing += (analogRead(A0) / 194.0);
-    return dm9ing;
+    String battvolt = "";
+    battvolt += (analogRead(A0) / BATTDIV);     // ESP-Everything
+
+    // battvolt += (analogRead(A0) / 194.0);    // D1-mini
+    // battvolt += (analogRead(A0) / 178.7);     // ESP-Everything
+    // battvolt += (analogRead(A0) / 1.0);     // RAW
+    return battvolt;
   }
 
   /* Drag in complete blocks of HTML */
@@ -589,7 +595,8 @@ String processor(const String &var)
   {
     char rssi1[5];
     itoa(WiFi.RSSI(), rssi1, 10);
-    char buf[12];
+    // char buf[12];
+    char buf[44];
     sprintf(buf, "%s (%s dBm)", ssid, rssi1);
     return buf;
   }

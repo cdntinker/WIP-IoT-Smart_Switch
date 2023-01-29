@@ -135,6 +135,7 @@ function checkBatteryVolts()
             else
             {
                 document.getElementById("batteryVolts").innerHTML = "- - -";
+                document.getElementById("battery").style.background = "grey";
             }
              setTimeout(checkBatteryVolts, 5000);
             /* Repeat our status check only once there's a result */

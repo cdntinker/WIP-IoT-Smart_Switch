@@ -146,18 +146,36 @@ boolean customInit()
               {
                   float Volts = analogRead(A0) / BATTDIV;
 
-                  if (Volts >= 4.0) 
-                  {
+                //   if (Volts >= 4.0) 
+                //   {
+                //       request->send_P(200, "text/plain", "green");
+                //   }
+                //   else if (Volts <= 3.2)
+                //   {
+                //     request->send_P(200, "text/plain", "red");
+                //   }
+                //   else
+                //   {
+                //       request->send_P(200, "text/plain", "orange");
+                //   }
+
+                    if (Volts >= 3.7)
+                    {
                       request->send_P(200, "text/plain", "green");
-                  }
-                  else if (Volts <= 3.2)
-                  {
-                    request->send_P(200, "text/plain", "red");
-                  }
-                  else
-                  {
+                    }
+                    else if (Volts >= 3.2)
+                    {
+                      request->send_P(200, "text/plain", "yellow");
+                    }
+                    else if (Volts >= 3.0)
+                    {
                       request->send_P(200, "text/plain", "orange");
-                  } });
+                    }
+                    else
+                    {
+                      request->send_P(200, "text/plain", "red");
+                    }
+                });
 
     server.on("/management", HTTP_GET, [](AsyncWebServerRequest *request)
               {

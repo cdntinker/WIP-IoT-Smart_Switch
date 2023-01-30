@@ -211,30 +211,41 @@ String processor(const String &var)
     String battvolt = "";
     battvolt += (analogRead(A0) / BATTDIV);     // ESP-Everything
 
-    // battvolt += (analogRead(A0) / 194.0);    // D1-mini
-    // battvolt += (analogRead(A0) / 178.7);     // ESP-Everything
-    // battvolt += (analogRead(A0) / 1.0);     // RAW
     return battvolt;
   }
   if (var == "battColor")
   {
-    // battvolt += (analogRead(A0) / 194.0);    // D1-mini
-    // battvolt += (analogRead(A0) / 178.7);     // ESP-Everything
-    // battvolt += (analogRead(A0) / 1.0);     // RAW
 
     float Volts = analogRead(A0) / BATTDIV; // ESP-Everything
 
-    if (Volts >= 4.0)
+    // if (Volts >= 4.0)
+    // {
+    //   return "green";
+    // }
+    // else if (Volts <= 3.2)
+    // {
+    //   return "red";
+    // }
+    // else
+    // {
+    //   return "orange";
+    // }
+
+    if (Volts >= 3.7)
     {
       return "green";
     }
-    else if (Volts <= 3.2)
+    else if (Volts >= 3.2)
     {
-      return "red";
+      return "yellow";
+    }
+    else if (Volts >= 3.0)
+    {
+      return "orange";
     }
     else
     {
-      return "orange";
+      return "red";
     }
   }
 

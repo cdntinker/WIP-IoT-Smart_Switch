@@ -107,10 +107,6 @@ function checkBatteryColor()
             {
                 document.getElementById("battery").style.background = this.responseText;
             }
-            else
-            {
-                document.getElementById("battery").style.background = "grey";
-            }
              setTimeout(checkBatteryColor, 5000);
             /* Repeat our status check only once there's a result */
         }

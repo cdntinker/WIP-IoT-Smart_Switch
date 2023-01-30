@@ -210,26 +210,20 @@ String processor(const String &var)
   {
     String battvolt = "";
     battvolt += (analogRead(A0) / BATTDIV);     // ESP-Everything
-
     return battvolt;
   }
+
+  if (var == "ADC")
+  {
+    String ADCreading = "";
+    ADCreading += analogRead(A0);
+    return ADCreading;
+  }
+
   if (var == "battColor")
   {
 
     float Volts = analogRead(A0) / BATTDIV; // ESP-Everything
-
-    // if (Volts >= 4.0)
-    // {
-    //   return "green";
-    // }
-    // else if (Volts <= 3.2)
-    // {
-    //   return "red";
-    // }
-    // else
-    // {
-    //   return "orange";
-    // }
 
     if (Volts >= 3.7)
     {

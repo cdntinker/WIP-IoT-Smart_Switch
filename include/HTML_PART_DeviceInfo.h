@@ -26,7 +26,7 @@ const char PART_deviceinfo_html[] PROGMEM = R"rawliteral(
         <div class = "host-text">%macplaceholder%</div>
         <div class = "host-text">%brokerplaceholder%</div>
         <div class = "host-text">%memsketch%</div>
-        <div class = "host-text">%BATTERYv%V</div>
+        <div class = "host-text">%BATTERYv%V (ADC: %ADC%)</div>
         <div class = "host-text">%DevName% (%FirmwareVer%)</div>
       </div>
     </div>

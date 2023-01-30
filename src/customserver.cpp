@@ -146,19 +146,6 @@ boolean customInit()
               {
                   float Volts = analogRead(A0) / BATTDIV;
 
-                //   if (Volts >= 4.0) 
-                //   {
-                //       request->send_P(200, "text/plain", "green");
-                //   }
-                //   else if (Volts <= 3.2)
-                //   {
-                //     request->send_P(200, "text/plain", "red");
-                //   }
-                //   else
-                //   {
-                //       request->send_P(200, "text/plain", "orange");
-                //   }
-
                     if (Volts >= 3.7)
                     {
                       request->send_P(200, "text/plain", "green");

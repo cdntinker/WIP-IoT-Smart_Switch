@@ -237,15 +237,15 @@ String processor(const String &var)
     }
     else if (Volts >= 3.2)
     {
-      return "yellow";
+      return "orange";
     }
     else if (Volts >= 3.0)
     {
-      return "orange";
+      return "red";
     }
     else
     {
-      return "red";
+      return "black";
     }
   }
 

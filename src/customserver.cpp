@@ -165,15 +165,15 @@ boolean customInit()
                     }
                     else if (Volts >= 3.2)
                     {
-                      request->send_P(200, "text/plain", "yellow");
+                      request->send_P(200, "text/plain", "orange");
                     }
                     else if (Volts >= 3.0)
                     {
-                      request->send_P(200, "text/plain", "orange");
+                      request->send_P(200, "text/plain", "red");
                     }
                     else
                     {
-                      request->send_P(200, "text/plain", "red");
+                      request->send_P(200, "text/plain", "black");
                     }
                 });
 

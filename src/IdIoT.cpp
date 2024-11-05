@@ -28,6 +28,8 @@ void setup()
   setup_DEBUG();
   DEBUG_Title();
 
+    Serial.printf("#=- %-97s -=#\n", STR(DeviceName));
+
   DEBUG_Reset();              // print reset reason
 
   parameterSETUP();           // wifisave.h

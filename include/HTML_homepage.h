@@ -18,6 +18,11 @@ const char home_html[] PROGMEM = R"rawliteral(
 %PART_Header%
       <div id="body"> 
 %PART_HomePage_Body%
+%PART_HomePage_Body_Relays%
+%PART_HomePage_Body_LEDs%
+%PART_HomePage_Body_Buttons%
+%PART_HomePage_Body_Inputs_direct%
+%PART_HomePage_Body_Inputs_sensors%
         <br>
 %PART_DeviceInfo%
       </div>

@@ -265,6 +265,18 @@ String processor(const String &var)
   if (var == "PART_HomePage_Body")
     return PART_HomePage_Body;
 
+ if (var == "PART_HomePage_Body_Relays")
+    return PART_HomePage_Body_Relays;
+ if (var == "PART_HomePage_Body_LEDs")
+    return PART_HomePage_Body_LEDs;
+ if (var == "PART_HomePage_Body_Buttons")
+    return PART_HomePage_Body_Buttons;
+ if (var == "PART_HomePage_Body_Inputs_direct")
+    return PART_HomePage_Body_Inputs_direct;
+ if (var == "PART_HomePage_Body_Inputs_sensors")
+    return PART_HomePage_Body_Inputs_sensors;
+
+
   if (var == "config_form_WiFi")
     return config_form_WiFi;
   if (var == "config_form_AP")
@@ -635,6 +647,9 @@ String processor(const String &var)
 
   if (var == "brokerplaceholder")
     return mqtt_broker;
+
+  if (var == "clientplaceholder")
+    return DeviceID();
 
   if (var == "memsketch")
     return info_memsketch();

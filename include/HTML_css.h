@@ -73,7 +73,7 @@ const char CSS_STYLE[] PROGMEM = R"rawliteral(
    .border{
     border: 0.25rem solid %color%;
     border-radius: .4rem;
-    width: 30rem;
+    width: 28rem;
     margin: auto;
     padding:  .4rem;
     }
@@ -277,12 +277,13 @@ const char CSS_STYLE[] PROGMEM = R"rawliteral(
     }
     
     .innerl {
-     width: 14rem;
+     text-align:right;
+     width: 12rem;
      display: inline-block;
     }
     .innerr {
      text-align:left;
-     width: 15.7rem;
+     width: 14rem;
      display: inline-block;
     }
 

@@ -199,24 +199,18 @@ void MQTT_reconnect()
 
   DEBUG_Init("Attempting MQTT connection...");
   // if (MQTT_client.connect(host, mqtt_username, mqtt_password, out_heart, mqtt_lwt_qos, mqtt_lwt_retain, "0"))
-  if (MQTT_client.connect(host, mqtt_username, mqtt_password, MQTT_heartbeat, mqtt_lwt_qos, mqtt_lwt_retain, "0"))
+  if (MQTT_client.connect(host, mqtt_username, mqtt_password, MQTT_heartbeat, mqtt_lwt_qos, mqtt_lwt_retain, "Offline"))
   {
     IPaddress = WiFi.localIP().toString();
     DEBUG_Success("mqtt connected");
     connected_update = true;
-    // Once connected, publish an announcement...
-    strcpy(connectphrase, "connected = ");
-    strcat(connectphrase, host);
-    strcat(connectphrase, "  IP Address = ");
-    const char *c = IPaddress.c_str();
-    strcat(connectphrase, c); // ip address
-    // const char *phrase = connectphrase;
-    // MQTT_client.publish("outTopic", phrase);
-    byte lwt_payload[] = {'1'};
-    // const char lwt_payload[10] = "Online";
+    // Once connected, publish an LWT announcement...
+    // byte lwt_payload[] = {'1'};
+    const char lwt_payload[10] = "Online";
     // strcpy(lwt_payload, "Online");
     // MQTT_client.publish(out_heart, lwt_payload, 1, mqtt_lwt_retain);
-    MQTT_client.publish(MQTT_heartbeat, lwt_payload, 1, mqtt_lwt_retain);
+    // MQTT_client.publish(MQTT_heartbeat, lwt_payload, 1, mqtt_lwt_retain);
+    MQTT_client.publish(MQTT_heartbeat, lwt_payload, mqtt_lwt_retain);
     // ... and resubscribe
 
     MQTT_client.subscribe(MQTT_inTopic);

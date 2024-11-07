@@ -41,7 +41,6 @@ const char*     out_heart  = "-";               // LWT topic
 
 char            MQTT_heartbeat[60];
 
-char            connectphrase[140];             // publishes to 'outTopic' when connected
 String          IPaddress;                      // IP address for 'outTopic'
 
 /* mqtt config input */

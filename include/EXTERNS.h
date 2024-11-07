@@ -47,7 +47,6 @@ extern uint8_t       ledmode[5];            // what mode the leds are in    -- u
 extern const char* out_heart;  // LWT        topic
 extern char MQTT_heartbeat[60];
 
-extern char connectphrase[140];     // publishes to 'outTopic' when connected
 extern String IPaddress;            // IP address for 'outTopic'
 // extern char mqtt_button_buffer[40]; // message from button buffer
 // extern char mqtt_amp_buffer[100];   // message from INA buffer

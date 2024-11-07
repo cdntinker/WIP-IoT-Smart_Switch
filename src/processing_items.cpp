@@ -248,6 +248,18 @@ String processor(const String &var)
     return PART_Header_html;
   if (var == "PART_DeviceInfo")
     return PART_deviceinfo_html;
+
+  if (var == "deviceinfo_WiFi")
+    return PART_deviceinfo_WiFi_html;
+  if (var == "deviceinfo_MQTT")
+    return PART_deviceinfo_MQTT_html;
+  if (var == "deviceinfo_Batt")
+    return PART_deviceinfo_Batt_html;
+  if (var == "deviceinfo_Mem")
+    return PART_deviceinfo_Mem_html;
+  if (var == "deviceinfo_Firm")
+    return PART_deviceinfo_Firm_html;
+
   if (var == "PART_Footer")
     return PART_Footer_html;
   if (var == "PART_status")

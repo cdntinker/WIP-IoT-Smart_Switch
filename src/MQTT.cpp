@@ -189,30 +189,21 @@ extern unsigned int GPIO_LED_COUNT;
 
 void MQTT_reconnect()
 {
-
-  // Loop until we're reconnected
-  // while (!MQTT_client.connected())
-  // {
   PIXELS_colorWipe(0, 0, 0, 220);
 
-// strcpy(out_heart, MQTT_heartbeat);
-
   DEBUG_Init("Attempting MQTT connection...");
-  // if (MQTT_client.connect(host, mqtt_username, mqtt_password, out_heart, mqtt_lwt_qos, mqtt_lwt_retain, "0"))
   if (MQTT_client.connect(host, mqtt_username, mqtt_password, MQTT_heartbeat, mqtt_lwt_qos, mqtt_lwt_retain, "Offline"))
   {
     IPaddress = WiFi.localIP().toString();
     DEBUG_Success("mqtt connected");
     connected_update = true;
-    // Once connected, publish an LWT announcement...
-    // byte lwt_payload[] = {'1'};
-    const char lwt_payload[10] = "Online";
-    // strcpy(lwt_payload, "Online");
-    // MQTT_client.publish(out_heart, lwt_payload, 1, mqtt_lwt_retain);
-    // MQTT_client.publish(MQTT_heartbeat, lwt_payload, 1, mqtt_lwt_retain);
-    MQTT_client.publish(MQTT_heartbeat, lwt_payload, mqtt_lwt_retain);
-    // ... and resubscribe
 
+    // Once connected, publish an LWT announcement...
+    const char lwt_payload[10] = "Online";
+
+    MQTT_client.publish(MQTT_heartbeat, lwt_payload, mqtt_lwt_retain);
+
+    // ... and resubscribe
     MQTT_client.subscribe(MQTT_inTopic);
   }
   else
@@ -222,11 +213,11 @@ void MQTT_reconnect()
     //       Wait 5 seconds before retrying
     delay(5000);
   }
-  // }
 }
 
 void MQTT_loop()
 {
+  // Loop until we're reconnected
   if (!MQTT_client.connected())
   {
     MQTT_reconnect();

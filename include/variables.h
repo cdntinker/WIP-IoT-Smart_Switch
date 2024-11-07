@@ -37,8 +37,6 @@ uint8_t         prevflash[5]     = {LOW};       // array of last flash state    
 uint8_t         ledmode[5]       = {0};         // what mode the leds are in    -- used in overrideMODE control
 
 /* mqtt topics */
-const char*     out_heart  = "-";               // LWT topic
-
 char            MQTT_heartbeat[60];
 
 String          IPaddress;                      // IP address for 'outTopic'

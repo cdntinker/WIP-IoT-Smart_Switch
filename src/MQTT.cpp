@@ -62,7 +62,8 @@ void MQTT_settopics()
   DEBUG_LineOut(DEBUGtxt);
 
   //  Build the topic names
-  strcpy(MQTT_heartbeat, MQTT_ClientName);
+  strcpy(MQTT_heartbeat, "tele/");
+  strcat(MQTT_heartbeat, MQTT_ClientName);
   strcat(MQTT_heartbeat, "/LWT");
 
   sprintf(DEBUGtxt, "MQTT_heartbeat: %s", MQTT_heartbeat);
@@ -194,8 +195,11 @@ void MQTT_reconnect()
   // {
   PIXELS_colorWipe(0, 0, 0, 220);
 
+// strcpy(out_heart, MQTT_heartbeat);
+
   DEBUG_Init("Attempting MQTT connection...");
-  if (MQTT_client.connect(host, mqtt_username, mqtt_password, out_heart, mqtt_lwt_qos, mqtt_lwt_retain, "0"))
+  // if (MQTT_client.connect(host, mqtt_username, mqtt_password, out_heart, mqtt_lwt_qos, mqtt_lwt_retain, "0"))
+  if (MQTT_client.connect(host, mqtt_username, mqtt_password, MQTT_heartbeat, mqtt_lwt_qos, mqtt_lwt_retain, "0"))
   {
     IPaddress = WiFi.localIP().toString();
     DEBUG_Success("mqtt connected");
@@ -206,10 +210,13 @@ void MQTT_reconnect()
     strcat(connectphrase, "  IP Address = ");
     const char *c = IPaddress.c_str();
     strcat(connectphrase, c); // ip address
-    const char *phrase = connectphrase;
-    MQTT_client.publish("outTopic", phrase);
+    // const char *phrase = connectphrase;
+    // MQTT_client.publish("outTopic", phrase);
     byte lwt_payload[] = {'1'};
-    MQTT_client.publish(out_heart, lwt_payload, 1, mqtt_lwt_retain);
+    // const char lwt_payload[10] = "Online";
+    // strcpy(lwt_payload, "Online");
+    // MQTT_client.publish(out_heart, lwt_payload, 1, mqtt_lwt_retain);
+    MQTT_client.publish(MQTT_heartbeat, lwt_payload, 1, mqtt_lwt_retain);
     // ... and resubscribe
 
     MQTT_client.subscribe(MQTT_inTopic);

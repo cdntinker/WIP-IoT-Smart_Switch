@@ -278,7 +278,8 @@ boolean customInit()
             response->addHeader("Connection", "close");
             response->addHeader("Access-Control-Allow-Origin", "*");
             request->send(response);
-            restartRequired = true; },
+            restartRequired = true; 
+            },
         [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final)
         {
             // Upload handler chunks in data

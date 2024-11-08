@@ -171,7 +171,7 @@ const char CSS_STYLE[] PROGMEM = R"rawliteral(
     border-radius: .4rem;
     padding: 0.3rem 0.6rem 0.3rem 0.6rem;
     margin: auto;
-    width: 26rem;
+    width: 20rem;
    }
 
    .mt-4 {

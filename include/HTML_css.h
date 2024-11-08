@@ -73,9 +73,9 @@ const char CSS_STYLE[] PROGMEM = R"rawliteral(
    .border{
     border: 0.25rem solid %color%;
     border-radius: .4rem;
-    width: 28rem;
+    width: 24rem;
     margin: auto;
-    padding:  .4rem;
+    padding:  .0rem;
     }
 
     .name-status {
@@ -95,7 +95,7 @@ const char CSS_STYLE[] PROGMEM = R"rawliteral(
     }
 
     .name-text {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     font-weight: bold;
     }
   
@@ -278,12 +278,12 @@ const char CSS_STYLE[] PROGMEM = R"rawliteral(
     
     .innerl {
      text-align:right;
-     width: 12rem;
+     width: 10rem;
      display: inline-block;
     }
     .innerr {
      text-align:left;
-     width: 14rem;
+     width: 13rem;
      display: inline-block;
     }
 

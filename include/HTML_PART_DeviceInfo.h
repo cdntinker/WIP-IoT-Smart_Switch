@@ -86,7 +86,7 @@ const char PART_deviceinfo_Mem_html[] PROGMEM = R"rawliteral(
 const char PART_deviceinfo_Firm_html[] PROGMEM = R"rawliteral(
     <div class = "innerl">
       <div class = "column1">
-        <div class = "name-text">Firmware Version: </div>
+        <div class = "name-text">Firmware: </div>
       </div>
     </div>
     

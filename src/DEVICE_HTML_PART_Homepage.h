@@ -9,8 +9,6 @@ const char PART_HomePage_Body[] PROGMEM = R"rawliteral(
 #ifdef SmartSwitch_Relays
 const char PART_HomePage_Body_Relays[] PROGMEM = R"rawliteral(
 <div class = "border">
-<font size=1>Relays</font>
-
 %OTOButtons.Relays%
 </div>
 )rawliteral";
@@ -22,8 +20,6 @@ const char PART_HomePage_Body_Relays[] PROGMEM = R"rawliteral(
 #ifdef SmartSwitch_LEDs
 const char PART_HomePage_Body_LEDs[] PROGMEM = R"rawliteral(
 <div class = "border">
-<font size=1>LEDs</font>
-
 %OTOButtons.LEDs%
 </div>
 )rawliteral";
@@ -35,8 +31,6 @@ const char PART_HomePage_Body_LEDs[] PROGMEM = R"rawliteral(
 #ifdef SmartSwitch_Buttons
 const char PART_HomePage_Body_Buttons[] PROGMEM = R"rawliteral(
 <div class = "border">
-<font size=1>Buttons</font>
-
 %OTOInputs.Buttons%
 </div>
 )rawliteral";
@@ -48,8 +42,6 @@ const char PART_HomePage_Body_Buttons[] PROGMEM = R"rawliteral(
 #ifdef SmartSwitch_Inputs_Direct
 const char PART_HomePage_Body_Inputs_direct[] PROGMEM = R"rawliteral(
 <div class = "border">
-<font size=1>Inputs_direct</font>
-
 %OTOInputs.Inputs_direct%
 </div>
 )rawliteral";
@@ -61,8 +53,6 @@ const char PART_HomePage_Body_Inputs_direct[] PROGMEM = R"rawliteral(
 #ifdef SmartSwitch_Inputs_Sensors
 const char PART_HomePage_Body_Inputs_sensors[] PROGMEM = R"rawliteral(
 <div class = "border">
-<font size=1>Inputs_sensors</font>
-
 %OTOInputs.Inputs_sensors%
 </div>
 )rawliteral";

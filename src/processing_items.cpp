@@ -393,7 +393,7 @@ String processor(const String &var)
         sprintf(DEBUGtxt, "Button Group > %2d", DeviceCTR);
         DEBUG_LineOut(DEBUGtxt);
         String GroupNumber = String(DeviceCTR);
-        String TheLabel = "<font size=\"+2\"><b>Relay #";
+        String TheLabel = "<font size=\"+1\"><b>Relay #";
         TheLabel += DeviceCTR;
         TheLabel += "</b></font>\n";
         TheHTML += TheLabel;
@@ -462,7 +462,7 @@ String processor(const String &var)
         sprintf(DEBUGtxt, "Button Group > %2d", DeviceCTR);
         DEBUG_LineOut(DEBUGtxt);
         String GroupNumber = String(DeviceCTR);
-        String TheLabel = "<font size=\"+2\"><b>LED #";
+        String TheLabel = "<font size=\"+1\"><b>LED #";
         TheLabel += DeviceCTR;
         TheLabel += "</b></font>\n";
         TheHTML += TheLabel;
@@ -547,7 +547,7 @@ String processor(const String &var)
         sprintf(DEBUGtxt, "Button Group > %2d", DeviceCTR);
         DEBUG_LineOut(DEBUGtxt);
         String GroupNumber = String(DeviceCTR);
-        String TheLabel = "<font size=\"+2\"><b>Button #";
+        String TheLabel = "<font size=\"+1\"><b>Button #";
         TheLabel += DeviceCTR;
         TheLabel += "</b></font>\n";
         TheHTML += TheLabel;

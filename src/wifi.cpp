@@ -46,7 +46,7 @@ void setup_wifi()
 {
   WiFi.hostname(host);
   delay(10);
-  DEBUG_Wifi(ssid);
+  /*BORK!*/DEBUG_Wifi(ssid);
   if (strcmp(password, "0") == 0) // non-password protected wifi
   {
     WiFi.begin(ssid);
@@ -83,11 +83,11 @@ void wifi_checkup()
       if (wifi_confirmed == false)
       {
         DEBUG_Success("WiFi Connected");
-        DEBUG_Wifi(ssid);
+        /*BORK!*/DEBUG_Wifi(ssid);
         String IPaddress1 = WiFi.localIP().toString();
         // DEBUG_IP(IPaddress1.c_str());
         DEBUG_IP();
-        DEBUG_MAC(WiFi.macAddress().c_str());
+        /*BORK!*/DEBUG_MAC(WiFi.macAddress().c_str());
         char rssi1[5];
         itoa(WiFi.RSSI(), rssi1, 10);
         char buf[12];

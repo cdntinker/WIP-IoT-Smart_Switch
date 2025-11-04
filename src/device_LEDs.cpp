@@ -20,6 +20,7 @@ void LED_setup()
     for (unsigned int CTR = 0; CTR < GPIO_LED_COUNT; CTR++)
         pinMode(GPIO_LED_PINS[CTR], OUTPUT);
 }
+
 // Turn LED on/off
 void LED_switch(int LEDNum, bool OnOff)
 {
@@ -29,8 +30,17 @@ void LED_switch(int LEDNum, bool OnOff)
     if (OnOff)
     {
         // DEBUG_LineOut("LED ON");
-        digitalWrite(GPIO_LED_PINS[LEDNum], HIGH);
-        GPIO_LED_STATE[LEDNum] = HIGH;
+        if ((strcmp(STR(DeviceType), "D1-Mini") != 0) && LEDNum == 2)
+            // Built-in LED on D1-Mini is active-low...
+        {
+            digitalWrite(GPIO_LED_PINS[LEDNum], HIGH);
+            GPIO_LED_STATE[LEDNum] = HIGH;
+        }
+        else
+        {
+            digitalWrite(GPIO_LED_PINS[LEDNum], LOW);
+            GPIO_LED_STATE[LEDNum] = HIGH;
+        }
         MQTT_SendSTAT(MQTT_Topic, "ON");
         sprintf(DEBUGtxt, "LED %02d (%d) ON", LEDNum, GPIO_LED_PINS[LEDNum]);
         DEBUG_LineOut(DEBUGtxt);
@@ -38,8 +48,16 @@ void LED_switch(int LEDNum, bool OnOff)
     else
     {
         // DEBUG_LineOut("LED OFF");
-        digitalWrite(GPIO_LED_PINS[LEDNum], LOW);
-        GPIO_LED_STATE[LEDNum] = LOW;
+        if (strcmp(STR(DeviceType), "D1-Mini") != 0)
+        {
+            digitalWrite(GPIO_LED_PINS[LEDNum], LOW);
+            GPIO_LED_STATE[LEDNum] = LOW;
+        }
+        else
+        {
+            digitalWrite(GPIO_LED_PINS[LEDNum], HIGH);
+            GPIO_LED_STATE[LEDNum] = LOW;
+        }
         MQTT_SendSTAT(MQTT_Topic, "OFF");
         sprintf(DEBUGtxt, "LED %02d (%d) OFF", LEDNum, GPIO_LED_PINS[LEDNum]);
         DEBUG_LineOut(DEBUGtxt);

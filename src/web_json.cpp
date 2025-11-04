@@ -11,8 +11,7 @@
 void webSENDjson()
 {
       //  DEBUG_LineOut("[WSc] SENT: Broadcast message!!");   // debug
-  const size_t capacity = 1024;
-  DynamicJsonDocument doc(capacity);
+  JsonDocument doc;
 
   {
     doc["border0"] = "#422a2a";

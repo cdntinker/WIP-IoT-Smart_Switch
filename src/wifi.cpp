@@ -35,7 +35,8 @@ void access_point_init()
     DEBUG_Wifi(AP_SSID);
   }
   String APIPaddress = WiFi.softAPIP().toString();
-  DEBUG_IP(APIPaddress.c_str());
+  // DEBUG_IP(APIPaddress.c_str());
+  DEBUG_IP();
   ap_start = true;
   DEBUG_Separator();
 }
@@ -84,7 +85,8 @@ void wifi_checkup()
         DEBUG_Success("WiFi Connected");
         DEBUG_Wifi(ssid);
         String IPaddress1 = WiFi.localIP().toString();
-        DEBUG_IP(IPaddress1.c_str());
+        // DEBUG_IP(IPaddress1.c_str());
+        DEBUG_IP();
         DEBUG_MAC(WiFi.macAddress().c_str());
         char rssi1[5];
         itoa(WiFi.RSSI(), rssi1, 10);

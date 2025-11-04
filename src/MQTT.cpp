@@ -203,9 +203,10 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
        *###############################################*/
       if (strcmp(MQTT_Name, MQTT_GroupName) == 0)
       {
-        Serial.println("WooHoo Group call!!!");
+        DEBUG_SectionTitle("WooHoo Group call!!!");
         MQTT_BuildTattles();
         MQTT_JSON_send((char *)DevInfo_Topic, strlen(DevInfo), false, DevInfo);
+        // DEBUG_BlockOut(DevInfo);
       }
       else
       {

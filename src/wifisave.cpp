@@ -29,7 +29,7 @@ void deleteData()
 bool saveFACTORY()
 { // esp8266
   DEBUG_Init("Saving FACTORY Settings");
-  DynamicJsonDocument json(1024);
+  JsonDocument json;
   json["host"] = hostFACTORY;
   json["ssid"] = ssidFACTORY;
   json["password"] = passwordFACTORY;
@@ -79,7 +79,7 @@ bool saveFACTORY()
 bool saveConfignew()
 { // esp8266
   DEBUG_Init("saving NEW config");
-  DynamicJsonDocument json(1024);
+  JsonDocument json;
   json["host"] = host;
   json["ssid"] = ssid;
   json["password"] = password;
@@ -144,7 +144,7 @@ bool loadConfig()
 
       configFile.readBytes(buf.get(), size);
 
-      DynamicJsonDocument json(1024);
+      JsonDocument json;
       auto deserializeError = deserializeJson(json, buf.get());
       if (DEBUG_JSON)
       {

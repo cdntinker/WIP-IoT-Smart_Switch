@@ -22,7 +22,7 @@ const char management_html[] PROGMEM = R"rawliteral(
      <div id="body">
 
        <div class = "border">
-       <div class="col-12 mt-3 p-centered">
+         <div class="col-12 mt-3 p-centered">
            <label class="label label2 mr-2">Upload Firmware Here</label>
            <div class="form-group pt-2 mt-3">
              <form method="POST" action="#" enctype="multipart/form-data" id="upload_form">

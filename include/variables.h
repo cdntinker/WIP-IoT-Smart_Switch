@@ -50,4 +50,7 @@ uint8_t         grnnew[5] = {0};                // new LED color for override MO
 uint8_t         blunew[5] = {0};                // new LED color for override MODE     -- BLUE
 uint8_t         whinew[5] = {0};                // new LED color for override MODE     -- WHITE
  
+char out_DevInfo[60];
+const char* DevInfo_Topic = "-";
+
  #endif

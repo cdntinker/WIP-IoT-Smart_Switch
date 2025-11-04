@@ -7,6 +7,7 @@
 
 /* Varibles here are filled in by the config system */
 char        host[32];
+char        group[32] = "AustinOTAs";
 char        ssid[32];
 char        password[64];
 

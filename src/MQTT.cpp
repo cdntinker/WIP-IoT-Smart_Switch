@@ -27,17 +27,36 @@ extern char DEBUGtxt[92];
 
 char MQTT_outTopic[MQTT_BUFFER_SIZE];
 char MQTT_inTopic[MQTT_BUFFER_SIZE];
+char MQTT_grpTopic[MQTT_BUFFER_SIZE];
 char MQTT_teleTopic[MQTT_BUFFER_SIZE];
 char MQTT_statTopic[MQTT_BUFFER_SIZE];
 
 // const char MQTT_ClientName[] = STR(DeviceName);
 char MQTT_ClientName[32];
+char MQTT_GroupName[32];
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define MQTT_JSON_BUFFER_SIZE (350) // This number is arbitrary unless used to send JSON messages
+char DevInfo[MQTT_JSON_BUFFER_SIZE];
+
+void MQTT_BuildTattles()
+{
+
+  snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
+           "{\"deviceName\": \"%s\", \"groupName\": \"%s\", \"ip\": \"%s\", \"mac\": \"%s\", \"ssid\": \"%s\", \"wifichannel\": \"%u\",\"rssi\": %d, \"FWVersion\": \"%s %s\", \"HWVersion\": \"%s\"}",
+           host, group,
+           WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
+           WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),
+           STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType));
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MQTT_init()
 {
   DEBUG_Init("MQTT");
 
   strcpy(MQTT_ClientName, host);
+  strcpy(MQTT_GroupName, group);
 
   if (strcmp(mqtt_broker, "0") == 0) // no broker declared
   {
@@ -66,6 +85,11 @@ void MQTT_settopics()
   strcat(MQTT_heartbeat, MQTT_ClientName);
   strcat(MQTT_heartbeat, "/LWT");
 
+  strcpy(out_DevInfo, "stat/");
+  strcat(out_DevInfo, host);
+  strcat(out_DevInfo, "/DevInfo");
+  DevInfo_Topic = out_DevInfo;
+
   sprintf(DEBUGtxt, "MQTT_heartbeat: %s", MQTT_heartbeat);
   DEBUG_LineOut(DEBUGtxt);
 
@@ -74,6 +98,13 @@ void MQTT_settopics()
   strcat(MQTT_inTopic, "/#");
 
   sprintf(DEBUGtxt, "MQTT_inTopic:   %s", MQTT_inTopic);
+  DEBUG_LineOut(DEBUGtxt);
+
+  strcpy(MQTT_grpTopic, "cmnd/"); //  in - Commands
+  strcat(MQTT_grpTopic, MQTT_GroupName);
+  strcat(MQTT_grpTopic, "/#");
+
+  sprintf(DEBUGtxt, "MQTT_grpTopic:   %s", MQTT_grpTopic);
   DEBUG_LineOut(DEBUGtxt);
 
   strcpy(MQTT_teleTopic, "tele/"); // out - Telemetry
@@ -97,11 +128,26 @@ void MQTT_settopics()
 
 void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
 {
+  char MQTT_PARSE[64];
+  char MQTT_Name[64];
+  // char MQTT_cmnd[64];
   sprintf(DEBUGtxt, "MQTT_msg_in arrived [%s] ", MQTT_topic);
-  DEBUG_LineOut(DEBUGtxt);
+  DEBUG_SectionTitle(DEBUGtxt);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  strcpy(MQTT_PARSE, strchr(MQTT_topic, '/')); // This drops the first part of the topic
+  strcpy(MQTT_Name, strrchr(MQTT_PARSE, '/')); // This drops the second part if there is more
+  memmove(MQTT_Name, MQTT_Name + 1, sizeof(MQTT_Name) - 1);
+  memmove(MQTT_PARSE, MQTT_PARSE + 1, sizeof(MQTT_PARSE) - 1);
+  if (strcmp(MQTT_Name, MQTT_PARSE) != 0)
+    strncpy(MQTT_Name, MQTT_PARSE, strchr(MQTT_PARSE, '/') - MQTT_PARSE); // This drops all after the second part if there is more
+
+  sprintf(DEBUGtxt, "Device/Group: %s", MQTT_Name);
+  DEBUG_LineOut2(DEBUGtxt);
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   MQTT_payload[length] = '\0';
-  sprintf(DEBUGtxt, "MQTT_payload:[%s] ", (char *)MQTT_payload);
+  sprintf(DEBUGtxt, "MQTT_payload: [%s] ", (char *)MQTT_payload);
   DEBUG_LineOut2(DEBUGtxt);
 
   //////////////////////////////////////////////////
@@ -116,8 +162,7 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   strcpy(CNasT, "/");
   strcat(CNasT, MQTT_ClientName); // "ClientName as MQTT_command"
 
-  DEBUG_SectionTitle("MQTT_msg_in arrived");
-  sprintf(DEBUGtxt, "MQTT_command: %30s", MQTT_command);
+  sprintf(DEBUGtxt, "   MQTT_command: %s", MQTT_command);
   DEBUG_LineOut(DEBUGtxt);
 
   // if (length < MQTT_BUFFER_SIZE)
@@ -136,9 +181,7 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
       MQTT_msg_in[i + 1] = '\0';
     }
 
-    sprintf(DEBUGtxt, "MQTT_msg_in: %28s", MQTT_msg_in);
-    DEBUG_LineOut(DEBUGtxt);
-    sprintf(DEBUGtxt, "MQTT_msg_in Size: %d", length);
+    sprintf(DEBUGtxt, "MQTT_msg_in: %s (size: %d)", MQTT_msg_in, length);
     DEBUG_LineOut(DEBUGtxt);
 
     /////////////////////////////////////////////////////
@@ -152,22 +195,38 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
     }
     else
     {
-      /*********************************************************************
-     * This is where you need to send the incoming message off
-     * to be handled elsewhere.
-     * Probably in your main project code would be best...
-     * 
-     * Need a standardised function call. (should be in main project...)
-     * Tho...  Separate Handlers in individual libraries would be cool.
-     * void DEVICE_MQTT_IN(const char *MQTT_command, const char *MQTT_msg_in)
-     *********************************************************************/
-      ////////////////////////////////////////////////////////////////////////////
-      // Incoming message handling is done in the device/library specific       //
-      // function referred to by DEVICE_MQTT_IN                                 //
-      // At some point, I intend to make it possible to have multiple           //
-      // sub-functions...                                                       //
-      ////////////////////////////////////////////////////////////////////////////
-      DEVICE_MQTT_IN(MQTT_command, MQTT_msg_in);
+      /*###############################################*
+       * Need to determine if this is the group topic  *
+       * then handle various permutations of it.       *
+       *                                               *
+       * See SmartSwitch_functions.cpp                 *
+       *###############################################*/
+      if (strcmp(MQTT_Name, MQTT_GroupName) == 0)
+      {
+        Serial.println("WooHoo Group call!!!");
+        MQTT_BuildTattles();
+        MQTT_JSON_send((char *)DevInfo_Topic, strlen(DevInfo), false, DevInfo);
+      }
+      else
+      {
+        /*********************************************************************
+         * This is where you need to send the incoming message off
+         * to be handled elsewhere.
+         * Probably in your main project code would be best...
+         *
+         * Need a standardised function call. (should be in main project...)
+         * Tho...  Separate Handlers in individual libraries would be cool.
+         * void DEVICE_MQTT_IN(const char *MQTT_command, const char *MQTT_msg_in)
+         *********************************************************************/
+
+        ////////////////////////////////////////////////////////////////////////////
+        // Incoming message handling is done in the device/library specific       //
+        // function referred to by DEVICE_MQTT_IN                                 //
+        // At some point, I intend to make it possible to have multiple           //
+        // sub-functions...                                                       //
+        ////////////////////////////////////////////////////////////////////////////
+        DEVICE_MQTT_IN(MQTT_command, MQTT_msg_in);
+      }
     }
   }
   else
@@ -205,6 +264,7 @@ void MQTT_reconnect()
 
     // ... and resubscribe
     MQTT_client.subscribe(MQTT_inTopic);
+    MQTT_client.subscribe(MQTT_grpTopic);
   }
   else
   {

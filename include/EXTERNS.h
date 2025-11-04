@@ -72,6 +72,7 @@ extern uint8_t  whinew[5]; // new LED color for override MODE     -- WHITE
 
 /* Varibles here are filled in by the config system */
 extern char        host[32];
+extern char        group[32];
 extern char        ssid[32];
 extern char        password[64];
 
@@ -124,3 +125,6 @@ extern char      htmlcolorFACTORY[10];      // main HTML webpage color          
 extern char      htmlhoverFACTORY[10];      // html color for hovering over a menu button    Superhouse.tv color
 
 extern uint8_t     brightnessFACTORY;               // set strip brightness
+
+extern char out_DevInfo[60];
+extern const char* DevInfo_Topic;

@@ -43,13 +43,26 @@ char DevInfo[MQTT_JSON_BUFFER_SIZE];
 
 void MQTT_BuildTattles()
 {
+  char DevInfo_fmt[256];
+  strcpy(DevInfo_fmt, "{");
+  strcat(DevInfo_fmt, "\"Device\": \"%s\", \"FriendlyName\": \"Poop\", \"GroupTopic\": \"%s\",");
+  strcat(DevInfo_fmt, " \"IPAddress\": \"%s\", \"mac\": \"%s\",");
+  strcat(DevInfo_fmt, " \"WiFi\": {\"SSID\": \"%s\", \"Channel\": \"%u\",\"Signal\": \"%d\"},");
+  strcat(DevInfo_fmt, " \"Version\": \"%s %s\", \"Hardware\": \"%s\"");
+  strcat(DevInfo_fmt, "}");
+
+  // Serial.println("BOOGA!");
+  // Serial.println(DevInfo_fmt);
+  // Serial.println("BOOGA!");
+  //  "{\"Device\": \"%s\", \"FriendlyName\": \"Poop\", \"GroupTopic\": \"%s\", \"IPAddress\": \"%s\", \"mac\": \"%s\", \"wifiSSID\": \"%s\", \"wifichannel\": \"%u\",\"wifisignal\": %d, \"Version\": \"%s %s\", \"Hardware\": \"%s\"}",
 
   snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
-           "{\"Device\": \"%s\", \"FriendlyName\": \"Poop\", \"GroupTopic\": \"%s\", \"IPAddress\": \"%s\", \"mac\": \"%s\", \"wifiSSID\": \"%s\", \"wifichannel\": \"%u\",\"wifisignal\": %d, \"Version\": \"%s %s\", \"Hardware\": \"%s\"}",
+           DevInfo_fmt,
            host, group,
            WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
            WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),
            STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType));
+  // Serial.println(DevInfo);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -138,11 +151,18 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   strcpy(MQTT_PARSE, strchr(MQTT_topic, '/')); // This drops the first part of the topic
-  strcpy(MQTT_Name, strrchr(MQTT_PARSE, '/')); // This drops the second part if there is more
+  strcpy(MQTT_Name, strrchr(MQTT_PARSE, '/')); // This drops all after the second part if there is more
   memmove(MQTT_Name, MQTT_Name + 1, sizeof(MQTT_Name) - 1);
   memmove(MQTT_PARSE, MQTT_PARSE + 1, sizeof(MQTT_PARSE) - 1);
   if (strcmp(MQTT_Name, MQTT_PARSE) != 0)
-    strncpy(MQTT_Name, MQTT_PARSE, strchr(MQTT_PARSE, '/') - MQTT_PARSE); // This drops all after the second part if there is more
+  {
+    strcpy(MQTT_Name, MQTT_PARSE);
+    for (unsigned int i = 0; i < strlen(MQTT_Name); i++)
+    { // This drops all after the second part if there is more
+      if (MQTT_Name[i] == '/')
+        MQTT_Name[i] = '\0';
+    }
+  }
 
   sprintf(DEBUGtxt, "Device/Group: %s", MQTT_Name);
   DEBUG_LineOut2(DEBUGtxt);

@@ -38,11 +38,15 @@ char MQTT_GroupName[32];
 #define MQTT_JSON_BUFFER_SIZE (350) // This number is arbitrary unless used to send JSON messages
 char DevInfo[MQTT_JSON_BUFFER_SIZE];
 
-void MQTT_BuildTattles()
+void MQTT_BuildDevInfo()
 {
+#ifdef GROUPTOPIC
+  strcpy(group, STR(GROUPTOPIC)); // Need to do something about making this editable on the config page...
+#endif
+
   char DevInfo_fmt[256];
   strcpy(DevInfo_fmt, "{");
-  strcat(DevInfo_fmt, "\"Device\": \"%s\", \"FriendlyName\": \"Poop\", \"GroupTopic\": \"%s\",");
+  strcat(DevInfo_fmt, "\"Device\": \"%s\", \"FriendlyName\": \"%s\", \"GroupTopic\": \"%s\",");
   strcat(DevInfo_fmt, " \"IPAddress\": \"%s\", \"mac\": \"%s\",");
   strcat(DevInfo_fmt, " \"WiFi\": {\"SSID\": \"%s\", \"Channel\": \"%u\",\"Signal\": \"%d\"},");
   strcat(DevInfo_fmt, " \"Version\": \"%s %s\", \"Hardware\": \"%s\"");
@@ -50,7 +54,7 @@ void MQTT_BuildTattles()
 
   snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
            DevInfo_fmt,
-           host, group,
+           host, htmltitle, group,
            WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
            WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),
            STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType));
@@ -141,9 +145,9 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   DEBUG_SectionTitle(DEBUGtxt);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  strcpy(MQTT_PARSE, strchr(MQTT_topic, '/')); // This drops the first part of the topic
-  strcpy(MQTT_Name, strrchr(MQTT_PARSE, '/')); // This drops all after the second part if there is more
-  memmove(MQTT_Name, MQTT_Name + 1, sizeof(MQTT_Name) - 1); // ditch the leading /
+  strcpy(MQTT_PARSE, strchr(MQTT_topic, '/'));                 // This drops the first part of the topic
+  strcpy(MQTT_Name, strrchr(MQTT_PARSE, '/'));                 // This drops all after the second part if there is more
+  memmove(MQTT_Name, MQTT_Name + 1, sizeof(MQTT_Name) - 1);    // ditch the leading /
   memmove(MQTT_PARSE, MQTT_PARSE + 1, sizeof(MQTT_PARSE) - 1); // ditch the leading /
   if (strcmp(MQTT_Name, MQTT_PARSE) != 0)
   {
@@ -217,7 +221,7 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
       if (strcmp(MQTT_Name, MQTT_GroupName) == 0)
       {
         DEBUG_SectionTitle("WooHoo Group call!!!");
-        MQTT_BuildTattles();
+        MQTT_BuildDevInfo();
         MQTT_JSON_send((char *)DevInfo_Topic, strlen(DevInfo), false, DevInfo);
         // DEBUG_BlockOut(DevInfo);
       }

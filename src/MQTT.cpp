@@ -39,11 +39,13 @@ char MQTT_GroupName[32];
 #define MQTT_JSON_BUFFER_SIZE (350) // This number is arbitrary unless used to send JSON messages
 char DevInfo[MQTT_JSON_BUFFER_SIZE];
 
+// "{\"deviceName\": \"%s\", \"groupName\": \"%s\", \"ip\": \"%s\", \"mac\": \"%s\", \"ssid\": \"%s\", \"wifichannel\": \"%u\",\"rssi\": %d, \"FWVersion\": \"%s %s\", \"HWVersion\": \"%s\"}",
+
 void MQTT_BuildTattles()
 {
 
   snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
-           "{\"deviceName\": \"%s\", \"groupName\": \"%s\", \"ip\": \"%s\", \"mac\": \"%s\", \"ssid\": \"%s\", \"wifichannel\": \"%u\",\"rssi\": %d, \"FWVersion\": \"%s %s\", \"HWVersion\": \"%s\"}",
+           "{\"Device\": \"%s\", \"FriendlyName\": \"Poop\", \"GroupTopic\": \"%s\", \"IPAddress\": \"%s\", \"mac\": \"%s\", \"wifiSSID\": \"%s\", \"wifichannel\": \"%u\",\"wifisignal\": %d, \"Version\": \"%s %s\", \"Hardware\": \"%s\"}",
            host, group,
            WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
            WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),

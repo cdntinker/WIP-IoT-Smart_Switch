@@ -31,15 +31,12 @@ char MQTT_grpTopic[MQTT_BUFFER_SIZE];
 char MQTT_teleTopic[MQTT_BUFFER_SIZE];
 char MQTT_statTopic[MQTT_BUFFER_SIZE];
 
-// const char MQTT_ClientName[] = STR(DeviceName);
 char MQTT_ClientName[32];
 char MQTT_GroupName[32];
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define MQTT_JSON_BUFFER_SIZE (350) // This number is arbitrary unless used to send JSON messages
 char DevInfo[MQTT_JSON_BUFFER_SIZE];
-
-// "{\"deviceName\": \"%s\", \"groupName\": \"%s\", \"ip\": \"%s\", \"mac\": \"%s\", \"ssid\": \"%s\", \"wifichannel\": \"%u\",\"rssi\": %d, \"FWVersion\": \"%s %s\", \"HWVersion\": \"%s\"}",
 
 void MQTT_BuildTattles()
 {
@@ -51,18 +48,12 @@ void MQTT_BuildTattles()
   strcat(DevInfo_fmt, " \"Version\": \"%s %s\", \"Hardware\": \"%s\"");
   strcat(DevInfo_fmt, "}");
 
-  // Serial.println("BOOGA!");
-  // Serial.println(DevInfo_fmt);
-  // Serial.println("BOOGA!");
-  //  "{\"Device\": \"%s\", \"FriendlyName\": \"Poop\", \"GroupTopic\": \"%s\", \"IPAddress\": \"%s\", \"mac\": \"%s\", \"wifiSSID\": \"%s\", \"wifichannel\": \"%u\",\"wifisignal\": %d, \"Version\": \"%s %s\", \"Hardware\": \"%s\"}",
-
   snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
            DevInfo_fmt,
            host, group,
            WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
            WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),
            STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType));
-  // Serial.println(DevInfo);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -145,15 +136,15 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
 {
   char MQTT_PARSE[64];
   char MQTT_Name[64];
-  // char MQTT_cmnd[64];
+
   sprintf(DEBUGtxt, "MQTT_msg_in arrived [%s] ", MQTT_topic);
   DEBUG_SectionTitle(DEBUGtxt);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   strcpy(MQTT_PARSE, strchr(MQTT_topic, '/')); // This drops the first part of the topic
   strcpy(MQTT_Name, strrchr(MQTT_PARSE, '/')); // This drops all after the second part if there is more
-  memmove(MQTT_Name, MQTT_Name + 1, sizeof(MQTT_Name) - 1);
-  memmove(MQTT_PARSE, MQTT_PARSE + 1, sizeof(MQTT_PARSE) - 1);
+  memmove(MQTT_Name, MQTT_Name + 1, sizeof(MQTT_Name) - 1); // ditch the leading /
+  memmove(MQTT_PARSE, MQTT_PARSE + 1, sizeof(MQTT_PARSE) - 1); // ditch the leading /
   if (strcmp(MQTT_Name, MQTT_PARSE) != 0)
   {
     strcpy(MQTT_Name, MQTT_PARSE);

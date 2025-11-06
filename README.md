@@ -6,6 +6,8 @@ At this moment, Relays and LEDs on devices are being handled.
 
 Add Group Topic to the config page.
 
+Make MQTT command handlers update the UI.
+
 Simplify handling of Active-High vs. Active-Low LEDs.
 
 Handling on-device buttons is highest priority.

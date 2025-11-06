@@ -278,6 +278,8 @@ void MQTT_reconnect()
   {
     IPaddress = WiFi.localIP().toString();
     DEBUG_Success("mqtt connected");
+    sprintf(DEBUGtxt, "Broker: %s", mqtt_broker);
+    DEBUG_LineOut2(DEBUGtxt);
     connected_update = true;
 
     // Once connected, publish an LWT announcement...

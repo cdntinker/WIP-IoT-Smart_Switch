@@ -1,0 +1,2561 @@
+[
+    {
+        "id": "12115c3af1abebbc",
+        "type": "tab",
+        "label": "TAZ (etc) Detection",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4b1b53154015d17e",
+        "type": "group",
+        "z": "12115c3af1abebbc",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "7dc8cbeb0f98c65b",
+            "e045b4c31b9ec32d",
+            "dcce916fc81d39d7",
+            "861504832f34bf12",
+            "ab045aa8f14ff036",
+            "3c6dad7d41bb4f0a",
+            "ed090d03aee8e4ae",
+            "633ed852a0b322dd",
+            "50df445a0e335584",
+            "5c702f973d2d0d6a",
+            "123575fb6e456631",
+            "3302ba80836a6b39",
+            "8e19a807be7830c8",
+            "05874c749a86cea5",
+            "296d982556b64c2b",
+            "2b02a5154afeda48",
+            "5d8ca7171c8f7c7a",
+            "c26e92804572e79d",
+            "0acb012952dac294",
+            "c584b4a694da02bd",
+            "d383a67a1733414b",
+            "d98291e3dbe57f32",
+            "ce8ba72e3b405d9f",
+            "f258d46ea56194d4",
+            "ea7a47a41642c1df",
+            "2d633d80f6b7ea2c",
+            "25965d9723514f66"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 1012,
+        "h": 322
+    },
+    {
+        "id": "4ba0d12bade43fb5",
+        "type": "group",
+        "z": "12115c3af1abebbc",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "2865333c24417f6d",
+            "da82ef9e6a96724d",
+            "a8606faf26141317",
+            "76a607e6c6aa3f76",
+            "532b8ebc4a7f1d39",
+            "3a976c383a722332",
+            "8a30d666d44ca322",
+            "90f06dfe30ce581a",
+            "78b16274e7ed6935",
+            "a096868d060f2e54",
+            "75c4cef75b9a3114",
+            "17d573b2e176537e",
+            "35d77c3b574a4323",
+            "b57bbd6a161e029b",
+            "58c7076df1a5e2ef",
+            "9948ba693675b507",
+            "1f5f0e4c47dbd38c",
+            "26b163f6c6124d77",
+            "b71e25d7b3a2da1d",
+            "078bd71e3b1ed582",
+            "3f7b97bee82dcf4d",
+            "2f6e64b59c032057",
+            "a1960f4d9e83db9e",
+            "eec2ffc473fda85d"
+        ],
+        "x": 14,
+        "y": 359,
+        "w": 1072,
+        "h": 422
+    },
+    {
+        "id": "6176055a1efa5b5a",
+        "type": "group",
+        "z": "12115c3af1abebbc",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "0738cb2ccdd254c6",
+            "09873e6c4ea78c18",
+            "13b6b10a5aff0fdd",
+            "5ec1728962487ca1",
+            "7e62c94c5aecae2c",
+            "076d8bf8e6d552a6",
+            "0bfebfe405168cd4",
+            "d749c67cf7a606b7",
+            "a3f17701c86c80bc",
+            "3f99453fce4baf8f",
+            "23ae06c898280882",
+            "7ceec3b75eee2a94",
+            "a06f268f7476d1a7",
+            "920f28aa5c30dd63",
+            "48d337a34412f285",
+            "19774f52162fa9ce",
+            "e87762a30545fb17",
+            "14a380b6a65d7cc6",
+            "862a8fb3de0696b2",
+            "49913515c8eb71a8",
+            "9adb7d175f5f8658",
+            "c597b8d365348e48",
+            "2c7f8b95dbe3b295"
+        ],
+        "x": 14,
+        "y": 799,
+        "w": 1072,
+        "h": 342
+    },
+    {
+        "id": "974508caad4e094d",
+        "type": "group",
+        "z": "12115c3af1abebbc",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "e55624f4ca674ae2",
+            "7170c1f122df5f10",
+            "0e1295871a607542",
+            "0a18c88846f22ecb",
+            "111b42f0acf5cedd",
+            "47c28a702d882589",
+            "42df1089a66cccca",
+            "c13b047a3c27c7e1",
+            "5643852601a84981",
+            "66e4c9cbe8e4e591",
+            "d419363502fb0ff7"
+        ],
+        "x": 14,
+        "y": 1379,
+        "w": 1072,
+        "h": 242
+    },
+    {
+        "id": "b31038c6feb7e0a6",
+        "type": "group",
+        "z": "12115c3af1abebbc",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "69d01dee0241e5a7",
+            "8a08cb963b13e93e",
+            "8e8f921e95177cef",
+            "c6390bede00a892c",
+            "703b6dd8f29a8095",
+            "852d5f5d86ee845b",
+            "4d264460c6f6b1a4",
+            "3a43179f09ed9061",
+            "a411210f93b44ab2",
+            "acb0a22a50095da0",
+            "f4e45a3ca8ad911e"
+        ],
+        "x": 14,
+        "y": 1159,
+        "w": 1072,
+        "h": 202
+    },
+    {
+        "id": "633ed852a0b322dd",
+        "type": "junction",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "x": 810,
+        "y": 200,
+        "wires": [
+            [
+                "e045b4c31b9ec32d",
+                "ab045aa8f14ff036",
+                "861504832f34bf12",
+                "3c6dad7d41bb4f0a"
+            ]
+        ]
+    },
+    {
+        "id": "296d982556b64c2b",
+        "type": "junction",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "x": 660,
+        "y": 160,
+        "wires": [
+            [
+                "c26e92804572e79d"
+            ]
+        ]
+    },
+    {
+        "id": "c26e92804572e79d",
+        "type": "junction",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "x": 760,
+        "y": 160,
+        "wires": [
+            [
+                "633ed852a0b322dd"
+            ]
+        ]
+    },
+    {
+        "id": "0acb012952dac294",
+        "type": "junction",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "x": 620,
+        "y": 200,
+        "wires": [
+            [
+                "296d982556b64c2b",
+                "3302ba80836a6b39",
+                "8e19a807be7830c8",
+                "05874c749a86cea5",
+                "2b02a5154afeda48"
+            ]
+        ]
+    },
+    {
+        "id": "d383a67a1733414b",
+        "type": "junction",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "d98291e3dbe57f32"
+            ]
+        ]
+    },
+    {
+        "id": "d98291e3dbe57f32",
+        "type": "junction",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "x": 560,
+        "y": 280,
+        "wires": [
+            [
+                "0acb012952dac294"
+            ]
+        ]
+    },
+    {
+        "id": "7e62c94c5aecae2c",
+        "type": "junction",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "x": 100,
+        "y": 1040,
+        "wires": [
+            [
+                "09873e6c4ea78c18",
+                "0738cb2ccdd254c6"
+            ]
+        ]
+    },
+    {
+        "id": "7dc8cbeb0f98c65b",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Lower Basement",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/LowerBasement/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "0acb012952dac294"
+            ]
+        ]
+    },
+    {
+        "id": "e045b4c31b9ec32d",
+        "type": "mqtt out",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Mosquitto1",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3cfa1fac61dca0ec",
+        "x": 930,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "dcce916fc81d39d7",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Upper Basement",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/UpperBasement/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "0acb012952dac294"
+            ]
+        ]
+    },
+    {
+        "id": "8ee672090506b4c8",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "name": "Origin",
+        "info": "hazymat\nOn the SuperhHouse Discord\nhttps://discordapp.com/channels/613044183632052279/645266934354411525/800777561436061776\n\nThis actual flow has evolved in a massive number of ways since, but that's the origin...",
+        "x": 1090,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "861504832f34bf12",
+        "type": "mqtt out",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Mosquitto0",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d3da52ca9a787511",
+        "x": 930,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ab045aa8f14ff036",
+        "type": "mqtt out",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Mosquitto2",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "dccc3b5ab802f58f",
+        "x": 930,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3c6dad7d41bb4f0a",
+        "type": "mqtt out",
+        "z": "12115c3af1abebbc",
+        "d": true,
+        "g": "4b1b53154015d17e",
+        "name": "SkyNet",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "542e9a8a.0d3104",
+        "x": 920,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ed090d03aee8e4ae",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Request STATUS messages from EVERYTHING",
+        "info": "Each of these inject nodes simply \ncontains a GROUP topic for the \ndevices on your network.\n\n\"tasmotas\" & \"sonoffs\" are for the\ndefault group topics of tasmota.\n\n\"AustinOTAs\" is for the default group\ntopic of AustinOTA devices.\n\nAll the rest are for custom group \ntopics specific to YOUR network.\n",
+        "x": 220,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "2865333c24417f6d",
+        "type": "mqtt in",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Mosquito0",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d3da52ca9a787511",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "75c4cef75b9a3114"
+            ]
+        ]
+    },
+    {
+        "id": "da82ef9e6a96724d",
+        "type": "mqtt in",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Mosquito1",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "3cfa1fac61dca0ec",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 520,
+        "wires": [
+            [
+                "17d573b2e176537e"
+            ]
+        ]
+    },
+    {
+        "id": "a8606faf26141317",
+        "type": "mqtt in",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Mosquito2",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "dccc3b5ab802f58f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 560,
+        "wires": [
+            [
+                "35d77c3b574a4323"
+            ]
+        ]
+    },
+    {
+        "id": "76a607e6c6aa3f76",
+        "type": "mqtt in",
+        "z": "12115c3af1abebbc",
+        "d": true,
+        "g": "4ba0d12bade43fb5",
+        "name": "SkyNet",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "542e9a8a.0d3104",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 600,
+        "wires": [
+            [
+                "b57bbd6a161e029b"
+            ]
+        ]
+    },
+    {
+        "id": "532b8ebc4a7f1d39",
+        "type": "function",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "split topic",
+        "func": "const levels = msg.topic.split('/');\nmsg.appId = levels;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 540,
+        "wires": [
+            [
+                "3a976c383a722332"
+            ]
+        ]
+    },
+    {
+        "id": "3a976c383a722332",
+        "type": "switch",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Prefix",
+        "property": "appId[0]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "tele",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "stat",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cmnd",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 530,
+        "y": 540,
+        "wires": [
+            [
+                "8a30d666d44ca322"
+            ],
+            [
+                "90f06dfe30ce581a"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8a30d666d44ca322",
+        "type": "switch",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "tele",
+        "property": "appId[2]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "LWT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATE",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 530,
+        "y": 460,
+        "wires": [
+            [],
+            [
+                "9948ba693675b507",
+                "2f6e64b59c032057"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "90f06dfe30ce581a",
+        "type": "switch",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "stat",
+        "property": "appId[2]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "STATUS",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATUS0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATUS1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATUS2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATUS3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATUS4",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATUS5",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STATUS11",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "POWER",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "RESULT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DevInfo",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 12,
+        "x": 710,
+        "y": 600,
+        "wires": [
+            [
+                "26b163f6c6124d77",
+                "78b16274e7ed6935"
+            ],
+            [
+                "78b16274e7ed6935",
+                "58c7076df1a5e2ef"
+            ],
+            [
+                "b71e25d7b3a2da1d",
+                "78b16274e7ed6935"
+            ],
+            [
+                "1f5f0e4c47dbd38c",
+                "78b16274e7ed6935"
+            ],
+            [],
+            [],
+            [
+                "78b16274e7ed6935",
+                "3f7b97bee82dcf4d"
+            ],
+            [
+                "078bd71e3b1ed582",
+                "78b16274e7ed6935"
+            ],
+            [],
+            [],
+            [
+                "eec2ffc473fda85d",
+                "78b16274e7ed6935"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "78b16274e7ed6935",
+        "type": "link out",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Original",
+        "mode": "link",
+        "links": [
+            "69ace95b614f9355",
+            "13b6b10a5aff0fdd",
+            "c9d5db27eb164499",
+            "eb70c1a49cac0703"
+        ],
+        "x": 885,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "a096868d060f2e54",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Adjust these",
+        "info": "You'll need one \"MQTT-In\" for each \nMQTT broker on your network that \nmight have Tasmota devices connecting.\n",
+        "x": 110,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "50df445a0e335584",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Adjust these",
+        "info": "You'll need one \"MQTT-Out\" for each \nMQTT broker on your network that \nmight have Tasmota devices connecting.\n",
+        "x": 930,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "75c4cef75b9a3114",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Broker",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Broker",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 480,
+        "wires": [
+            [
+                "532b8ebc4a7f1d39"
+            ]
+        ]
+    },
+    {
+        "id": "17d573b2e176537e",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Broker",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Broker",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 520,
+        "wires": [
+            [
+                "532b8ebc4a7f1d39"
+            ]
+        ]
+    },
+    {
+        "id": "35d77c3b574a4323",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Broker",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Broker",
+                "pt": "msg",
+                "to": "2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 560,
+        "wires": [
+            [
+                "532b8ebc4a7f1d39"
+            ]
+        ]
+    },
+    {
+        "id": "b57bbd6a161e029b",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Broker",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Broker",
+                "pt": "msg",
+                "to": "SkyNet",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 600,
+        "wires": [
+            [
+                "532b8ebc4a7f1d39"
+            ]
+        ]
+    },
+    {
+        "id": "58c7076df1a5e2ef",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "stat/+/STATUS0",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "5c702f973d2d0d6a",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Testing",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/Testing/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "d383a67a1733414b"
+            ]
+        ]
+    },
+    {
+        "id": "123575fb6e456631",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Taz <= 9.1",
+        "info": "Doesn't seem to do STATUS0",
+        "x": 720,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9948ba693675b507",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "tele/+/STATE",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "1f5f0e4c47dbd38c",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "FWR - 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "26b163f6c6124d77",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "stat/+/STATUS",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b71e25d7b3a2da1d",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "PRM - 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "3302ba80836a6b39",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 180,
+        "wires": [
+            [
+                "633ed852a0b322dd"
+            ]
+        ]
+    },
+    {
+        "id": "8e19a807be7830c8",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 200,
+        "wires": [
+            [
+                "633ed852a0b322dd"
+            ]
+        ]
+    },
+    {
+        "id": "05874c749a86cea5",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "633ed852a0b322dd"
+            ]
+        ]
+    },
+    {
+        "id": "2b02a5154afeda48",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "11",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "11",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 240,
+        "wires": [
+            [
+                "633ed852a0b322dd"
+            ]
+        ]
+    },
+    {
+        "id": "078bd71e3b1ed582",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "STS - 11",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "3f7b97bee82dcf4d",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "NET - 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "5d8ca7171c8f7c7a",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "tasmotas",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/tasmotas/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "d383a67a1733414b"
+            ]
+        ]
+    },
+    {
+        "id": "c584b4a694da02bd",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "sonoffs",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/sonoffs/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "d383a67a1733414b"
+            ]
+        ]
+    },
+    {
+        "id": "2f6e64b59c032057",
+        "type": "link out",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Original",
+        "mode": "link",
+        "links": [
+            "69ace95b614f9355",
+            "13b6b10a5aff0fdd",
+            "c9d5db27eb164499",
+            "eb70c1a49cac0703"
+        ],
+        "x": 635,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ce8ba72e3b405d9f",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Ground Floor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/GroundFloor/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 460,
+        "y": 180,
+        "wires": [
+            [
+                "0acb012952dac294"
+            ]
+        ]
+    },
+    {
+        "id": "f258d46ea56194d4",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Upper Floor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/UpperFloor/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "0acb012952dac294"
+            ]
+        ]
+    },
+    {
+        "id": "ea7a47a41642c1df",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Da Lab",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/DaLab/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 440,
+        "y": 260,
+        "wires": [
+            [
+                "0acb012952dac294"
+            ]
+        ]
+    },
+    {
+        "id": "0738cb2ccdd254c6",
+        "type": "function",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "Create / update objects",
+        "func": "var d = new Date().toLocaleDateString();\nvar t = new Date().toLocaleTimeString();\n\nvar TasmotaCount = flow.get(\"home.tasmotacount\");\n\n// create the sonoffs object if it doesn't exist\n////// if (typeof flow.get(\"home.tasmotas\") == 'undefined') flow.set(\"home.tasmotas\", [])\n\n// Well... swapping [] for {} makes it, technically, an array...\n// Gotta figure out how to fill it in now...\n\nvar deviceID = msg.appId[1];         // get the sonoff device ID / MQTT prefix\n\nflow.set(\"DEVICES.\" + deviceID + \".Broker\", msg.Broker)\nflow.set(\"DEVICES.\" + deviceID + \".Device\", deviceID)\n\n// var DEVICE = flow.get(\"home.tasmotas\")\nvar DEVICE = {};\n\nvar Active = \"False\";\n\n// Probably need to put most of this here into a loop of some sort\n// and step through it to hunt for the deviceID...\n\n// DEVICE.Broker = msg.Broker\n// if (msg.payload == \"down\") {    // does trigger node say this device is down?\n//     // now check if it was previously down, if so, do nothing. if not,\n//     // record down_since datetime and set state to down\n//     if (DEVICE.state == \"up\") {\n//         DEVICE.state = \"down\"\n//         DEVICE.down_since_date = d\n//         DEVICE.down_since_time = t\n//     }\n// } else { // IT'S UP\n//     // Was it previously down? If so change the state\n//     if (DEVICE.state == \"down\") {\n//         DEVICE.state = \"up\"\n//         DEVICE.up_since_date = d\n//         DEVICE.up_since_time = t\n//         DEVICE.down_since_date = \"\"\n//         DEVICE.down_since_time = \"\"\n//     }\n//     // Either way, update the last seen date, device info, and sensor readings\n//     DEVICE.last_seen_date = d\n//     DEVICE.last_seen_time = t\n//     DEVICE.last_seen = new Date()\n// }\n\n// ////////////////////////////\n\n// if (msg.topic.split(\"/\")[2] == \"SENSOR\") {\n//     DEVICE.sensorReadings = msg.payload\n// }\n\n// if (msg.topic.split(\"/\")[2] == \"STATUS0\") {\n//     DEVICE.FriendlyName = msg.payload.Status.FriendlyName[0]\n//     DEVICE.IPAddress = msg.payload.StatusNET.IPAddress\n//     DEVICE.FWVersion = msg.payload.StatusFWR.Version\n//     DEVICE.HWVersion = msg.payload.StatusFWR.Hardware\n//     DEVICE.SSID = msg.payload.StatusSTS.Wifi.SSId\n//     DEVICE.GroupTopic = msg.payload.StatusPRM.GroupTopic \n// }\n///////////////////////////\n// if (msg.topic.split(\"/\")[2] == \"STATE\") {\n//     DEVICE.SSID = msg.payload.Wifi.SSId\n// }\n///////////////////////////\n\n//-------------------------------\nif (msg.topic.split(\"/\")[2] == \"DevInfo\") {\n    flow.set(\"DEVICES.\" + deviceID + \".GroupTopic\", msg.payload.GroupTopic)\n    flow.set(\"DEVICES.\" + deviceID + \".FriendlyName\", msg.payload.FriendlyName)\n    flow.set(\"DEVICES.\" + deviceID + \".FWVersion\", msg.payload.Version)\n    flow.set(\"DEVICES.\" + deviceID + \".HWVersion\", msg.payload.Hardware)\n    flow.set(\"DEVICES.\" + deviceID + \".IPAddress\", msg.payload.IPAddress)\n    flow.set(\"DEVICES.\" + deviceID + \".wifichannel\", msg.payload.WiFi.Channel)\n    flow.set(\"DEVICES.\" + deviceID + \".wifisignal\", msg.payload.WiFi.Signal)\n    flow.set(\"DEVICES.\" + deviceID + \".wifiSSID\", msg.payload.WiFi.SSID)\n    flow.set(\"DEVICES.\" + deviceID + \".SSID\", msg.payload.WiFi.SSID)\n\n}\n//-------------------------------\n\nif (msg.topic.split(\"/\")[2] == \"STATUS\") {\n    flow.set(\"DEVICES.\" + deviceID + \".FriendlyName\", msg.payload.Status.FriendlyName[0])\n}\n///////////////////////////\nif (msg.topic.split(\"/\")[2] == \"STATUS1\") {\n    flow.set(\"DEVICES.\" + deviceID + \".GroupTopic\", msg.payload.StatusPRM.GroupTopic)\n}\n///////////////////////////\nif (msg.topic.split(\"/\")[2] == \"STATUS2\") {\n    flow.set(\"DEVICES.\" + deviceID + \".FWVersion\", msg.payload.StatusFWR.Version)\n    flow.set(\"DEVICES.\" + deviceID + \".HWVersion\", msg.payload.StatusFWR.Hardware)\n}\n///////////////////////////\nif (msg.topic.split(\"/\")[2] == \"STATUS5\") {\n    flow.set(\"DEVICES.\" + deviceID + \".IPAddress\", msg.payload.StatusNET.IPAddress)\n}\n///////////////////////////\nif (msg.topic.split(\"/\")[2] == \"STATUS11\") {\n    flow.set(\"DEVICES.\" + deviceID + \".wifisignal\", msg.payload.StatusSTS.Wifi.Signal)\n    flow.set(\"DEVICES.\" + deviceID + \".wifichannel\", msg.payload.StatusSTS.Wifi.Channel)\n    flow.set(\"DEVICES.\" + deviceID + \".wifiSSID\", msg.payload.StatusSTS.Wifi.SSId)\n    flow.set(\"DEVICES.\" + deviceID + \".SSID\", msg.payload.StatusSTS.Wifi.SSId)\n}\n///////////////////////////\nif (msg.topic.split(\"/\")[2] == \"STATE\") {\n    flow.set(\"DEVICES.\" + deviceID + \".wifisignal\", msg.payload.Wifi.Signal)\n    flow.set(\"DEVICES.\" + deviceID + \".wifichannel\", msg.payload.Wifi.Channel)\n    flow.set(\"DEVICES.\" + deviceID + \".wifiSSID\", msg.payload.Wifi.SSId)\n    flow.set(\"DEVICES.\" + deviceID + \".SSID\", msg.payload.Wifi.SSId)\n    flow.set(\"DEVICES.\" + deviceID + \".deviceTime\", msg.payload.Time)\n}\n\n// else {  // device didn't exist\n//     // create object for first time\n// DEVICE = {\n//     FriendlyName: \"\",\n//     GroupTopic: \"\",\n//     created_date: d,\n//     created_time: t,\n//     state: \"up\",\n//     last_seen_date: d,\n//     last_seen_time: t,\n//     last_seen: new Date(),\n//     up_since_date: d,\n//     up_since_time: t,\n//     down_since_date: \"\",\n//     down_since_time: \"\"\n// }\n// }\n\n\nflow.set(\"DEVICES.\" + deviceID + \".created_date\", d)\nflow.set(\"DEVICES.\" + deviceID + \".created_time\", t)\nflow.set(\"DEVICES.\" + deviceID + \".state\", \"up\")\nflow.set(\"DEVICES.\" + deviceID + \".last_seen_date\", d)\nflow.set(\"DEVICES.\" + deviceID + \".last_seen_time\", t)\nflow.set(\"DEVICES.\" + deviceID + \".last_seen\", new Date())\nflow.set(\"DEVICES.\" + deviceID + \".up_since_date\", d)\nflow.set(\"DEVICES.\" + deviceID + \".up_since_time\", t)\nflow.set(\"DEVICES.\" + deviceID + \".down_since_date\", \"\")\nflow.set(\"DEVICES.\" + deviceID + \".down_since_time\", \"\")\n\nmsg.payload.TasmotaCount = TasmotaCount;\nmsg.payload.deviceID = deviceID;\nmsg.payload.DEVICE = DEVICE;\n\nreturn msg",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 1040,
+        "wires": [
+            [
+                "e87762a30545fb17"
+            ]
+        ]
+    },
+    {
+        "id": "09873e6c4ea78c18",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "debug 432",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.Status",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 190,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "13b6b10a5aff0fdd",
+        "type": "link in",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "link in 50",
+        "links": [
+            "2f6e64b59c032057",
+            "78b16274e7ed6935"
+        ],
+        "x": 55,
+        "y": 1040,
+        "wires": [
+            [
+                "7e62c94c5aecae2c"
+            ]
+        ]
+    },
+    {
+        "id": "5ec1728962487ca1",
+        "type": "catch",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "",
+        "scope": [
+            "0738cb2ccdd254c6",
+            "48d337a34412f285"
+        ],
+        "uncaught": false,
+        "x": 770,
+        "y": 880,
+        "wires": [
+            [
+                "076d8bf8e6d552a6"
+            ]
+        ]
+    },
+    {
+        "id": "076d8bf8e6d552a6",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "debug 433",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "0bfebfe405168cd4",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "BorkedS31",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d749c67cf7a606b7",
+        "type": "switch",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "",
+        "property": "appId[1]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "BorkedS31",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 1040,
+        "wires": [
+            [
+                "0bfebfe405168cd4",
+                "a3f17701c86c80bc",
+                "3f99453fce4baf8f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a3f17701c86c80bc",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "BorkedS31 - topic",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "3f99453fce4baf8f",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "BorkedS31 - DEVICE",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.DEVICE",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "23ae06c898280882",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 880,
+        "wires": [
+            [
+                "7ceec3b75eee2a94"
+            ]
+        ]
+    },
+    {
+        "id": "7ceec3b75eee2a94",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "retreive devices from FLOW",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DEVICES",
+                "tot": "flow",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 880,
+        "wires": [
+            [
+                "a06f268f7476d1a7"
+            ]
+        ]
+    },
+    {
+        "id": "a06f268f7476d1a7",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "debug 454",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "920f28aa5c30dd63",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "10 sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1100,
+        "wires": [
+            [
+                "48d337a34412f285"
+            ]
+        ]
+    },
+    {
+        "id": "48d337a34412f285",
+        "type": "function",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "Check if down",
+        "func": "// Upon reload or redeploy, let's go through all the devices and check if\n// they have not been seen in the last 65000ms, if so they are down and\n// we will update the objects in memory\n\n// Without this function, our objects will only show as down when there was\n// previously a message that ran through the trigger node, which then timed-out.\n// This doesn't cover the case where we redeployed and in the meantime\n// something went down\n\nvar sonoffs = flow.get(\"DEVICES\")\nvar d = new Date().toLocaleDateString();\nvar t = new Date().toLocaleTimeString();\n\nObject.keys(sonoffs).forEach(Device => {\n    if (Date.now() - Date.parse(sonoffs[Device].last_seen) > 65000) {\n        if (sonoffs[Device].state == \"up\") {\n            sonoffs[Device].state = \"down\"\n            sonoffs[Device].down_since_date = d\n            sonoffs[Device].down_since_time = t\n        }\n    }\n    msg.bork = [sonoffs[Device].Device, sonoffs[Device].state]\n}\n)\n\nreturn msg",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1100,
+        "wires": [
+            [
+                "19774f52162fa9ce",
+                "e87762a30545fb17"
+            ]
+        ]
+    },
+    {
+        "id": "19774f52162fa9ce",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "debug 455",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "bork",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "e87762a30545fb17",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tasmotas",
+                "pt": "msg",
+                "to": "DEVICES",
+                "tot": "flow"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 1040,
+        "wires": [
+            [
+                "d749c67cf7a606b7"
+            ]
+        ]
+    },
+    {
+        "id": "a1960f4d9e83db9e",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "Receive STATUS, DevInfo & LWT messages from EVERYTHING",
+        "info": "",
+        "x": 270,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2d633d80f6b7ea2c",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "AustinOTAs",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/AustinOTAs/DevInfo",
+        "payload": "",
+        "payloadType": "str",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "d383a67a1733414b"
+            ]
+        ]
+    },
+    {
+        "id": "eec2ffc473fda85d",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "4ba0d12bade43fb5",
+        "name": "DevInfo",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "14a380b6a65d7cc6",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "Commit data to FLOW (DEVICES)",
+        "info": "",
+        "x": 180,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "862a8fb3de0696b2",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 960,
+        "wires": [
+            [
+                "49913515c8eb71a8"
+            ]
+        ]
+    },
+    {
+        "id": "49913515c8eb71a8",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "wipe",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "DEVICES",
+                "pt": "flow"
+            },
+            {
+                "t": "delete",
+                "p": "home.tasmotas",
+                "pt": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9adb7d175f5f8658",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 920,
+        "wires": [
+            [
+                "c597b8d365348e48"
+            ]
+        ]
+    },
+    {
+        "id": "c597b8d365348e48",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "retreive devices from FLOW",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "home.tasmotas",
+                "tot": "flow",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 920,
+        "wires": [
+            [
+                "2c7f8b95dbe3b295"
+            ]
+        ]
+    },
+    {
+        "id": "2c7f8b95dbe3b295",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "6176055a1efa5b5a",
+        "name": "debug 464",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "e55624f4ca674ae2",
+        "type": "ui_template",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "group": "827de44c837ad276",
+        "name": "TAZ - TasmOTA Device Status",
+        "order": 1,
+        "width": "20",
+        "height": "15",
+        "format": "<style>\n    a:visited {\n        color: #8cd3d6;\n    }\n\n    .nr-dashboard-theme .nr-dashboard-template .md-button {\n        min-height: 5px;\n    }\n\n</style>\n\n<h1>TasmOTA (etc) Device Status [{{msg.Count}} devices]</h1>\n<!--<div ng-if=\"msg.Notify !=== 'undefined'\">Oh no, empty</div>-->\n\n<table>\n    <tr style=\"font-weight:800; background-color:rgba(20,20,20,.6);\">\n        <td>Group</td>\n        <td>&nbsp;&nbsp;</td>\n        <td>MQTT Topic</td>\n        <td>Friendly Name</td>\n        <td>State</td>\n        <td>Since</td>\n        <td>Ch</td>\n        <td>Sig</td>\n        <td>SSID</td>\n        <td>Broker</td>\n        <td>FW / HW</td>\n        <td>IP</td>\n    </tr>\n    <tr ng-repeat=\"(key, value) in msg.payload\">\n        <td>{{value.GroupTopic}}</td>\n        <td></td>\n        <!-- <td>{{key}}</td> -->\n        <td>{{value.Device}}</td>\n        <td>{{value.FriendlyName}}</td>\n        <td ng-if=\"value.state === 'up'\">\n            <span style=\"color:green; font-weight:600\">&#10003;</span>\n            UP\n        </td>\n        <td ng-if=\"value.state === 'down'\">\n            <span style=\"color:red; font-weight:600\">&#10007;</span>\n            DN\n        </td>\n        <td ng-if=\"value.state === 'up'\">\n            <span style=\"color:#888; font-size:10px; display:block;\">{{value.up_since_time}}</span>\n            <span style=\"color:#888; font-size:10px;display:block;\"> {{value.up_since_date}}</span>\n        </td>\n        <td ng-if=\"value.state === 'down'\">\n            <span style=\"color:#888; font-size:10px; display:block;\">{{value.down_since_time}}</span>\n            <span style=\"color:#888; font-size:10px;display:block;\"> {{value.down_since_date}}</span>\n        </td>\n        <td>{{value.wifichannel}}</td>\n\n        <!-- signal colours -->\n        <td>\n            <span ng-if=\"value.wifisignal > -65\" style=\"color:green\">{{value.wifisignal}}</span>\n            <span ng-if=\"value.wifisignal < -64 && value.wifisignal > -71\" style=\"color:orange\">\n                {{value.wifisignal}}\n            </span>\n            <span ng-if=\"value.wifisignal < -70\" style=\"color:red\">{{value.wifisignal}}</span>\n        </td>\n        <td>{{value.SSID}}</td>\n        <td>{{value.Broker}}</td>\n        <td>\n            <span style=\"color:#888;font-size:10px;display:block;\">{{value.FWVersion}}</span>\n            <span style=\"color:#888;font-size:10px;display:block;\">{{value.HWVersion}}</span>\n        </td>\n        <td ng-if=\"value.state === 'up'\">\n            <a href=\"http://{{value.IPAddress}}\" target=\"_blank\">{{value.IPAddress}}</a>\n        </td>\n        <td ng-if=\"value.state === 'down'\">{{value.IPAddress}}</td>\n\n        <td ng-if=\"value.state === 'up'\">&numsp;&numsp;&numsp;</td>\n        <td ng-if=\"value.state === 'down'\">\n            <!-- <md-button ng-click=\"send({action: 'delete', device: key})\">Del</md-button> -->\n            <md-button style=\"background-color:black\" ng-click=\"send({action: 'delete', device: key})\">&#128465;\n            </md-button>\n        </td>\n    </tr>\n</table>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 870,
+        "y": 1500,
+        "wires": [
+            [
+                "7170c1f122df5f10",
+                "0e1295871a607542"
+            ]
+        ]
+    },
+    {
+        "id": "7170c1f122df5f10",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "debug 448",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "0e1295871a607542",
+        "type": "function",
+        "z": "12115c3af1abebbc",
+        "d": true,
+        "g": "974508caad4e094d",
+        "name": "DESTROY!",
+        "func": "var Record = \"home.tasmotas.\" + msg.device;\n\nflow.set(Record, undefined);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 1540,
+        "wires": [
+            [
+                "5643852601a84981"
+            ]
+        ]
+    },
+    {
+        "id": "0a18c88846f22ecb",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "Build the Dashboard",
+        "info": "",
+        "x": 130,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "111b42f0acf5cedd",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "retreive from FLOW.home.tasmotas",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "home.tasmotas",
+                "tot": "flow",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "Count",
+                "pt": "msg",
+                "to": "home.tasmotacount",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 1500,
+        "wires": [
+            [
+                "47c28a702d882589",
+                "66e4c9cbe8e4e591",
+                "d419363502fb0ff7"
+            ]
+        ]
+    },
+    {
+        "id": "47c28a702d882589",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "Sort - Group/Device",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload^(GroupTopic,Device)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 1500,
+        "wires": [
+            [
+                "e55624f4ca674ae2",
+                "42df1089a66cccca"
+            ]
+        ]
+    },
+    {
+        "id": "42df1089a66cccca",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "Sort - tasmotas",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "c13b047a3c27c7e1",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "10 sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 120,
+        "y": 1460,
+        "wires": [
+            [
+                "111b42f0acf5cedd"
+            ]
+        ]
+    },
+    {
+        "id": "5643852601a84981",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "debug 450",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "66e4c9cbe8e4e591",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "Count - tasmotas",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "Count",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "d419363502fb0ff7",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "List - tasmotas",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.tasmotas",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "69d01dee0241e5a7",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "1 sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 1240,
+        "wires": [
+            [
+                "8a08cb963b13e93e"
+            ]
+        ]
+    },
+    {
+        "id": "8a08cb963b13e93e",
+        "type": "function",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "flow.get('home.sonoffs'/'DEVICES')",
+        "func": "// msg.sonoffs = flow.get('home.sonoffs');\nmsg.sonoffs = flow.get('DEVICES');\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 1280,
+        "wires": [
+            [
+                "8e8f921e95177cef",
+                "4d264460c6f6b1a4"
+            ]
+        ]
+    },
+    {
+        "id": "8e8f921e95177cef",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "debug 439",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "sonoffs",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "c6390bede00a892c",
+        "type": "split",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "property": "sonoffs",
+        "x": 430,
+        "y": 1320,
+        "wires": [
+            [
+                "a411210f93b44ab2"
+            ]
+        ]
+    },
+    {
+        "id": "703b6dd8f29a8095",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "debug 440",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "852d5f5d86ee845b",
+        "type": "function",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "function 9",
+        "func": "var WTF = flow.get(\"home.tasmotacount\");\n\n// msg.BARF[WTF] = msg.parts.key + \":\" + msg.sonoffs;\nmsg.BARF[WTF] = msg.sonoffs;\n\nvar FFFUUU = flow.get(\"home.tasmotas\");\nFFFUUU[WTF] = msg.sonoffs;\nflow.set(\"home.tasmotas\", FFFUUU);\n\nWTF++;\nflow.set(\"home.tasmotacount\", WTF);\nmsg.WTF = WTF;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 1320,
+        "wires": [
+            [
+                "703b6dd8f29a8095"
+            ]
+        ]
+    },
+    {
+        "id": "4d264460c6f6b1a4",
+        "type": "function",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "create \"home.tasmotas\"",
+        "func": "var WTF = 0;\nflow.set(\"home.tasmotacount\", WTF);\n\nmsg.BARF = [];\n\nif (typeof flow.get(\"home.tasmotas\") == 'undefined') flow.set(\"home.tasmotas\", [])\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 1320,
+        "wires": [
+            [
+                "c6390bede00a892c"
+            ]
+        ]
+    },
+    {
+        "id": "3a43179f09ed9061",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "debug 447",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "a411210f93b44ab2",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sonoffs.Device",
+                "pt": "msg",
+                "to": "msg.parts.key",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 1320,
+        "wires": [
+            [
+                "852d5f5d86ee845b",
+                "3a43179f09ed9061"
+            ]
+        ]
+    },
+    {
+        "id": "acb0a22a50095da0",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "This takes the flow data from the original & converts it to an array...",
+        "info": "",
+        "x": 680,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "f4e45a3ca8ad911e",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "b31038c6feb7e0a6",
+        "name": "Commit data to FLOW (home.tasmotas)",
+        "info": "",
+        "x": 190,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "25965d9723514f66",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "4b1b53154015d17e",
+        "name": "Bork",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cmnd/Bork/STATUS",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "d383a67a1733414b"
+            ]
+        ]
+    },
+    {
+        "id": "3cfa1fac61dca0ec",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "Mosquitto1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d3da52ca9a787511",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "Mosquitto0",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dccc3b5ab802f58f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "Mosquitto2",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "542e9a8a.0d3104",
+        "type": "mqtt-broker",
+        "name": "SkyNet",
+        "broker": "skynet.tinkernet.ca",
+        "port": "1883",
+        "clientid": "NodeRed1",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "827de44c837ad276",
+        "type": "ui_group",
+        "name": "Tasmotas",
+        "tab": "b0c5fef358ac64a8",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b0c5fef358ac64a8",
+        "type": "ui_tab",
+        "name": "TAZ Detection",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]

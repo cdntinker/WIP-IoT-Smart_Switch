@@ -40,21 +40,17 @@ char DevInfo[MQTT_JSON_BUFFER_SIZE];
 
 void MQTT_BuildDevInfo()
 {
-#ifdef GROUPTOPIC
-  strcpy(group, STR(GROUPTOPIC)); // Need to do something about making this editable on the config page...
-#endif
-
-  char DevInfo_fmt[256];
-  strcpy(DevInfo_fmt, "{");
-  strcat(DevInfo_fmt, "\"Device\": \"%s\", \"FriendlyName\": \"%s\", \"GroupTopic\": \"%s\",");
-  strcat(DevInfo_fmt, " \"IPAddress\": \"%s\", \"mac\": \"%s\",");
-  strcat(DevInfo_fmt, " \"WiFi\": {\"SSID\": \"%s\", \"Channel\": \"%u\",\"Signal\": \"%d\"},");
-  strcat(DevInfo_fmt, " \"Version\": \"%s %s\", \"Hardware\": \"%s\"");
-  strcat(DevInfo_fmt, "}");
+  char fmt_DevInfo[256];
+  strcpy(fmt_DevInfo, "{");
+  strcat(fmt_DevInfo, "\"Device\": \"%s\", \"FriendlyName\": \"%s\", \"GroupTopic\": \"%s\",");
+  strcat(fmt_DevInfo, " \"IPAddress\": \"%s\", \"mac\": \"%s\",");
+  strcat(fmt_DevInfo, " \"WiFi\": {\"SSID\": \"%s\", \"Channel\": \"%u\",\"Signal\": \"%d\"},");
+  strcat(fmt_DevInfo, " \"Version\": \"%s %s\", \"Hardware\": \"%s\"");
+  strcat(fmt_DevInfo, "}");
 
   snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
-           DevInfo_fmt,
-           host, htmltitle, group,
+           fmt_DevInfo,
+           host, htmltitle, MQTT_GroupName,
            WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
            WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),
            STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType));
@@ -66,6 +62,9 @@ void MQTT_init()
   DEBUG_Init("MQTT");
 
   strcpy(MQTT_ClientName, host);
+#ifdef GROUPTOPIC
+  strcpy(group, STR(GROUPTOPIC)); // Need to do something about making this editable on the config page...
+#endif
   strcpy(MQTT_GroupName, group);
 
   if (strcmp(mqtt_broker, "0") == 0) // no broker declared
@@ -142,7 +141,8 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   char MQTT_Name[64];
 
   sprintf(DEBUGtxt, "MQTT_msg_in arrived [%s] ", MQTT_topic);
-  DEBUG_SectionTitle(DEBUGtxt);
+  //SNORT!
+  // DEBUG_SectionTitle(DEBUGtxt);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   strcpy(MQTT_PARSE, strchr(MQTT_topic, '/'));                 // This drops the first part of the topic
@@ -160,12 +160,14 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   }
 
   sprintf(DEBUGtxt, "Device/Group: %s", MQTT_Name);
-  DEBUG_LineOut2(DEBUGtxt);
+  //SNORT!
+  // DEBUG_LineOut2(DEBUGtxt);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   MQTT_payload[length] = '\0';
   sprintf(DEBUGtxt, "MQTT_payload: [%s] ", (char *)MQTT_payload);
-  DEBUG_LineOut2(DEBUGtxt);
+  //SNORT!
+  // DEBUG_LineOut2(DEBUGtxt);
 
   //////////////////////////////////////////////////
   //  From TinkerLibs_MQTT
@@ -180,7 +182,8 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   strcat(CNasT, MQTT_ClientName); // "ClientName as MQTT_command"
 
   sprintf(DEBUGtxt, "   MQTT_command: %s", MQTT_command);
-  DEBUG_LineOut(DEBUGtxt);
+  //SNORT!
+  // DEBUG_LineOut(DEBUGtxt);
 
   // if (length < MQTT_BUFFER_SIZE)
   // if (length < 63)
@@ -199,7 +202,8 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
     }
 
     sprintf(DEBUGtxt, "MQTT_msg_in: %s (size: %d)", MQTT_msg_in, length);
-    DEBUG_LineOut(DEBUGtxt);
+    //SNORT!
+    // DEBUG_LineOut(DEBUGtxt);
 
     /////////////////////////////////////////////////////
     // MQTT_msg_in handling goes here...
@@ -220,9 +224,10 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
        *###############################################*/
       if (strcmp(MQTT_Name, MQTT_GroupName) == 0)
       {
-        DEBUG_SectionTitle("WooHoo Group call!!!");
+        // DEBUG_SectionTitle("WooHoo Group call!!!");
         MQTT_BuildDevInfo();
         MQTT_JSON_send((char *)DevInfo_Topic, strlen(DevInfo), false, DevInfo);
+        //SNORT!
         // DEBUG_BlockOut(DevInfo);
       }
       else

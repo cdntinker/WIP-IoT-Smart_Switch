@@ -27,41 +27,41 @@ void LED_switch(int LEDNum, bool OnOff)
     char MQTT_Topic[16];
     sprintf(MQTT_Topic, "LED%02d", LEDNum);
     DEBUG_SectionTitle("SmartSwitch Action");
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // This should probably be handled based on a build_flag in pio_Modules.ini
+    unsigned int LED_ON;
+    unsigned int LED_OFF;
+    char LED_STATE[4] = "-";
+    if ((strcmp(STR(DeviceType), "D1-Mini") == 0) || (strcmp(STR(BoardType), "Sonoff_Basic") == 0))
+    {   // Devices with Active-Low LEDs
+        LED_ON = LOW;
+        LED_OFF = HIGH;
+    }
+    else
+    {   // Devices with Active-High LEDs
+        LED_ON = HIGH;
+        LED_OFF = LOW;
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (OnOff)
     {
-        // DEBUG_LineOut("LED ON");
-        if ((strcmp(STR(DeviceType), "D1-Mini") != 0) && LEDNum == 2)
-            // Built-in LED on D1-Mini is active-low...
-        {
-            digitalWrite(GPIO_LED_PINS[LEDNum], HIGH);
-            GPIO_LED_STATE[LEDNum] = HIGH;
-        }
-        else
-        {
-            digitalWrite(GPIO_LED_PINS[LEDNum], LOW);
-            GPIO_LED_STATE[LEDNum] = HIGH;
-        }
-        MQTT_SendSTAT(MQTT_Topic, "ON");
-        sprintf(DEBUGtxt, "LED %02d (%d) ON", LEDNum, GPIO_LED_PINS[LEDNum]);
-        DEBUG_LineOut(DEBUGtxt);
+        digitalWrite(GPIO_LED_PINS[LEDNum], LED_ON);
+        GPIO_LED_STATE[LEDNum] = HIGH;
+        strcpy(LED_STATE, "ON");
     }
     else
     {
-        // DEBUG_LineOut("LED OFF");
-        if (strcmp(STR(DeviceType), "D1-Mini") != 0)
-        {
-            digitalWrite(GPIO_LED_PINS[LEDNum], LOW);
-            GPIO_LED_STATE[LEDNum] = LOW;
-        }
-        else
-        {
-            digitalWrite(GPIO_LED_PINS[LEDNum], HIGH);
-            GPIO_LED_STATE[LEDNum] = LOW;
-        }
-        MQTT_SendSTAT(MQTT_Topic, "OFF");
-        sprintf(DEBUGtxt, "LED %02d (%d) OFF", LEDNum, GPIO_LED_PINS[LEDNum]);
-        DEBUG_LineOut(DEBUGtxt);
+        digitalWrite(GPIO_LED_PINS[LEDNum], LED_OFF);
+        GPIO_LED_STATE[LEDNum] = LOW;
+        strcpy(LED_STATE, "OFF");
     }
+
+        MQTT_SendSTAT(MQTT_Topic, LED_STATE);
+        sprintf(DEBUGtxt, "LED %02d (%d) %s", LEDNum, GPIO_LED_PINS[LEDNum], LED_STATE);
+        DEBUG_LineOut(DEBUGtxt);
+        /***********************************************
+         * TODO: update the UI to reflect these actions
+         ***********************************************/
 }
 
 // Turn LED on/off

@@ -122,24 +122,16 @@
             "d749c67cf7a606b7",
             "a3f17701c86c80bc",
             "3f99453fce4baf8f",
-            "23ae06c898280882",
-            "7ceec3b75eee2a94",
-            "a06f268f7476d1a7",
             "920f28aa5c30dd63",
             "48d337a34412f285",
             "19774f52162fa9ce",
             "e87762a30545fb17",
-            "14a380b6a65d7cc6",
-            "862a8fb3de0696b2",
-            "49913515c8eb71a8",
-            "9adb7d175f5f8658",
-            "c597b8d365348e48",
-            "2c7f8b95dbe3b295"
+            "14a380b6a65d7cc6"
         ],
         "x": 14,
         "y": 799,
         "w": 1072,
-        "h": 342
+        "h": 222
     },
     {
         "id": "974508caad4e094d",
@@ -165,12 +157,13 @@
             "c13b047a3c27c7e1",
             "5643852601a84981",
             "66e4c9cbe8e4e591",
-            "d419363502fb0ff7"
+            "d419363502fb0ff7",
+            "06a0840dab5f7b63"
         ],
         "x": 14,
-        "y": 1379,
+        "y": 1259,
         "w": 1072,
-        "h": 242
+        "h": 202
     },
     {
         "id": "b31038c6feb7e0a6",
@@ -195,12 +188,40 @@
             "4d264460c6f6b1a4",
             "3a43179f09ed9061",
             "a411210f93b44ab2",
-            "acb0a22a50095da0",
             "f4e45a3ca8ad911e"
         ],
         "x": 14,
-        "y": 1159,
+        "y": 1039,
         "w": 1072,
+        "h": 202
+    },
+    {
+        "id": "55fd63091027b4f3",
+        "type": "group",
+        "z": "12115c3af1abebbc",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "23ae06c898280882",
+            "7ceec3b75eee2a94",
+            "a06f268f7476d1a7",
+            "862a8fb3de0696b2",
+            "49913515c8eb71a8",
+            "9adb7d175f5f8658",
+            "c597b8d365348e48",
+            "2c7f8b95dbe3b295",
+            "49dacee36d159fb9"
+        ],
+        "x": 14,
+        "y": 1479,
+        "w": 612,
         "h": 202
     },
     {
@@ -294,7 +315,7 @@
         "z": "12115c3af1abebbc",
         "g": "6176055a1efa5b5a",
         "x": 100,
-        "y": 1040,
+        "y": 920,
         "wires": [
             [
                 "09873e6c4ea78c18",
@@ -386,7 +407,7 @@
         "type": "comment",
         "z": "12115c3af1abebbc",
         "name": "Origin",
-        "info": "hazymat\nOn the SuperhHouse Discord\nhttps://discordapp.com/channels/613044183632052279/645266934354411525/800777561436061776\n\nThis actual flow has evolved in a massive number of ways since, but that's the origin...",
+        "info": "hazymat\nOn the SuperHouse Discord\nhttps://discordapp.com/channels/613044183632052279/645266934354411525/800777561436061776\n\nThis actual flow has evolved in a massive number of ways since, but that's the origin...",
         "x": 1090,
         "y": 140,
         "wires": []
@@ -1371,7 +1392,7 @@
         "finalize": "",
         "libs": [],
         "x": 230,
-        "y": 1040,
+        "y": 920,
         "wires": [
             [
                 "e87762a30545fb17"
@@ -1393,7 +1414,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 190,
-        "y": 1000,
+        "y": 880,
         "wires": []
     },
     {
@@ -1407,7 +1428,7 @@
             "78b16274e7ed6935"
         ],
         "x": 55,
-        "y": 1040,
+        "y": 920,
         "wires": [
             [
                 "7e62c94c5aecae2c"
@@ -1425,7 +1446,7 @@
             "48d337a34412f285"
         ],
         "uncaught": false,
-        "x": 770,
+        "x": 490,
         "y": 880,
         "wires": [
             [
@@ -1447,7 +1468,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 910,
+        "x": 630,
         "y": 880,
         "wires": []
     },
@@ -1466,7 +1487,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 910,
-        "y": 980,
+        "y": 860,
         "wires": []
     },
     {
@@ -1491,7 +1512,7 @@
         "repair": false,
         "outputs": 2,
         "x": 730,
-        "y": 1040,
+        "y": 920,
         "wires": [
             [
                 "0bfebfe405168cd4",
@@ -1516,7 +1537,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 930,
-        "y": 1020,
+        "y": 900,
         "wires": []
     },
     {
@@ -1534,83 +1555,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 940,
-        "y": 1060,
-        "wires": []
-    },
-    {
-        "id": "23ae06c898280882",
-        "type": "inject",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "x": 110,
-        "y": 880,
-        "wires": [
-            [
-                "7ceec3b75eee2a94"
-            ]
-        ]
-    },
-    {
-        "id": "7ceec3b75eee2a94",
-        "type": "change",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "retreive devices from FLOW",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "DEVICES",
-                "tot": "flow",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 300,
-        "y": 880,
-        "wires": [
-            [
-                "a06f268f7476d1a7"
-            ]
-        ]
-    },
-    {
-        "id": "a06f268f7476d1a7",
-        "type": "debug",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "debug 454",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 510,
-        "y": 880,
+        "y": 940,
         "wires": []
     },
     {
@@ -1636,7 +1581,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 180,
-        "y": 1100,
+        "y": 980,
         "wires": [
             [
                 "48d337a34412f285"
@@ -1657,7 +1602,7 @@
         "finalize": "",
         "libs": [],
         "x": 340,
-        "y": 1100,
+        "y": 980,
         "wires": [
             [
                 "19774f52162fa9ce",
@@ -1680,7 +1625,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 910,
-        "y": 1100,
+        "y": 980,
         "wires": []
     },
     {
@@ -1709,7 +1654,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 1040,
+        "y": 920,
         "wires": [
             [
                 "d749c67cf7a606b7"
@@ -1787,141 +1732,6 @@
         "wires": []
     },
     {
-        "id": "862a8fb3de0696b2",
-        "type": "inject",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "x": 110,
-        "y": 960,
-        "wires": [
-            [
-                "49913515c8eb71a8"
-            ]
-        ]
-    },
-    {
-        "id": "49913515c8eb71a8",
-        "type": "change",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "wipe",
-        "rules": [
-            {
-                "t": "delete",
-                "p": "DEVICES",
-                "pt": "flow"
-            },
-            {
-                "t": "delete",
-                "p": "home.tasmotas",
-                "pt": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 230,
-        "y": 960,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "9adb7d175f5f8658",
-        "type": "inject",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "x": 110,
-        "y": 920,
-        "wires": [
-            [
-                "c597b8d365348e48"
-            ]
-        ]
-    },
-    {
-        "id": "c597b8d365348e48",
-        "type": "change",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "retreive devices from FLOW",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "home.tasmotas",
-                "tot": "flow",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 300,
-        "y": 920,
-        "wires": [
-            [
-                "2c7f8b95dbe3b295"
-            ]
-        ]
-    },
-    {
-        "id": "2c7f8b95dbe3b295",
-        "type": "debug",
-        "z": "12115c3af1abebbc",
-        "g": "6176055a1efa5b5a",
-        "name": "debug 464",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 510,
-        "y": 920,
-        "wires": []
-    },
-    {
         "id": "e55624f4ca674ae2",
         "type": "ui_template",
         "z": "12115c3af1abebbc",
@@ -1938,7 +1748,7 @@
         "templateScope": "local",
         "className": "",
         "x": 870,
-        "y": 1500,
+        "y": 1380,
         "wires": [
             [
                 "7170c1f122df5f10",
@@ -1961,7 +1771,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 970,
-        "y": 1460,
+        "y": 1340,
         "wires": []
     },
     {
@@ -1978,8 +1788,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
-        "y": 1540,
+        "x": 790,
+        "y": 1420,
         "wires": [
             [
                 "5643852601a84981"
@@ -1994,7 +1804,7 @@
         "name": "Build the Dashboard",
         "info": "",
         "x": 130,
-        "y": 1420,
+        "y": 1300,
         "wires": []
     },
     {
@@ -2026,7 +1836,7 @@
         "to": "",
         "reg": false,
         "x": 220,
-        "y": 1500,
+        "y": 1380,
         "wires": [
             [
                 "47c28a702d882589",
@@ -2056,7 +1866,7 @@
         "to": "",
         "reg": false,
         "x": 520,
-        "y": 1500,
+        "y": 1380,
         "wires": [
             [
                 "e55624f4ca674ae2",
@@ -2079,7 +1889,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 720,
-        "y": 1440,
+        "y": 1320,
         "wires": []
     },
     {
@@ -2105,7 +1915,7 @@
         "payload": "",
         "payloadType": "str",
         "x": 120,
-        "y": 1460,
+        "y": 1340,
         "wires": [
             [
                 "111b42f0acf5cedd"
@@ -2127,7 +1937,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 970,
-        "y": 1580,
+        "y": 1420,
         "wires": []
     },
     {
@@ -2145,7 +1955,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 430,
-        "y": 1460,
+        "y": 1340,
         "wires": []
     },
     {
@@ -2163,7 +1973,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 420,
-        "y": 1420,
+        "y": 1300,
         "wires": []
     },
     {
@@ -2189,7 +1999,7 @@
         "payload": "",
         "payloadType": "str",
         "x": 110,
-        "y": 1240,
+        "y": 1120,
         "wires": [
             [
                 "8a08cb963b13e93e"
@@ -2210,7 +2020,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 1280,
+        "y": 1160,
         "wires": [
             [
                 "8e8f921e95177cef",
@@ -2233,7 +2043,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 310,
-        "y": 1240,
+        "y": 1120,
         "wires": []
     },
     {
@@ -2250,7 +2060,7 @@
         "addname": "",
         "property": "sonoffs",
         "x": 430,
-        "y": 1320,
+        "y": 1200,
         "wires": [
             [
                 "a411210f93b44ab2"
@@ -2272,7 +2082,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 970,
-        "y": 1320,
+        "y": 1200,
         "wires": []
     },
     {
@@ -2289,7 +2099,7 @@
         "finalize": "",
         "libs": [],
         "x": 820,
-        "y": 1320,
+        "y": 1200,
         "wires": [
             [
                 "703b6dd8f29a8095"
@@ -2310,7 +2120,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 1320,
+        "y": 1200,
         "wires": [
             [
                 "c6390bede00a892c"
@@ -2332,7 +2142,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 1280,
+        "y": 1160,
         "wires": []
     },
     {
@@ -2356,7 +2166,7 @@
         "to": "",
         "reg": false,
         "x": 610,
-        "y": 1320,
+        "y": 1200,
         "wires": [
             [
                 "852d5f5d86ee845b",
@@ -2365,25 +2175,14 @@
         ]
     },
     {
-        "id": "acb0a22a50095da0",
-        "type": "comment",
-        "z": "12115c3af1abebbc",
-        "g": "b31038c6feb7e0a6",
-        "name": "This takes the flow data from the original & converts it to an array...",
-        "info": "",
-        "x": 680,
-        "y": 1240,
-        "wires": []
-    },
-    {
         "id": "f4e45a3ca8ad911e",
         "type": "comment",
         "z": "12115c3af1abebbc",
         "g": "b31038c6feb7e0a6",
-        "name": "Commit data to FLOW (home.tasmotas)",
+        "name": "Commit data to FLOW as an array (home.tasmotas)",
         "info": "",
-        "x": 190,
-        "y": 1200,
+        "x": 230,
+        "y": 1080,
         "wires": []
     },
     {
@@ -2415,6 +2214,239 @@
                 "d383a67a1733414b"
             ]
         ]
+    },
+    {
+        "id": "23ae06c898280882",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 1560,
+        "wires": [
+            [
+                "7ceec3b75eee2a94"
+            ]
+        ]
+    },
+    {
+        "id": "7ceec3b75eee2a94",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "retreive devices from FLOW",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DEVICES",
+                "tot": "flow",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 1560,
+        "wires": [
+            [
+                "a06f268f7476d1a7"
+            ]
+        ]
+    },
+    {
+        "id": "a06f268f7476d1a7",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "debug 454",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "862a8fb3de0696b2",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 1640,
+        "wires": [
+            [
+                "49913515c8eb71a8"
+            ]
+        ]
+    },
+    {
+        "id": "49913515c8eb71a8",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "wipe",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "DEVICES",
+                "pt": "flow"
+            },
+            {
+                "t": "delete",
+                "p": "home.tasmotas",
+                "pt": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 1640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9adb7d175f5f8658",
+        "type": "inject",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 1600,
+        "wires": [
+            [
+                "c597b8d365348e48"
+            ]
+        ]
+    },
+    {
+        "id": "c597b8d365348e48",
+        "type": "change",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "retreive array from FLOW",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "home.tasmotas",
+                "tot": "flow",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 1600,
+        "wires": [
+            [
+                "2c7f8b95dbe3b295"
+            ]
+        ]
+    },
+    {
+        "id": "2c7f8b95dbe3b295",
+        "type": "debug",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "debug 464",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "06a0840dab5f7b63",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "974508caad4e094d",
+        "name": "Needs fixing -->",
+        "info": "This used to work in the original...\nDoesn't work now...\n\nHhhmmm...",
+        "x": 600,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "49dacee36d159fb9",
+        "type": "comment",
+        "z": "12115c3af1abebbc",
+        "g": "55fd63091027b4f3",
+        "name": "For testing",
+        "info": "",
+        "x": 100,
+        "y": 1520,
+        "wires": []
     },
     {
         "id": "3cfa1fac61dca0ec",

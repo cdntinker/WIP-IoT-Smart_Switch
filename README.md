@@ -4,10 +4,15 @@ At this moment, Relays and LEDs on devices are being handled.
 
 # TODO items
 
+Add Group Topic to the config page.
+
+Simplify handling of Active-High vs. Active-Low LEDs.
+
 Handling on-device buttons is highest priority.
 
 Sensors of various sorts would be rather nice.
 
+# Usage
 ## To build in PlatformIO...
 
 You can either just download the repo & open the folder in VSCode or actually Clone the repository directly.

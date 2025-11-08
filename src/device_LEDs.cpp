@@ -33,7 +33,10 @@ void LED_switch(int LEDNum, bool OnOff)
     unsigned int LED_ON;
     unsigned int LED_OFF;
     char LED_STATE[4] = "-";
-    if ((strcmp(STR(DeviceType), "D1-Mini") == 0) || (strcmp(STR(BoardType), "Sonoff_Basic") == 0))
+    if ((strcmp(STR(DeviceType), "D1-Mini") == 0) 
+        || (strcmp(STR(BoardType), "Sonoff_Basic") == 0)
+        || (strcmp(STR(BoardType), "ESP-M3b") == 0)
+        )
     {   // Devices with Active-Low LEDs
         LED_ON = LOW;
         LED_OFF = HIGH;

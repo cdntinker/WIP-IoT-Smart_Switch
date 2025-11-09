@@ -9,7 +9,7 @@ const char PART_HomePage_Body[] PROGMEM = R"rawliteral(
 #ifdef SmartSwitch_Relays
 const char PART_HomePage_Body_Relays[] PROGMEM = R"rawliteral(
 <div class = "border">
-%OTOButtons.Relays%
+%OTOoutputs.Relays%
 </div>
 )rawliteral";
 #else
@@ -20,7 +20,7 @@ const char PART_HomePage_Body_Relays[] PROGMEM = R"rawliteral(
 #ifdef SmartSwitch_LEDs
 const char PART_HomePage_Body_LEDs[] PROGMEM = R"rawliteral(
 <div class = "border">
-%OTOButtons.LEDs%
+%OTOoutputs.LEDs%
 </div>
 )rawliteral";
 #else

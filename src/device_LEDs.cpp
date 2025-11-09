@@ -34,15 +34,15 @@ void LED_switch(int LEDNum, bool OnOff)
     unsigned int LED_OFF;
     char LED_STATE[4] = "-";
     if ((strcmp(STR(DeviceType), "D1-Mini") == 0) 
-        || (strcmp(STR(BoardType), "Sonoff_Basic") == 0)
+        || (strcmp(STR(BoardType), "Sonoff_Basic") == 0) 
         || (strcmp(STR(BoardType), "ESP-M3b") == 0)
-        )
-    {   // Devices with Active-Low LEDs
+       )
+    { // Devices with Active-Low LEDs
         LED_ON = LOW;
         LED_OFF = HIGH;
     }
     else
-    {   // Devices with Active-High LEDs
+    { // Devices with Active-High LEDs
         LED_ON = HIGH;
         LED_OFF = LOW;
     }
@@ -60,12 +60,12 @@ void LED_switch(int LEDNum, bool OnOff)
         strcpy(LED_STATE, "OFF");
     }
 
-        MQTT_SendSTAT(MQTT_Topic, LED_STATE);
-        sprintf(DEBUGtxt, "LED %02d (%d) %s", LEDNum, GPIO_LED_PINS[LEDNum], LED_STATE);
-        DEBUG_LineOut(DEBUGtxt);
-        /***********************************************
-         * TODO: update the UI to reflect these actions
-         ***********************************************/
+    MQTT_SendSTAT(MQTT_Topic, LED_STATE);
+    sprintf(DEBUGtxt, "LED %02d (%d) %s", LEDNum, GPIO_LED_PINS[LEDNum], LED_STATE);
+    DEBUG_LineOut(DEBUGtxt);
+    /***********************************************
+     * TODO: update the UI to reflect these actions
+     ***********************************************/
 }
 
 // Turn LED on/off

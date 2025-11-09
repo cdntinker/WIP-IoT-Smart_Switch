@@ -362,7 +362,7 @@ String processor(const String &var)
   extern bool GPIO_Button_STATE[4];
   extern int GPIO_Button_COUNT;
 
-  if (var.startsWith("OTOButtons"))
+  if (var.startsWith("OTOoutputs"))
   {
     DEBUG_SectionTitle(var.c_str());
 

@@ -45,7 +45,7 @@ void MQTT_BuildDevInfo()
   strcat(fmt_DevInfo, "\"Device\": \"%s\", \"FriendlyName\": \"%s\", \"GroupTopic\": \"%s\",");
   strcat(fmt_DevInfo, " \"IPAddress\": \"%s\", \"mac\": \"%s\",");
   strcat(fmt_DevInfo, " \"WiFi\": {\"SSID\": \"%s\", \"Channel\": \"%u\",\"Signal\": \"%d\"},");
-  strcat(fmt_DevInfo, " \"Version\": \"%s %s\", \"Hardware\": \"%s\"");
+  strcat(fmt_DevInfo, " \"Version\": \"%s %s\", \"Hardware\": \"%s\",");
   strcat(fmt_DevInfo, " \"Battery\": \"%.2f\"");
   strcat(fmt_DevInfo, "}");
 

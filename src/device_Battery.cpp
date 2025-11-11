@@ -1,33 +1,27 @@
 #include "Tinker_DEBUG.h"
 #include "device_Battery.h"
 
-/*
- * Wemos battery shield, measure Vbat
- * add 100k between Vbat and ADC
- * Voltage divider of 100k+220k over 100k
- * gives 100/420k
- * ergo 4.2V -> 1Volt
- * Max input on A0=1Volt ->1023
- * 4.2*(Raw/1023)=Vbat
- */
+#ifdef Battery_Operated
 
-unsigned int BatteryRaw = 0;
-float BatteryVoltage = 0.0;
+unsigned int ADCvalue = 0;
+float BatteryVoltage;
 
 void Battery_setup()
 {
-
     pinMode(A0, INPUT);
 }
 
-unsigned int Battery_Raw()
+unsigned int ADC_Reading()
 {
-    return (analogRead(A0));
+    int ADCvalue = analogRead(A0);
+    if (ADCvalue < 100)
+        ADCvalue = 0;    // A fair indication there is no actual battery...
+    return (ADCvalue);
 }
 
 float Battery_measure()
 {
-    BatteryVoltage = Battery_Raw() / BATTDIV;
+    BatteryVoltage = ADC_Reading() / BATTDIV;
 
     return (BatteryVoltage);
 }
@@ -35,6 +29,22 @@ float Battery_measure()
 void Battery_loop()
 {
     sprintf(DEBUGtxt, "Battery Voltage: %.2f", Battery_measure());
-
     DEBUG_LineOut2(DEBUGtxt);
 }
+
+#else
+void Battery_setup()
+{
+}
+unsigned int ADC_Reading()
+{
+    return (-1);
+}
+float Battery_measure()
+{
+    return (-1);
+}
+void Battery_loop()
+{
+}
+#endif

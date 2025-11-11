@@ -27,7 +27,7 @@ void SmartSwitch_init()
     Battery_setup();
     sprintf(DEBUGtxt, "Battery: (on A0)");
     DEBUG_LineOut(DEBUGtxt);
-    sprintf(DEBUGtxt, " ADC raw: %d", Battery_Raw());
+    sprintf(DEBUGtxt, " ADC raw: %d", ADC_Reading());
     DEBUG_LineOut2(DEBUGtxt);
     sprintf(DEBUGtxt, " initial: %.2fV", Battery_measure());
     DEBUG_LineOut2(DEBUGtxt);
@@ -197,11 +197,11 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
         else if (strcmp(MQTT_msg_in, "Battery") == 0)
         {
             DEBUG_LineOut2("Battery");
-            sprintf(DEBUGtxt, " ADC raw: %d", Battery_Raw());
+            sprintf(DEBUGtxt, " ADC raw: %d", ADC_Reading());
             DEBUG_LineOut2(DEBUGtxt);
             sprintf(DEBUGtxt, " initial: %.2fV", Battery_measure());
             DEBUG_LineOut2(DEBUGtxt);
-            sprintf(StatusMessage, "%d", Battery_Raw());
+            sprintf(StatusMessage, "%d", ADC_Reading());
             MQTT_SendSTAT("ADC", StatusMessage);
             sprintf(StatusMessage, "%.2f", Battery_measure());
             MQTT_SendSTAT("Battery", StatusMessage);

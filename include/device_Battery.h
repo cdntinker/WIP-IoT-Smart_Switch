@@ -1,10 +1,10 @@
 
-extern unsigned int BatteryRaw;
+extern unsigned int ADCvalue;
 extern float BatteryVoltage;
 
 void Battery_setup();
 
-unsigned int Battery_Raw();
+unsigned int ADC_Reading();
 
 float Battery_measure();
 

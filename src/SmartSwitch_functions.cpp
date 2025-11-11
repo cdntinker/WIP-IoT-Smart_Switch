@@ -22,11 +22,23 @@ void SmartSwitch_init()
 
     String OOGABOOGA = "";
 
+#ifdef Battery_Operated
+    /*****  Battery *****/
+    Battery_setup();
+    sprintf(DEBUGtxt, "Battery: (on A0)");
+    DEBUG_LineOut(DEBUGtxt);
+    sprintf(DEBUGtxt, " ADC raw: %d", Battery_Raw());
+    DEBUG_LineOut2(DEBUGtxt);
+    sprintf(DEBUGtxt, " initial: %.2fV", Battery_measure());
+    DEBUG_LineOut2(DEBUGtxt);
+#endif
+
+#ifdef SmartSwitch_Relays
     /*****  Relays  *****/
     Relay_setup();
-    sprintf(DEBUGtxt, " Relays: %2d", GPIO_Relay_COUNT);
+    sprintf(DEBUGtxt, "Relays: %2d", GPIO_Relay_COUNT);
     DEBUG_LineOut(DEBUGtxt);
-    OOGABOOGA = "GPIOs: ";
+    OOGABOOGA = "  GPIOs: ";
     for (unsigned int ctr = 0; ctr < GPIO_Relay_COUNT; ctr++)
     {
         OOGABOOGA += ctr;
@@ -35,12 +47,14 @@ void SmartSwitch_init()
         OOGABOOGA += " ";
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
+#endif
 
+#ifdef SmartSwitch_LEDs
     /*****  LEDs  *****/
     LED_setup();
-    sprintf(DEBUGtxt, "   LEDs: %2d", GPIO_LED_COUNT);
+    sprintf(DEBUGtxt, "LEDs: %2d", GPIO_LED_COUNT);
     DEBUG_LineOut(DEBUGtxt);
-    OOGABOOGA = "GPIOs: ";
+    OOGABOOGA = "  GPIOs: ";
     for (unsigned int ctr = 0; ctr < GPIO_LED_COUNT; ctr++)
     {
         OOGABOOGA += ctr;
@@ -49,12 +63,14 @@ void SmartSwitch_init()
         OOGABOOGA += " ";
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
+#endif
 
+#ifdef SmartSwitch_Buttons
     /*****  Buttons  *****/
     Button_setup();
     sprintf(DEBUGtxt, "Buttons: %2d", GPIO_Button_COUNT);
     DEBUG_LineOut(DEBUGtxt);
-    OOGABOOGA = "GPIOs: ";
+    OOGABOOGA = "  GPIOs: ";
     for (unsigned int ctr = 0; ctr < GPIO_Button_COUNT; ctr++)
     {
         OOGABOOGA += ctr;
@@ -63,6 +79,7 @@ void SmartSwitch_init()
         OOGABOOGA += " ";
     }
     DEBUG_LineOut2(OOGABOOGA.c_str());
+#endif
 
     /*****  Switches  *****/
 
@@ -70,6 +87,7 @@ void SmartSwitch_init()
 }
 
 // Handle incoming MQTT messages for the SmartSwitch functionality
+char StatusMessage[12];
 
 void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
 {
@@ -96,7 +114,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
 
         for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
         {
-            if ((unsigned int) TheTopic.toInt() < GPIO_Relay_COUNT)
+            if ((unsigned int)TheTopic.toInt() < GPIO_Relay_COUNT)
             {
                 if (strcmp(MQTT_msg_in, "on") == 0)
                     DEVICE_RELAY(CTR, HIGH);
@@ -129,7 +147,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
 
         for (int CTR = CTRbegin; CTR < CTRfinish; CTR++)
         {
-            if ((unsigned int) TheTopic.toInt() < GPIO_LED_COUNT)
+            if ((unsigned int)TheTopic.toInt() < GPIO_LED_COUNT)
             {
                 if (strcmp(MQTT_msg_in, "on") == 0)
                     DEVICE_LED(CTR, HIGH);
@@ -149,21 +167,44 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
         DEBUG_LineOut("Status Requested");
         if (strcmp(MQTT_msg_in, "Power") == 0)
         {
+            DEBUG_LineOut2("Power");
             MQTT_SendSTAT("Power", GPIO_Relay_STATE[0] ? "ON" : "OFF");
+        }
+        else if (strcmp(MQTT_msg_in, "LED00") == 0)
+        {
+            DEBUG_LineOut2("LED00");
+            MQTT_SendSTAT("LED00", GPIO_LED_STATE[0] ? "ON" : "OFF");
         }
         else if (strcmp(MQTT_msg_in, "LED01") == 0)
         {
+            DEBUG_LineOut2("LED01");
             MQTT_SendSTAT("LED01", GPIO_LED_STATE[0] ? "ON" : "OFF");
         }
         else if (strcmp(MQTT_msg_in, "LNKLD") == 0)
         {
+            DEBUG_LineOut2("LNKLD");
             MQTT_SendSTAT("LNKLD", GPIO_LED_STATE[1] ? "ON" : "OFF");
         }
         else if (strcmp(MQTT_msg_in, "All") == 0)
         {
+            DEBUG_LineOut2("All");
             MQTT_SendSTAT("Power", GPIO_Relay_STATE[0] ? "ON" : "OFF");
             MQTT_SendSTAT("LED01", GPIO_LED_STATE[0] ? "ON" : "OFF");
             MQTT_SendSTAT("LNKLD", GPIO_LED_STATE[1] ? "ON" : "OFF");
+            // sprintf(StatusMessage, "%.2f", Battery_measure());
+            // MQTT_SendSTAT("Battery", StatusMessage);
+        }
+        else if (strcmp(MQTT_msg_in, "Battery") == 0)
+        {
+            DEBUG_LineOut2("Battery");
+            sprintf(DEBUGtxt, " ADC raw: %d", Battery_Raw());
+            DEBUG_LineOut2(DEBUGtxt);
+            sprintf(DEBUGtxt, " initial: %.2fV", Battery_measure());
+            DEBUG_LineOut2(DEBUGtxt);
+            sprintf(StatusMessage, "%d", Battery_Raw());
+            MQTT_SendSTAT("ADC", StatusMessage);
+            sprintf(StatusMessage, "%.2f", Battery_measure());
+            MQTT_SendSTAT("Battery", StatusMessage);
         }
         // else if (strcmp(MQTT_msg_in, "All") == 0)
     }

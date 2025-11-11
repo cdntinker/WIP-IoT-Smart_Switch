@@ -17,6 +17,7 @@
 ///////#include "device_Switches.h"
 #include "device_Relays.h"
 #include "device_LEDs.h"
+#include "device_Battery.h"
 
 #ifndef DEVICE_Translations
 #define DEVICE_Translations

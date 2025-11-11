@@ -13,7 +13,6 @@
 
 #include <PubSubClient.h> // For MQTT
 
-#include "Tinker_SmartSwitch.h"
 #include "DEVICE_SPECIFIC.h"
 
 WiFiClient espClient;

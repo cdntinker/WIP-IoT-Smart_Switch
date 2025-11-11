@@ -2,9 +2,9 @@
 // #include <BfButton.h>
 
 // extern int SmartSwitch_ButtonPin[4];
-extern unsigned int GPIO_Button_PINS[4];
-extern bool GPIO_Button_STATE[10];
-extern unsigned int GPIO_Button_COUNT;
+// extern unsigned int GPIO_Button_PINS[4];
+// extern bool GPIO_Button_STATE[10];
+// extern unsigned int GPIO_Button_COUNT;
 
 // extern int ButtonCount;
 

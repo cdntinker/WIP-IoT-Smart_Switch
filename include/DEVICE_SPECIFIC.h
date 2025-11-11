@@ -11,8 +11,7 @@
 //  That'd be bloody cool.
 /////////////////////////////////////////////////////////////
 
-// #include <Tinker_SmartSwitch.h>
-#include "Tinker_SmartSwitch.h"     //  Building with embeded version in Arduino prefers quotes
+#include "device_MQTT.h"
 #include "device_Buttons.h"
 ///////#include "device_Switches.h"
 #include "device_Relays.h"

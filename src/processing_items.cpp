@@ -358,7 +358,7 @@ String processor(const String &var)
   extern bool GPIO_LED_STATE[4];
   extern int GPIO_LED_COUNT;
 
-  extern int GPIO_Button_PINS[4];
+  extern unsigned int GPIO_Button_PINS[4];  //WTFdude
   extern bool GPIO_Button_STATE[4];
   extern int GPIO_Button_COUNT;
 

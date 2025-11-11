@@ -1,7 +1,5 @@
 #include <Arduino.h>
 
-#include "Tinker_SmartSwitch.h"
-// #include "Tinker_MQTT.h"
 #define MQTT_BUFFER_SIZE (100) // This number is arbitrary
 
 void MQTT_SendSTAT(const char *Topic, const char *Message);

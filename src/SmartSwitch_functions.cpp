@@ -191,8 +191,8 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
             MQTT_SendSTAT("Power", GPIO_Relay_STATE[0] ? "ON" : "OFF");
             MQTT_SendSTAT("LED01", GPIO_LED_STATE[0] ? "ON" : "OFF");
             MQTT_SendSTAT("LNKLD", GPIO_LED_STATE[1] ? "ON" : "OFF");
-            // sprintf(StatusMessage, "%.2f", Battery_measure());
-            // MQTT_SendSTAT("Battery", StatusMessage);
+            sprintf(StatusMessage, "%.2f", Battery_measure());
+            MQTT_SendSTAT("Battery", StatusMessage);
         }
         else if (strcmp(MQTT_msg_in, "Battery") == 0)
         {

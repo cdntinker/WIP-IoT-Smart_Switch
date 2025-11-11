@@ -46,6 +46,7 @@ void MQTT_BuildDevInfo()
   strcat(fmt_DevInfo, " \"IPAddress\": \"%s\", \"mac\": \"%s\",");
   strcat(fmt_DevInfo, " \"WiFi\": {\"SSID\": \"%s\", \"Channel\": \"%u\",\"Signal\": \"%d\"},");
   strcat(fmt_DevInfo, " \"Version\": \"%s %s\", \"Hardware\": \"%s\"");
+  strcat(fmt_DevInfo, " \"Battery\": \"%.2f\"");
   strcat(fmt_DevInfo, "}");
 
   snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
@@ -53,7 +54,9 @@ void MQTT_BuildDevInfo()
            host, htmltitle, MQTT_GroupName,
            WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
            WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),
-           STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType));
+           STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType),
+           Battery_measure()
+          );
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

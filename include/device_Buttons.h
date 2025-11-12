@@ -9,6 +9,8 @@ extern unsigned int GPIO_Button_COUNT;
 // extern int ButtonCount;
 
 void Button_setup();
+void Button_loop();
+
 void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern);
 
 // void Button_init();

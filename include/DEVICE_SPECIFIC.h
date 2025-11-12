@@ -36,7 +36,7 @@ extern int SmartSwitch_SwitchPin[4];
 
 
 #define DEVICE_SETUP SmartSwitch_init
-#define DEVICE_LOOP Button_loop
+#define DEVICE_LOOP SmartSwitch_loop
 
 void DEVICE_SETUP();
 void DEVICE_LOOP();

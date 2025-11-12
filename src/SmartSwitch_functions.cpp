@@ -9,7 +9,7 @@ void MQTT_SendTELE(const char *Topic, const char *Message);
 #include "Tinker_DEBUG.h"
 extern char DEBUGtxt[92];
 
-// #include "device_Buttons.h"
+#include "device_Buttons.h"
 // #include "device_LEDs.h"
 // #include "device_Relays.h"
 #include "DEVICE_SPECIFIC.h"
@@ -51,6 +51,10 @@ void SmartSwitch_init()
     // Button_init();
 }
 
+void SmartSwitch_loop()
+{
+    Button_loop();
+}
 // Handle incoming MQTT messages for the SmartSwitch functionality
 char StatusMessage[12];
 

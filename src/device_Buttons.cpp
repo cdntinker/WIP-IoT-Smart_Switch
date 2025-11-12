@@ -24,26 +24,30 @@ bool GPIO_Button_STATE[10]; // 10 is arbitrary...
 
 //////////////////////////////////////////////////
 
-// #if GPIO_Button_COUNT > 0
 BfButton Button0(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[0], true, LOW);
-// #endif
-// #if GPIO_Button_COUNT > 1
 BfButton Button1(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[1], true, LOW);
-// #endif
-// #if GPIO_Button_COUNT > 2
-BfButton Button2(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[2], true, LOW);
-// #endif
-// #if GPIO_Button_COUNT > 3
-BfButton Button3(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[3], true, LOW);
-// #endif
 
-// // Handle button press
+#if 0
+BfButton Button2(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[2], true, LOW);
+BfButton Button3(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[3], true, LOW);
+#endif
+
+// Handle button press
+int ButtonNum;
 void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 {
-    String ButtonMessage = "button";
-    ButtonMessage += ButtonPin->getID();    // Need to get Button Number instead somehow...
-    String Topic = ButtonMessage;
+    for (unsigned int i = 0; i < GPIO_Button_COUNT; i++)    // Dig out the button number instead of GPIO
+    {
+        if (GPIO_Button_PINS[i] == ButtonPin->getID())
+        {
+            ButtonNum = i;
+        }
+    }
 
+    String Topic = "button";
+    Topic += (String)ButtonNum;
+
+    String ButtonMessage;
     switch (pattern)
     {
     case BfButton::SINGLE_PRESS:
@@ -65,6 +69,7 @@ void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 
     // void MQTT_SendSTAT(const char *Topic, const char *Message);
     MQTT_SendTELE(Topic.c_str(), ButtonMessage.c_str());
+    MQTT_SendTELE("poop", "nuggit");
 }
 
 void Button_setup()
@@ -80,27 +85,22 @@ void Button_setup()
     }
     DEBUG_LineOut2(DEBUGtxt);
 
-// #if GPIO_Button_COUNT > 0
     Button0.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
-// #endif
-// #if GPIO_Button_COUNT > 1
+
     Button1.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
-// #endif
-// #if GPIO_Button_COUNT > 2
+#if 0
     Button2.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
-// #endif
-// #if GPIO_Button_COUNT > 3
-    Button3.onPress(ButtonPressHandler)
+
+        Button3.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
-// #endif
-
+#endif
 }
 
 // // Turn Button on/off
@@ -141,16 +141,11 @@ void Button_setup()
 
 void Button_loop()
 {
-// #if GPIO_Button_COUNT > 0
     Button0.read();
-// #endif
-// #if GPIO_Button_COUNT > 1
     Button1.read();
-// #endif
-// #if GPIO_Button_COUNT > 2
+
+#if 0
     Button2.read();
-// #endif
-// #if GPIO_Button_COUNT > 3
     Button3.read();
-// #endif
+#endif
 }

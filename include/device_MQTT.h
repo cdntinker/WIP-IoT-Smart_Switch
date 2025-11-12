@@ -1,5 +1,6 @@
 
 void SmartSwitch_init();
+void SmartSwitch_loop();
 
 // void Button_loop();
 

@@ -20,6 +20,17 @@ void LED_setup()
 {
     for (unsigned int CTR = 0; CTR < GPIO_LED_COUNT; CTR++)
         pinMode(GPIO_LED_PINS[CTR], OUTPUT);
+
+    sprintf(DEBUGtxt, "LEDs: %2d", GPIO_LED_COUNT);
+    DEBUG_LineOut(DEBUGtxt);
+    strcpy(DEBUGtxt, "  GPIOs: ");
+    for (unsigned int ctr = 0; ctr < GPIO_LED_COUNT; ctr++)
+    {
+        char BOOP[8];
+        sprintf(BOOP, "%d=%d ", ctr, GPIO_LED_PINS[ctr]);
+        strcat(DEBUGtxt, BOOP);
+    }
+    DEBUG_LineOut2(DEBUGtxt);
 }
 
 // Turn LED on/off
@@ -33,11 +44,7 @@ void LED_switch(int LEDNum, bool OnOff)
     unsigned int LED_ON;
     unsigned int LED_OFF;
     char LED_STATE[4] = "-";
-    if ((strcmp(STR(DeviceType), "D1-Mini") == 0) 
-        || (strcmp(STR(BoardType), "Sonoff_Basic") == 0) 
-        || (strcmp(STR(BoardType), "ESP-M3b") == 0)
-        || (strcmp(STR(DeviceType), "ESP-07") == 0)
-       )
+    if ((strcmp(STR(DeviceType), "D1-Mini") == 0) || (strcmp(STR(BoardType), "Sonoff_Basic") == 0) || (strcmp(STR(BoardType), "ESP-M3b") == 0) || (strcmp(STR(DeviceType), "ESP-07") == 0))
     { // Devices with Active-Low LEDs
         LED_ON = LOW;
         LED_OFF = HIGH;

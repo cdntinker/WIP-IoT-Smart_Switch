@@ -44,7 +44,7 @@ extern uint8_t       ledmode[5];            // what mode the leds are in    -- u
 /* varibles */
 
 /* mqtt topics */
-extern char MQTT_heartbeat[60];
+extern char MQTT_lastwill[60];
 
 extern String IPaddress;            // IP address for 'outTopic'
 // extern char mqtt_button_buffer[40]; // message from button buffer

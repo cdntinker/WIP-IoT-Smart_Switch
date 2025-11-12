@@ -92,48 +92,48 @@ void MQTT_settopics()
   DEBUG_LineOut(DEBUGtxt);
 
   //  Build the topic names
-  strcpy(MQTT_heartbeat, "tele/");
-  strcat(MQTT_heartbeat, MQTT_ClientName);
-  strcat(MQTT_heartbeat, "/LWT");
+  strcpy(MQTT_lastwill, "tele/");
+  strcat(MQTT_lastwill, MQTT_ClientName);
+  strcat(MQTT_lastwill, "/LWT");
 
   strcpy(out_DevInfo, "stat/");
   strcat(out_DevInfo, host);
   strcat(out_DevInfo, "/DevInfo");
   DevInfo_Topic = out_DevInfo;
 
-  sprintf(DEBUGtxt, "MQTT_heartbeat: %s", MQTT_heartbeat);
+  strcpy(MQTT_grpTopic, "cmnd/"); //  in - Commands
+  strcat(MQTT_grpTopic, MQTT_GroupName);
+  strcat(MQTT_grpTopic, "/#");
+
+  sprintf(DEBUGtxt, "MQTT_groupTopic:  %s", MQTT_grpTopic);
+  DEBUG_LineOut(DEBUGtxt);
+
+  sprintf(DEBUGtxt, "MQTT_lastwill:    %s", MQTT_lastwill);
   DEBUG_LineOut(DEBUGtxt);
 
   strcpy(MQTT_inTopic, "cmnd/"); //  in - Commands
   strcat(MQTT_inTopic, MQTT_ClientName);
   strcat(MQTT_inTopic, "/#");
 
-  sprintf(DEBUGtxt, "MQTT_inTopic:   %s", MQTT_inTopic);
-  DEBUG_LineOut(DEBUGtxt);
-
-  strcpy(MQTT_grpTopic, "cmnd/"); //  in - Commands
-  strcat(MQTT_grpTopic, MQTT_GroupName);
-  strcat(MQTT_grpTopic, "/#");
-
-  sprintf(DEBUGtxt, "MQTT_grpTopic:   %s", MQTT_grpTopic);
+  sprintf(DEBUGtxt, "MQTT_inTopic:     %s", MQTT_inTopic);
   DEBUG_LineOut(DEBUGtxt);
 
   strcpy(MQTT_teleTopic, "tele/"); // out - Telemetry
   strcat(MQTT_teleTopic, MQTT_ClientName);
 
-  sprintf(DEBUGtxt, "MQTT_teleTopic: %s/#", MQTT_teleTopic);
+  sprintf(DEBUGtxt, "MQTT_teleTopic:   %s/#", MQTT_teleTopic);
   DEBUG_LineOut(DEBUGtxt);
 
   strcpy(MQTT_statTopic, "stat/"); // out - Status
   strcat(MQTT_statTopic, MQTT_ClientName);
 
-  sprintf(DEBUGtxt, "MQTT_statTopic: %s/#", MQTT_statTopic);
+  sprintf(DEBUGtxt, "MQTT_statTopic:   %s/#", MQTT_statTopic);
   DEBUG_LineOut(DEBUGtxt);
 
   strcpy(MQTT_outTopic, "noti/"); // out - Notifications
   strcat(MQTT_outTopic, MQTT_ClientName);
 
-  sprintf(DEBUGtxt, "MQTT_outTopic:  %s/#", MQTT_outTopic);
+  sprintf(DEBUGtxt, "MQTT_outTopic:    %s/#", MQTT_outTopic);
   DEBUG_LineOut(DEBUGtxt);
 }
 
@@ -276,7 +276,7 @@ void MQTT_reconnect()
   PIXELS_colorWipe(0, 0, 0, 220);
 
   DEBUG_Init("Attempting MQTT connection...");
-  if (MQTT_client.connect(host, mqtt_username, mqtt_password, MQTT_heartbeat, mqtt_lwt_qos, mqtt_lwt_retain, "Offline"))
+  if (MQTT_client.connect(host, mqtt_username, mqtt_password, MQTT_lastwill, mqtt_lwt_qos, mqtt_lwt_retain, "Offline"))
   {
     IPaddress = WiFi.localIP().toString();
     DEBUG_Success("mqtt connected");
@@ -287,7 +287,7 @@ void MQTT_reconnect()
     // Once connected, publish an LWT announcement...
     const char lwt_payload[10] = "Online";
 
-    MQTT_client.publish(MQTT_heartbeat, lwt_payload, mqtt_lwt_retain);
+    MQTT_client.publish(MQTT_lastwill, lwt_payload, mqtt_lwt_retain);
 
     // ... and resubscribe
     MQTT_client.subscribe(MQTT_inTopic);

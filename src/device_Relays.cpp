@@ -22,7 +22,17 @@ void Relay_setup()
 {
     for (unsigned int CTR = 0; CTR < GPIO_Relay_COUNT; CTR++)
         pinMode(GPIO_Relay_PINS[CTR], OUTPUT);
-}
+
+    sprintf(DEBUGtxt, "Relays: %2d", GPIO_Relay_COUNT);
+    DEBUG_LineOut(DEBUGtxt);
+    strcpy(DEBUGtxt, "  GPIOs: ");
+    for (unsigned int ctr = 0; ctr < GPIO_Relay_COUNT; ctr++)
+    {
+        char BOOP[8];
+        sprintf(BOOP, "%d=%d ", ctr, GPIO_Relay_PINS[ctr]);
+        strcat(DEBUGtxt, BOOP);
+    }
+    DEBUG_LineOut2(DEBUGtxt);}
 
 // Turn relay on/off
 void Relay_switch(int RelayNum, bool OnOff)

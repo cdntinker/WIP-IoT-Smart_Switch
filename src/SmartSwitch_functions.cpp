@@ -34,49 +34,16 @@ void SmartSwitch_init()
 #ifdef SmartSwitch_Relays
     /*****  Relays  *****/
     Relay_setup();
-    sprintf(DEBUGtxt, "Relays: %2d", GPIO_Relay_COUNT);
-    DEBUG_LineOut(DEBUGtxt);
-    OOGABOOGA = "  GPIOs: ";
-    for (unsigned int ctr = 0; ctr < GPIO_Relay_COUNT; ctr++)
-    {
-        OOGABOOGA += ctr;
-        OOGABOOGA += "=";
-        OOGABOOGA += GPIO_Relay_PINS[ctr];
-        OOGABOOGA += " ";
-    }
-    DEBUG_LineOut2(OOGABOOGA.c_str());
 #endif
 
 #ifdef SmartSwitch_LEDs
     /*****  LEDs  *****/
     LED_setup();
-    sprintf(DEBUGtxt, "LEDs: %2d", GPIO_LED_COUNT);
-    DEBUG_LineOut(DEBUGtxt);
-    OOGABOOGA = "  GPIOs: ";
-    for (unsigned int ctr = 0; ctr < GPIO_LED_COUNT; ctr++)
-    {
-        OOGABOOGA += ctr;
-        OOGABOOGA += "=";
-        OOGABOOGA += GPIO_LED_PINS[ctr];
-        OOGABOOGA += " ";
-    }
-    DEBUG_LineOut2(OOGABOOGA.c_str());
 #endif
 
 #ifdef SmartSwitch_Buttons
     /*****  Buttons  *****/
     Button_setup();
-    sprintf(DEBUGtxt, "Buttons: %2d", GPIO_Button_COUNT);
-    DEBUG_LineOut(DEBUGtxt);
-    OOGABOOGA = "  GPIOs: ";
-    for (unsigned int ctr = 0; ctr < GPIO_Button_COUNT; ctr++)
-    {
-        OOGABOOGA += ctr;
-        OOGABOOGA += "=";
-        OOGABOOGA += GPIO_Button_PINS[ctr];
-        OOGABOOGA += " ";
-    }
-    DEBUG_LineOut2(OOGABOOGA.c_str());
 #endif
 
     /*****  Switches  *****/

@@ -20,7 +20,7 @@ const char home_html[] PROGMEM = R"rawliteral(
 %PART_HomePage_Body%
 %PART_HomePage_Body_Relays%
 %PART_HomePage_Body_LEDs%
-Button Indicators Go Here
+%PART_HomePage_Body_Buttons%
 %PART_HomePage_Body_Inputs_direct%
 %PART_HomePage_Body_Inputs_sensors%
         <br>

@@ -37,6 +37,7 @@ BfButton Button2(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[2], true, LOW);
 BfButton Button3(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[3], true, LOW);
 #endif
 #endif
+//////////////////////////////////////////////////
 
 // Handle button press
 int ButtonNum;
@@ -75,11 +76,6 @@ void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 
     // void MQTT_SendSTAT(const char *Topic, const char *Message);
     MQTT_SendTELE(Topic.c_str(), ButtonMessage.c_str());
-
-#ifdef Debounc_Required
-    MQTT_SendSTAT("poop", "nuggit");
-    delay(500);
-#endif
 }
 
 void Button_setup()

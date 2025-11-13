@@ -43,7 +43,7 @@ const char management_html[] PROGMEM = R"rawliteral(
        <div class = "menu-buttons">
          <div class = "border">
            <div class = "buttons ButtonClickable">
-             <button6 onclick="location.href='/factory'">Factory Reset</button6>
+             <button5 onclick="location.href='/reboot'">%processorplaceholder% Reboot</button5>
            </div>
          </div>
        </div>
@@ -53,7 +53,7 @@ const char management_html[] PROGMEM = R"rawliteral(
        <div class = "menu-buttons">
          <div class = "border">
            <div class = "buttons ButtonClickable">
-             <button5 onclick="location.href='/reboot'">%processorplaceholder% Reboot</button5>
+             <button6 onclick="location.href='/factory'">Factory Reset</button6>
            </div>
          </div>
        </div>

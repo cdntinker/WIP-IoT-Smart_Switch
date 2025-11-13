@@ -23,20 +23,26 @@ unsigned int GPIO_Button_COUNT = 0;
 bool GPIO_Button_STATE[10]; // 10 is arbitrary...
 
 //////////////////////////////////////////////////
-
+#ifdef SmartSwitch_Bcount
+#if (SmartSwitch_Bcount >= 1)
 BfButton Button0(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[0], true, LOW);
+#endif
+#if (SmartSwitch_Bcount >= 2)
 BfButton Button1(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[1], true, LOW);
-
-#if 0
+#endif
+#if (SmartSwitch_Bcount >= 3)
 BfButton Button2(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[2], true, LOW);
+#endif
+#if (SmartSwitch_Bcount >= 4)
 BfButton Button3(BfButton::STANDALONE_DIGITAL, GPIO_Button_PINS[3], true, LOW);
+#endif
 #endif
 
 // Handle button press
 int ButtonNum;
 void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 {
-    for (unsigned int i = 0; i < GPIO_Button_COUNT; i++)    // Dig out the button number instead of GPIO
+    for (unsigned int i = 0; i < GPIO_Button_COUNT; i++) // Dig out the button number instead of GPIO
     {
         if (GPIO_Button_PINS[i] == ButtonPin->getID())
         {
@@ -69,7 +75,11 @@ void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
 
     // void MQTT_SendSTAT(const char *Topic, const char *Message);
     MQTT_SendTELE(Topic.c_str(), ButtonMessage.c_str());
-    MQTT_SendTELE("poop", "nuggit");
+
+#ifdef Debounc_Required
+    MQTT_SendSTAT("poop", "nuggit");
+    delay(500);
+#endif
 }
 
 void Button_setup()
@@ -85,21 +95,27 @@ void Button_setup()
     }
     DEBUG_LineOut2(DEBUGtxt);
 
+#ifdef SmartSwitch_Bcount
+#if (SmartSwitch_Bcount >= 1)
     Button0.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
-
+#endif
+#if (SmartSwitch_Bcount >= 2)
     Button1.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
-#if 0
+#endif
+#if (SmartSwitch_Bcount >= 3)
     Button2.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
-
-        Button3.onPress(ButtonPressHandler)
+#endif
+#if (SmartSwitch_Bcount >= 4)
+    Button3.onPress(ButtonPressHandler)
         .onDoublePress(ButtonPressHandler)    // default timeout
         .onPressFor(ButtonPressHandler, 500); // custom timeout for 1/2 second
+#endif
 #endif
 }
 
@@ -141,11 +157,19 @@ void Button_setup()
 
 void Button_loop()
 {
-    Button0.read();
-    Button1.read();
 
-#if 0
+#ifdef SmartSwitch_Bcount
+#if (SmartSwitch_Bcount >= 1)
+    Button0.read();
+#endif
+#if (SmartSwitch_Bcount >= 2)
+    Button1.read();
+#endif
+#if (SmartSwitch_Bcount >= 3)
     Button2.read();
+#endif
+#if (SmartSwitch_Bcount >= 4)
     Button3.read();
+#endif
 #endif
 }

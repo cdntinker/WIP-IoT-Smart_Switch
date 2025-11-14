@@ -28,7 +28,7 @@ extern bool GPIO_Relay_STATE[10];
 extern unsigned int GPIO_LED_PINS[4];
 extern bool GPIO_LED_STATE[10];
 
-extern int SmartSwitch_ButtonPin[4];
+//FFFF extern int SmartSwitch_ButtonPin[4];
 extern unsigned int GPIO_Button_PINS[4];
 extern bool GPIO_Button_STATE[10];
 

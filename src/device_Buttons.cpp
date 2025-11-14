@@ -2,8 +2,6 @@
 extern char DEBUGtxt[92];
 #include "MQTT.h" // emdedded functions for wifi and mqtt       should be cpp
 
-int SmartSwitch_ButtonPin[4];
-int ButtonCount = 0;
 #include "device_Buttons.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////

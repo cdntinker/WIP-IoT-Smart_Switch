@@ -298,14 +298,6 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
 
 } // end of mqtt MQTT_callback
 
-extern unsigned int GPIO_Relay_PINS[];
-extern bool GPIO_Relay_STATE[];
-extern unsigned int GPIO_Relay_COUNT;
-
-extern unsigned int GPIO_LED_PINS[];
-extern bool GPIO_LED_STATE[];
-extern unsigned int GPIO_LED_COUNT;
-
 void MQTT_reconnect()
 {
   PIXELS_colorWipe(0, 0, 0, 220);

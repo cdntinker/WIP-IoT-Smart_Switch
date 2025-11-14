@@ -10,6 +10,7 @@
 #include "neopixel.h"
 #include "web_json.h"
 #include "wifisave.h"
+#include "customserver.h" // manages the ASYNC server webpage serving   should be cpp
 
 #include <PubSubClient.h> // For MQTT
 
@@ -26,6 +27,7 @@ extern char DEBUGtxt[92];
 
 char MQTT_outTopic[MQTT_BUFFER_SIZE];
 char MQTT_inTopic[MQTT_BUFFER_SIZE];
+char MQTT_RebootTopic[MQTT_BUFFER_SIZE];
 char MQTT_grpTopic[MQTT_BUFFER_SIZE];
 char MQTT_teleTopic[MQTT_BUFFER_SIZE];
 char MQTT_statTopic[MQTT_BUFFER_SIZE];
@@ -54,8 +56,7 @@ void MQTT_BuildDevInfo()
            WiFi.localIP().toString().c_str(), WiFi.macAddress().c_str(),
            WiFi.SSID().c_str(), WiFi.channel(), WiFi.RSSI(),
            STR(DeviceName), STR(FIRMWAREVERSION), STR(DeviceType),
-           Battery_measure()
-          );
+           Battery_measure());
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -118,6 +119,15 @@ void MQTT_settopics()
   sprintf(DEBUGtxt, "MQTT_inTopic:     %s", MQTT_inTopic);
   DEBUG_LineOut(DEBUGtxt);
 
+  // MQTT_RebootTopic
+
+  strcpy(MQTT_RebootTopic, "cmnd/"); //  in - Commands
+  strcat(MQTT_RebootTopic, MQTT_ClientName);
+  strcat(MQTT_RebootTopic, "/REBOOT");
+
+  sprintf(DEBUGtxt, "MQTT_RebootTopic:     %s", MQTT_RebootTopic);
+  DEBUG_LineOut(DEBUGtxt);
+
   strcpy(MQTT_teleTopic, "tele/"); // out - Telemetry
   strcat(MQTT_teleTopic, MQTT_ClientName);
 
@@ -143,8 +153,8 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   char MQTT_Name[64];
 
   sprintf(DEBUGtxt, "MQTT_msg_in arrived [%s] ", MQTT_topic);
-  //SNORT!
-  // DEBUG_SectionTitle(DEBUGtxt);
+  // SNORT!
+  //  DEBUG_SectionTitle(DEBUGtxt);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   strcpy(MQTT_PARSE, strchr(MQTT_topic, '/'));                 // This drops the first part of the topic
@@ -162,14 +172,14 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   }
 
   sprintf(DEBUGtxt, "Device/Group: %s", MQTT_Name);
-  //SNORT!
-  // DEBUG_LineOut2(DEBUGtxt);
+  // SNORT!
+  //  DEBUG_LineOut2(DEBUGtxt);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   MQTT_payload[length] = '\0';
   sprintf(DEBUGtxt, "MQTT_payload: [%s] ", (char *)MQTT_payload);
-  //SNORT!
-  // DEBUG_LineOut2(DEBUGtxt);
+  // SNORT!
+  //  DEBUG_LineOut2(DEBUGtxt);
 
   //////////////////////////////////////////////////
   //  From TinkerLibs_MQTT
@@ -184,8 +194,8 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
   strcat(CNasT, MQTT_ClientName); // "ClientName as MQTT_command"
 
   sprintf(DEBUGtxt, "   MQTT_command: %s", MQTT_command);
-  //SNORT!
-  // DEBUG_LineOut(DEBUGtxt);
+  // SNORT!
+  //  DEBUG_LineOut(DEBUGtxt);
 
   // if (length < MQTT_BUFFER_SIZE)
   // if (length < 63)
@@ -204,8 +214,8 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
     }
 
     sprintf(DEBUGtxt, "MQTT_msg_in: %s (size: %d)", MQTT_msg_in, length);
-    //SNORT!
-    // DEBUG_LineOut(DEBUGtxt);
+    // SNORT!
+    //  DEBUG_LineOut(DEBUGtxt);
 
     /////////////////////////////////////////////////////
     // MQTT_msg_in handling goes here...
@@ -229,11 +239,36 @@ void MQTT_callback(char *MQTT_topic, byte *MQTT_payload, unsigned int length)
         // DEBUG_SectionTitle("WooHoo Group call!!!");
         MQTT_BuildDevInfo();
         MQTT_JSON_send((char *)DevInfo_Topic, strlen(DevInfo), false, DevInfo);
-        //SNORT!
-        // DEBUG_BlockOut(DevInfo);
+        // SNORT!
+        //  DEBUG_BlockOut(DevInfo);
       }
       else
       {
+        /*####################################
+         * SPECIAL CASE!
+         * This is the REBOOT topic
+         *####################################*/
+        DEBUG_Event(MQTT_msg_in);
+
+        if (strcmp(MQTT_command, "/REBOOT") == 0)
+        {
+
+          if (strcmp(MQTT_msg_in, "reboot") == 0)
+          {
+            sprintf(DEBUGtxt, "Reboot %s (reboot)", STR(DeviceName));
+            DEBUG_Event(DEBUGtxt);
+            MQTT_SendTELE("Rebooting", "simple reboot");
+            OTA_Restart();
+          }
+          else if (strcmp(MQTT_msg_in, "factory") == 0)
+          {
+            sprintf(DEBUGtxt, "Reboot %s (factory reset)", STR(DeviceName));
+            DEBUG_Event(DEBUGtxt);
+            MQTT_SendTELE("Rebooting", "factory reset");
+            deleteData();
+          }
+        }
+
         /*********************************************************************
          * This is where you need to send the incoming message off
          * to be handled elsewhere.
@@ -291,6 +326,7 @@ void MQTT_reconnect()
 
     // ... and resubscribe
     MQTT_client.subscribe(MQTT_inTopic);
+    MQTT_client.subscribe(MQTT_RebootTopic);
     MQTT_client.subscribe(MQTT_grpTopic);
   }
   else

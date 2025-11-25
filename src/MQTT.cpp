@@ -47,7 +47,7 @@ void MQTT_BuildDevInfo()
   strcat(fmt_DevInfo, " \"IPAddress\": \"%s\", \"mac\": \"%s\",");
   strcat(fmt_DevInfo, " \"WiFi\": {\"SSID\": \"%s\", \"Channel\": \"%u\",\"Signal\": \"%d\"},");
   strcat(fmt_DevInfo, " \"Version\": \"%s %s\", \"Hardware\": \"%s\",");
-  strcat(fmt_DevInfo, " \"Battery\": \"%.2f\"");
+  strcat(fmt_DevInfo, " \"Battery\": \"%.3f\"");
   strcat(fmt_DevInfo, "}");
 
   snprintf(DevInfo, MQTT_JSON_BUFFER_SIZE,
@@ -360,7 +360,7 @@ void MQTT_JSON_send(char g_mqtt_json_topic[50], size_t msg_length, bool TF, char
 void MQTT_SendSTAT(const char *MQTT_command, const char *MQTT_msg_in)
 {
   char TheTopic[128];
-  char TheMessage[128];
+  char TheMessage[256];
   strcpy(TheTopic, "stat/");
   strcat(TheTopic, host);
   strcat(TheTopic, "/");
@@ -375,7 +375,7 @@ void MQTT_SendSTAT(const char *MQTT_command, const char *MQTT_msg_in)
 void MQTT_SendNOTI(const char *MQTT_command, const char *MQTT_msg_in)
 {
   char TheTopic[128];
-  char TheMessage[128];
+  char TheMessage[256];
   strcpy(TheTopic, "noti/");
   strcat(TheTopic, host);
   strcat(TheTopic, "/");
@@ -389,7 +389,7 @@ void MQTT_SendNOTI(const char *MQTT_command, const char *MQTT_msg_in)
 void MQTT_SendTELE(const char *MQTT_command, const char *MQTT_msg_in)
 {
   char TheTopic[128];
-  char TheMessage[128];
+  char TheMessage[256];
   strcpy(TheTopic, "tele/");
   strcat(TheTopic, host);
   strcat(TheTopic, "/");

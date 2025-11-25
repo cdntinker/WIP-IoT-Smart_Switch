@@ -7,18 +7,18 @@ void MQTT_SendNOTI(const char *Topic, const char *Message);
 void MQTT_SendTELE(const char *Topic, const char *Message);
 
 #include "Tinker_DEBUG.h"
-extern char DEBUGtxt[92];
+extern char DEBUGtxt[256];
 
 #include "device_Buttons.h"
 // #include "device_LEDs.h"
 // #include "device_Relays.h"
+#include "device_I2C.h"
+
 #include "DEVICE_SPECIFIC.h"
 
 void SmartSwitch_init()
 {
     DEBUG_Init("SmartSwitch");
-
-    String OOGABOOGA = "";
 
 #ifdef Battery_Operated
     /*****  Battery *****/
@@ -27,7 +27,7 @@ void SmartSwitch_init()
     DEBUG_LineOut(DEBUGtxt);
     sprintf(DEBUGtxt, " ADC raw: %d", ADC_Reading());
     DEBUG_LineOut2(DEBUGtxt);
-    sprintf(DEBUGtxt, " initial: %.2fV", Battery_measure());
+    sprintf(DEBUGtxt, " initial: %.3fV", Battery_measure());
     DEBUG_LineOut2(DEBUGtxt);
 #endif
 
@@ -49,12 +49,17 @@ void SmartSwitch_init()
     /*****  Switches  *****/
 
     // Button_init();
+
+#ifdef INA219
+    I2C_setup();
+#endif
 }
 
 void SmartSwitch_loop()
 {
     Button_loop();
 }
+
 // Handle incoming MQTT messages for the SmartSwitch functionality
 char StatusMessage[12];
 
@@ -160,7 +165,7 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
             MQTT_SendSTAT("Power", GPIO_Relay_STATE[0] ? "ON" : "OFF");
             MQTT_SendSTAT("LED01", GPIO_LED_STATE[0] ? "ON" : "OFF");
             MQTT_SendSTAT("LNKLD", GPIO_LED_STATE[1] ? "ON" : "OFF");
-            sprintf(StatusMessage, "%.2f", Battery_measure());
+            sprintf(StatusMessage, "%f", Battery_measure());
             MQTT_SendSTAT("Battery", StatusMessage);
         }
         else if (strcmp(MQTT_msg_in, "Battery") == 0)
@@ -168,13 +173,25 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
             DEBUG_LineOut2("Battery");
             sprintf(DEBUGtxt, " ADC raw: %d", ADC_Reading());
             DEBUG_LineOut2(DEBUGtxt);
-            sprintf(DEBUGtxt, " initial: %.2fV", Battery_measure());
+            sprintf(DEBUGtxt, " initial: %fV", Battery_measure());
             DEBUG_LineOut2(DEBUGtxt);
             sprintf(StatusMessage, "%d", ADC_Reading());
             MQTT_SendSTAT("ADC", StatusMessage);
-            sprintf(StatusMessage, "%.2f", Battery_measure());
+            sprintf(StatusMessage, "%.3f", Battery_measure());
             MQTT_SendSTAT("Battery", StatusMessage);
         }
+        else if (strcmp(MQTT_msg_in, "I2C") == 0)
+        {
+            DEBUG_LineOut2("I2C");
+            I2C_scan();
+        }
+#ifdef INA219
+        else if (strcmp(MQTT_msg_in, "INA219") == 0)
+        {
+            DEBUG_LineOut2("INA219");
+            INA219_check();
+        }
+#endif
         // else if (strcmp(MQTT_msg_in, "All") == 0)
     }
 

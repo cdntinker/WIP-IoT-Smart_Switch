@@ -1,5 +1,6 @@
 #include "Tinker_DEBUG.h"
 #include "device_Battery.h"
+#include "device_I2C.h"
 
 #ifdef Battery_Operated
 
@@ -15,20 +16,23 @@ unsigned int ADC_Reading()
 {
     int ADCvalue = analogRead(A0);
     if (ADCvalue < 100)
-        ADCvalue = 0;    // A fair indication there is no actual battery...
+        ADCvalue = 0; // A fair indication there is no actual battery...
     return (ADCvalue);
 }
 
 float Battery_measure()
 {
+#ifndef INA219
     BatteryVoltage = ADC_Reading() / BATTDIV;
-
+#else
+    BatteryVoltage = INA219_Vbus();
+#endif
     return (BatteryVoltage);
 }
 
 void Battery_loop()
 {
-    sprintf(DEBUGtxt, "Battery Voltage: %.2f", Battery_measure());
+    sprintf(DEBUGtxt, "Battery Voltage: %f", Battery_measure());
     DEBUG_LineOut2(DEBUGtxt);
 }
 

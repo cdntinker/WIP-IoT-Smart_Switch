@@ -3,6 +3,7 @@ To Be Done:
   * Getting there...
   * Need to indicate presses in the Web UI
   * Need to build in option for button presses to affect things like relay/LED control
+    * Initial relay state seems to be unknown...  hhhmmm...
 * Sensor handling
 * Battery monitoring
   * Just needs adding to the Web UI now.
@@ -13,3 +14,4 @@ To Be Done:
   * hhhmmm...
   * simple reboot works fine
   * factory reset seems to need power cycle before it does the AP reliably
+* Make the Web UI reflect actual GPIO states

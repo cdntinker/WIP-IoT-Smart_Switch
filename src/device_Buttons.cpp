@@ -4,10 +4,8 @@ extern char DEBUGtxt[92];
 
 #include "device_Buttons.h"
 
-///////////////////////////////////////////////////////////////////////////////////////////
-//
-// void MQTT_SendSTAT(const char *Topic, const char *Message);
-//
+#include "device_Relays.h"
+
 //////////////////////////////////////////////////
 
 #define GPIO_Buttons(...) unsigned int GPIO_Button_PINS[] = {__VA_ARGS__}
@@ -17,6 +15,13 @@ unsigned int GPIO_Button_COUNT = sizeof(GPIO_Button_PINS) / sizeof(GPIO_Button_P
 #else
 unsigned int GPIO_Button_PINS[] = {0};
 unsigned int GPIO_Button_COUNT = 0;
+#endif
+#define BUTTON2RELAY(...) unsigned int Button_Mapping[] = {__VA_ARGS__}
+#ifdef Button_Relay
+BUTTON2RELAY(Button_Relay);
+#else
+unsigned int Button_Mapping[] = {0};
+
 #endif
 bool GPIO_Button_STATE[10]; // 10 is arbitrary...
 
@@ -57,7 +62,12 @@ void ButtonPressHandler(BfButton *ButtonPin, BfButton::press_pattern_t pattern)
     {
     case BfButton::SINGLE_PRESS:
         ButtonMessage = "single press";
-        // Action: Toggle
+// Action: Toggle Relay
+// #if (Button_Relay == ButtonNum)
+//         {
+            Relay_toggle(Button_Mapping[ButtonNum]);
+//         }
+// #endif
         break;
     case BfButton::DOUBLE_PRESS:
         ButtonMessage = "double press";
@@ -80,7 +90,7 @@ void Button_setup()
 {
     sprintf(DEBUGtxt, "Buttons: %2d", GPIO_Button_COUNT);
     DEBUG_LineOut(DEBUGtxt);
-    strcpy(DEBUGtxt, "  GPIOs: ");
+    strcpy(DEBUGtxt, " GPIOs: ");
     for (unsigned int ctr = 0; ctr < GPIO_Button_COUNT; ctr++)
     {
         char BOOP[8];
@@ -89,6 +99,17 @@ void Button_setup()
     }
     DEBUG_LineOut2(DEBUGtxt);
 
+    // sprintf(DEBUGtxt, "Button Mapping: %d", Button_Mapping[0]);
+    // DEBUG_LineOut(DEBUGtxt);
+    strcpy(DEBUGtxt, "Map to: ");
+    for (unsigned int ctr = 0; ctr < GPIO_Button_COUNT; ctr++)
+    {
+        char BOOP[8];
+        sprintf(BOOP, "B%d=R%d ", ctr, Button_Mapping[ctr]);
+        strcat(DEBUGtxt, BOOP);
+    }
+    DEBUG_LineOut2(DEBUGtxt);
+    
 #ifdef SmartSwitch_Bcount
 #if (SmartSwitch_Bcount >= 1)
     Button0.onPress(ButtonPressHandler)

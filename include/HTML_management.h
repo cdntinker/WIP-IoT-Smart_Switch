@@ -21,6 +21,14 @@ const char management_html[] PROGMEM = R"rawliteral(
 
      <div id="body">
 
+       <div class = "menu-buttons">
+         <div class = "border">
+           <div class = "buttons ButtonClickable">
+             <button5 onclick="location.href='/reboot'">%processorplaceholder% Reboot</button5>
+           </div>
+         </div>
+       </div>
+
        <div class = "border">
          <div class="col-12 mt-3 p-centered">
            <label class="label label2 mr-2">Upload Firmware Here</label>
@@ -39,14 +47,6 @@ const char management_html[] PROGMEM = R"rawliteral(
          </div>
        </div>
      </div>
-
-       <div class = "menu-buttons">
-         <div class = "border">
-           <div class = "buttons ButtonClickable">
-             <button5 onclick="location.href='/reboot'">%processorplaceholder% Reboot</button5>
-           </div>
-         </div>
-       </div>
 
 %PART_DeviceInfo%
 

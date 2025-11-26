@@ -22,10 +22,14 @@ unsigned int ADC_Reading()
 
 float Battery_measure()
 {
-#ifndef INA219
+#ifdef BATTDIV
     BatteryVoltage = ADC_Reading() / BATTDIV;
-#else
+#endif
+#ifdef INA219_installed
     BatteryVoltage = INA219_Vbus();
+#endif
+#ifdef INA226_installed
+    BatteryVoltage = INA226_Vbus();
 #endif
     return (BatteryVoltage);
 }

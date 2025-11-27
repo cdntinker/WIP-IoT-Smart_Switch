@@ -10,30 +10,5 @@ void I2C_setup();
 unsigned int I2C_scan();
 void I2C_identifier(uint8_t address);
 
-#ifdef INA219_installed
-#include "Adafruit_INA219.h"
-
-void INA219_setup();
-void INA219_check();
-void INA219_getreadings();
-
-float INA219_Vbus();
-float INA219_Vshunt();
-float INA219_Vload();
-float INA219_Current();
-float INA219_Power();
-#endif
-
-#ifdef INA226_installed
-#include "INA226.h"
-
-void INA226_setup();
-void INA226_check();
-void INA226_getreadings();
-
-float INA226_Vbus();
-float INA226_Vshunt();
-float INA226_Vload();
-float INA226_Current();
-float INA226_Power();
-#endif
+#include "I2C_INA219.h"
+#include "I2C_INA226.h"

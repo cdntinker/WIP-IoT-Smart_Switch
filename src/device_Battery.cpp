@@ -25,10 +25,10 @@ float Battery_measure()
 #ifdef BATTDIV
     BatteryVoltage = ADC_Reading() / BATTDIV;
 #endif
-#ifdef INA219_installed
+#ifdef I2C_INA219
     BatteryVoltage = INA219_Vbus();
 #endif
-#ifdef INA226_installed
+#ifdef I2C_INA226
     BatteryVoltage = INA226_Vbus();
 #endif
     return (BatteryVoltage);

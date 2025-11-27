@@ -10,11 +10,11 @@ void I2C_setup()
 
     I2C_scan();
 
-#ifdef INA219_installed
+#ifdef I2C_INA219
     INA219_setup();
 #endif
 
-#ifdef INA226_installed
+#ifdef I2C_INA226
     INA226_setup();
 #endif
 }
@@ -66,7 +66,6 @@ unsigned int I2C_scan()
     return (nDevices);
 }
 
-
 void I2C_identifier(uint8_t address)
 {
     // For some hints: https://learn.adafruit.com/i2c-addresses/the-list
@@ -97,169 +96,3 @@ void I2C_identifier(uint8_t address)
     if (address >= 0x7C && address <= 0x7F)     strcpy(poop, "Reserved for future purposes");
 }
 
-#ifdef INA219_installed
-Adafruit_INA219 ina219;
-
-void INA219_setup()
-{
-    INA219_check();
-}
-
-void INA219_check()
-{
-
-    if (!ina219.begin())
-    {
-        strcpy(DEBUGtxt, "Failed to find INA219 chip");
-    }
-    else
-    {
-        strcpy(DEBUGtxt, "Found an INA219 chip");
-
-        // Configures to INA219 to be able to measure up to 32V and 2A of current.
-        // Each unit of current corresponds to 100uA, and each unit of power corresponds to 2mW.
-        // Counter overflow occurs at 3.2A.
-        ina219.setCalibration_32V_2A();
-
-        // Configures to INA219 to be able to measure up to 32V and 1A of current.
-        // Each unit of current corresponds to 40uA, and each unit of power corresponds to 800uW.
-        // Counter overflow occurs at 1.3A
-        // ina219.setCalibration_32V_1A();
-
-        // set device to calibration which uses the highest precision for current measurement (0.1mA),
-        // at the expense of only supporting 16V at 400mA max.
-        // ina219.setCalibration_16V_400mA();
-
-        // INA219_getreadings();
-    }
-    DEBUG_LineOut2(DEBUGtxt);
-    MQTT_SendSTAT("I2C/INA219", DEBUGtxt);
-}
-
-void INA219_getreadings()
-{
-    char Batt_state[24];
-    if (INA219_Vshunt() < 0)
-        strcpy(Batt_state, "Charging");
-    else
-        strcpy(Batt_state, "Discharging");
-
-    sprintf(DEBUGtxt, "{\"V_bus\":\"%.3f\", \"mV_shunt\":\"%.3f\", \"V_load\":\"%.3f\", \"mA\":\"%.3f\", \"mW\":\"%.3f\", \"State\":\"%s\"}",
-            INA219_Vbus(),
-            INA219_Vshunt(),
-            INA219_Vload(),
-            INA219_Current(),
-            INA219_Power(),
-            Batt_state
-            // "Unknown as yet"
-    );
-
-    DEBUG_LineOut(DEBUGtxt);
-    MQTT_SendSTAT("I2C/INA219readings", DEBUGtxt);
-}
-
-float INA219_Vbus()
-{
-    return (ina219.getBusVoltage_V());
-}
-
-float INA219_Vshunt()
-{
-    return (ina219.getShuntVoltage_mV() / 1000);
-}
-
-float INA219_Vload()
-{
-    return (INA219_Vbus() + INA219_Vshunt());
-}
-
-float INA219_Current()
-{
-    return (ina219.getCurrent_mA());
-}
-
-float INA219_Power()
-{
-    return (ina219.getPower_mW());
-}
-#endif
-
-#ifdef INA226_installed
-#define INA_COUNT 4
-
-INA226 INA[INA_COUNT] =
-    {
-        INA226(I2CdevList[0]),
-        INA226(I2CdevList[1]),
-        INA226(I2CdevList[2]),
-        INA226(I2CdevList[3])};
-
-// bool failed = false;
-
-void INA226_setup()
-{
-
-    sprintf(DEBUGtxt, "INA226_LIB_VERSION: %s", (char *)INA226_LIB_VERSION);
-    DEBUG_LineOut(DEBUGtxt);
-
-    for (int ID = 0; ID < INA_COUNT; ID++)
-    {
-        if (!INA[ID].begin())
-        {
-            // failed = true;
-            sprintf(DEBUGtxt, "INA226 %d (%X) FAILED!!!", ID, I2CdevList[ID]);
-            DEBUG_LineOut2(DEBUGtxt);
-        }
-        else
-        {
-            // failed = false;
-            sprintf(DEBUGtxt, "INA226 %d (%X) SUCCEEDED!!! [%d : %d]", ID, I2CdevList[ID], INA[ID].getManufacturerID(), INA[ID].getDieID());
-            DEBUG_LineOut2(DEBUGtxt);
-
-        }
-    }
-    // if (failed)
-    // {
-    //     Serial.println("One or more INA could not connect. Fix and Reboot");
-    //     // while (1)
-    //         // ;
-    // }
-//  getManufacturerID() ;   // should return 0x5449
-//  getDieID()          ;   // should return 0x2260
-
-}
-
-void INA226_check()
-{
-}
-
-void INA226_getreadings()
-{
-}
-
-float INA226_Vbus()
-{
-    return (0);
-}
-
-float INA226_Vshunt()
-{
-    return (0);
-}
-
-float INA226_Vload()
-{
-    return (0);
-}
-
-float INA226_Current()
-{
-    return (0);
-}
-
-float INA226_Power()
-{
-    return (0);
-}
-
-#endif

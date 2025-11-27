@@ -36,12 +36,12 @@ void SmartSwitch_init()
     DEBUG_LineOut2(DEBUGtxt);
 #endif
 
-#ifdef INA219_installed
+#ifdef I2C_INA219
     sprintf(DEBUGtxt, "Battery: (using INA219)");
     DEBUG_LineOut(DEBUGtxt);
 #endif
 
-#ifdef INA226_installed
+#ifdef I2C_INA226
     sprintf(DEBUGtxt, "Battery: (using INA226)");
     DEBUG_LineOut(DEBUGtxt);
 #endif
@@ -199,14 +199,14 @@ void SmartSwitch_MQTT_in(const char *MQTT_command, const char *MQTT_msg_in)
             DEBUG_LineOut2("I2C");
             I2C_scan();
         }
-#ifdef INA219_installed
+#ifdef I2C_INA219
         else if (strcmp(MQTT_msg_in, "INA219") == 0)
         {
             DEBUG_LineOut2("INA219");
             INA219_check();
         }
 #endif
-#ifdef INA226_installed
+#ifdef I2C_INA226
         else if (strcmp(MQTT_msg_in, "INA226") == 0)
         {
             DEBUG_LineOut2("INA226");

@@ -106,6 +106,8 @@ void wifi_checkup()
           DEBUG_Separator();
           DEBUG_Success("AP mode disabled - wifi restored");
           DEBUG_Separator();
+    if ((strcmp(STR(DeviceType), "D1-Mini") == 0) || (strcmp(STR(BoardType), "Sonoff_Basic") == 0) || (strcmp(STR(BoardType), "ESP-M3b") == 0) || (strcmp(STR(DeviceType), "ESP-07") == 0))
+      digitalWrite(2, HIGH);    // Kill the damned on-board LED!
           ap_msg_timeout = true;
         }
       }

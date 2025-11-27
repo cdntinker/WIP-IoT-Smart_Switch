@@ -10,31 +10,31 @@
 #include "Tinker_DEBUG.h"
 extern char DEBUGtxt[92];
 
-#include "HTML_css.h"
-#include "HTML_SCRIPTS.h"
-#include "HTML_SCRIPTS_2.h"
-// #include "HTML_SCRIPTS_3.h"
+#include "HTML/HTML_css.h"
+#include "HTML/HTML_SCRIPTS.h"
+#include "HTML/HTML_SCRIPTS_2.h"
+// #include "HTML/HTML_SCRIPTS_3.h"
 
 /* Internal blocks of HTML */
-#include "HTML_PART_Header.h"
-#include "HTML_PART_DeviceInfo.h"
-#include "HTML_PART_Footer.h"
-#include "HTML_PART_Status.h"
-#include "HTML_PART_Battery.h"
+#include "HTML/HTML_PART_Header.h"
+#include "HTML/HTML_PART_DeviceInfo.h"
+#include "HTML/HTML_PART_Footer.h"
+#include "HTML/HTML_PART_Status.h"
+#include "HTML/HTML_PART_Battery.h"
 
-#include "DEVICE_HTML_PART_Homepage.h"
+#include "HTML/DEVICE_HTML_PART_Homepage.h"
 
 #ifndef PART_HomePage_Body_h
-#include "HTML_PART_HomeDefault.h"
+#include "HTML/HTML_PART_HomeDefault.h"
 #endif
 
 /* Sections for the config page */
-#include "HTML_PART_WiFi_Config.h"
-#include "HTML_PART_AP_Config.h"
-#include "HTML_PART_MQTT_Config.h"
-#include "HTML_PART_WEB_UI_Config.h"
-#include "HTML_PART_LEDs_Config.h"
-// #include "HTML_PART_SmartHUB_Config.h"
+#include "HTML/HTML_PART_WiFi_Config.h"
+#include "HTML/HTML_PART_AP_Config.h"
+#include "HTML/HTML_PART_MQTT_Config.h"
+#include "HTML/HTML_PART_WEB_UI_Config.h"
+#include "HTML/HTML_PART_LEDs_Config.h"
+// #include "HTML/HTML_PART_SmartHUB_Config.h"
 
 // /**********************************************************************/
 // /* Part of the button display from TinkerLibs-HTTP                    */

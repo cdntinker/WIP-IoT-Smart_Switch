@@ -1,4 +1,5 @@
 #include "Tinker_DEBUG.h"
+// #include "device_LEDs.h"
 
 extern char DEBUGtxt[92];
 
@@ -31,6 +32,7 @@ void LED_setup()
         strcat(DEBUGtxt, BOOP);
     }
     DEBUG_LineOut2(DEBUGtxt);
+
 }
 
 // Turn LED on/off
@@ -59,12 +61,14 @@ void LED_switch(int LEDNum, bool OnOff)
     {
         digitalWrite(GPIO_LED_PINS[LEDNum], LED_ON);
         GPIO_LED_STATE[LEDNum] = HIGH;
+        // GPIO_LED_STATE[LEDNum] = LED_ON;
         strcpy(LED_STATE, "ON");
     }
     else
     {
         digitalWrite(GPIO_LED_PINS[LEDNum], LED_OFF);
         GPIO_LED_STATE[LEDNum] = LOW;
+        // GPIO_LED_STATE[LEDNum] = LED_OFF;
         strcpy(LED_STATE, "OFF");
     }
 

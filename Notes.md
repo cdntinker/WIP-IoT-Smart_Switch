@@ -15,3 +15,6 @@ To Be Done:
   * simple reboot works fine
   * factory reset seems to need power cycle before it does the AP reliably
 * Make the Web UI reflect actual GPIO states
+* LEDs
+  * Why in hell can't I get the on-board LEDs on things to start out turned off???
+  

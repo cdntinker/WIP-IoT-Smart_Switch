@@ -51,6 +51,7 @@ void setup()
   /////////////////////////////////////////////
 
   DEBUG_Ready();              // prints running ; as most items are setup at this point
+
 }
 
 void loop()

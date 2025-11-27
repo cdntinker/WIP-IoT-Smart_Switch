@@ -12,14 +12,14 @@
 #include "processing_items.h"
 
 /* WEB PAGES */
-#include "HTML_homepage.h"        // website home page
-#include "HTML_management.h"      // Website OTA page
-#include "HTML_config_page.h"     // ESP html configuration page
-#include "HTML_failed.h"          // Something failed webpage
-#include "HTML_reboot.h"          // Website - ESP rebooting
-#include "HTML_finished.h"        // OTA success Webpage
-#include "HTML_config_finished.h" // Saved Config Message Webpage
-#include "HTML_factory.h"         // Factory Reset Performed Webpage
+#include "HTML/HTML_homepage.h"        // website home page
+#include "HTML/HTML_management.h"      // Website OTA page
+#include "HTML/HTML_config_page.h"     // ESP html configuration page
+#include "HTML/HTML_failed.h"          // Something failed webpage
+#include "HTML/HTML_reboot.h"          // Website - ESP rebooting
+#include "HTML/HTML_finished.h"        // OTA success Webpage
+#include "HTML/HTML_config_finished.h" // Saved Config Message Webpage
+#include "HTML/HTML_factory.h"         // Factory Reset Performed Webpage
 
 AsyncWebServer server(80); // declare ASYNC server library
 AsyncWebSocket ws("/ws");  // declare web socket

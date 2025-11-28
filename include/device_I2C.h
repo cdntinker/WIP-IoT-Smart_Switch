@@ -8,7 +8,8 @@ extern byte I2CdevList[127];   // This should actually be a structure to hold in
 
 void I2C_setup();
 unsigned int I2C_scan();
-void I2C_identifier(uint8_t address);
+void I2C_identifier0(uint8_t address);
+void I2C_identifier(uint8_t DevNum, uint8_t address);
 
 #include "I2C_INA219.h"
 #include "I2C_INA226.h"

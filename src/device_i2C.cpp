@@ -1,5 +1,7 @@
 #include "device_I2C.h"
 
+#include "INA226.h"
+
 void I2C_setup()
 {
     // Initialising I2C
@@ -21,7 +23,8 @@ void I2C_setup()
 
 byte I2CdevList[127]; // This should actually be a structure to hold info about the devices beyond just their addresses...
 
-    char poop[64];
+// char poop[64];
+char I2C_Whatsit[32];
 
 unsigned int I2C_scan()
 {
@@ -43,56 +46,72 @@ unsigned int I2C_scan()
         }
         else if (I2Cerr == 4)
         {
-            sprintf(DEBUGtxt, "Unknown error at address 0x%2X)", I2Caddress);
+            sprintf(DEBUGtxt, "Unknown error at 0x%2X)", I2Caddress);
             DEBUG_LineOut2(DEBUGtxt);
-
+            MQTT_SendNOTI("I2C", DEBUGtxt);
         }
     }
+
+    sprintf(DEBUGtxt, "Found %d Device(s).", nDevices);
+    DEBUG_LineOut2(DEBUGtxt);
+    MQTT_SendNOTI("I2C", DEBUGtxt);
 
     for (byte i = 0; i < nDevices; i++)
     {
         // This'd be an awesome place to stuff in code to determine what each I2C device actually is...
-        I2C_identifier(I2CdevList[i]);
+        I2C_identifier(i, I2CdevList[i]);
 
-        sprintf(DEBUGtxt, "Found I2C Device @ address:  0x%2X (%s)", I2CdevList[i], poop);
+        sprintf(DEBUGtxt, "Found I2C Device @: 0x%2X (%s)", I2CdevList[i], I2C_Whatsit);
         DEBUG_LineOut2(DEBUGtxt);
-            // I2C_identifier(I2CdevList[i]);
+        MQTT_SendNOTI("I2C", DEBUGtxt);
     }
-    sprintf(DEBUGtxt, "Found %d Device(s).", nDevices);
-    DEBUG_LineOut2(DEBUGtxt);
-    sprintf(DEBUGtxt, "%d", nDevices);
-    MQTT_SendSTAT("I2C/Count", DEBUGtxt);
 
     return (nDevices);
 }
 
-void I2C_identifier(uint8_t address)
+void I2C_identifier(uint8_t DevNum, uint8_t address)
 {
-    // For some hints: https://learn.adafruit.com/i2c-addresses/the-list
-    // and https://github.com/adafruit/I2C_Addresses
-    if (address <= 0x07)                        strcpy(poop, "reserved");
-    if (address >= 0x08 && address <= 0x0A)     strcpy(poop, "No Clue");
-    if (address == 0x0B)                        strcpy(poop, "LC709203F");
+    INA226 INA226_test = INA226(address);           // This should be changed to a more generic library
+    if (!INA226_test.begin())
+    {
+        sprintf(DEBUGtxt, "I2C Device #%d @ 0x%X FAILED!!!", DevNum, address);
+        DEBUG_LineOut2(DEBUGtxt);
+    }
+    else
+    {
+        uint16_t ManufacturerID = INA226_test.getManufacturerID();
+        uint16_t DieID = INA226_test.getDieID();
 
-    
-    if (address >= 0x20 && address <= 0x27)     strcpy(poop, "MCP23008 MCP23017 PCF8574");
-    if (address == 0x21 || address == 0x22)     strcpy(poop, "SAA4700");
+        sprintf(DEBUGtxt, "I2C Device #%d @ 0x%X SUCCEEDED!!! [0x%04X:0x%04X]",
+                DevNum, address, ManufacturerID, DieID);
+        DEBUG_LineOut2(DEBUGtxt);
 
-    if (address >= 0x30 && address <= 0x3F)     strcpy(poop, "PCF8574");
-    if (address >= 0x3c && address <= 0x3d)     strcpy(poop, "PCF8578");
+        sprintf(I2C_Whatsit, "IHNFC... [0x%04X:0x%04X]",
+                ManufacturerID, DieID);
+        // Just in case INA226_test returns something we don't yet know
 
-    if (address == 0x40)                        strcpy(poop, "SHT21/SI7021 INI219/INI226");
-    if (address >= 0x41 && address <= 0x4F)     strcpy(poop, "INI219/INI226");
+        if ((ManufacturerID == 0x0000))
+            if ((DieID == 0x00FF))
+                strcpy(I2C_Whatsit, "MCP23017"); // 16-bit I/O expander
 
-    if (address >= 0x50 && address <= 0x57)     strcpy(poop, "AT24C32"); // on some DS3231 breakout boards there is this IC at 0x57
+        if ((ManufacturerID == 0xF6F6))
+            if ((DieID == 0xF7F7))
+                strcpy(I2C_Whatsit, "PCF8574"); // 8-bit I/O expander
 
-    if (address == 0x68)                        strcpy(poop, "DS3231");
-    if (address >= 0x68 && address <= 0x6b)     strcpy(poop, "PCF8573");
+        if ((ManufacturerID == 0x5449))
+            if ((DieID == 0x2260))
+                strcpy(I2C_Whatsit, "INA226"); // high-precision, 16-bit, digital current shunt and power monitor
 
-    if (address >= 0x70 && address <= 0x77)     strcpy(poop, "HT16K33 TCA9548");
-    if (address >= 0x76 && address <= 0x77)     strcpy(poop, "BME280 BME680 BMP280");
+        if ((ManufacturerID == 0x8000))
+            if ((DieID == 0x0000))
+                strcpy(I2C_Whatsit, "ADS1115"); // 16-bit ADC
 
-    if (address >= 0x78 && address <= 0x7B)     strcpy(poop, "Reserved for 10-bit I2C addressing");
-    if (address >= 0x7C && address <= 0x7F)     strcpy(poop, "Reserved for future purposes");
+        if ((ManufacturerID == 0x4343))
+            if ((DieID == 0x4343))
+                strcpy(I2C_Whatsit, "SSD1306"); // CMOS OLED/PLED driver
+
+        if (ManufacturerID == 0x2000)
+            if ((DieID == 0x8214) || (DieID == 0xC20E) || (DieID == 0xFC06))
+                strcpy(I2C_Whatsit, "INA219"); // high-side current shunt and power monitor
+    }
 }
-
